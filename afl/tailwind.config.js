@@ -11,10 +11,14 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+          
+          'gradient-text': 'linear-gradient(to bottom, #f08024, #f01a0e)',
       },
     
-    fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
+      fontFamily: {
+        magistral: ['Magistral', 'sans'],
+        roboto: ['Roboto', 'sans'],
+        magistraal:['Magistraal', 'sans'],
       },
     fontSize: {
         "xxs":"10px",

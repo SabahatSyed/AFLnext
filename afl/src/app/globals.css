@@ -17,12 +17,22 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
   font-family: sans-serif, roboto;
+}
+@font-face {
+  font-family: 'Magistral';
+  src: url('/fonts/Magistral-Book.woff') format('truetype');
+  
+}
+@font-face {
+  font-family: 'Magistraal';
+  src: url('/fonts/Magistral-ExtraBold.woff') format('truetype');
+  
 }
