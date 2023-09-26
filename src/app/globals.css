@@ -36,3 +36,7 @@ body {
   src: url('/fonts/Magistral-ExtraBold.woff') format('truetype');
   
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Set the width of the scrollbar */
+}
