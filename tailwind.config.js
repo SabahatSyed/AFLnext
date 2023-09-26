@@ -36,7 +36,10 @@ module.exports = {
       colors: {
        "lightorange":"#FF7000",
        "darkorange":"#BB1824",
-       "bgblue":"#002D62"
+       "bgblue":"#002D62",
+       "headingblue":"#002D62",
+       "outlaws":"#043274",
+       "hawks":"#0909A4"
       },
     }
   },
