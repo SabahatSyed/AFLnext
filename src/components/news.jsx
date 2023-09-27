@@ -3,11 +3,11 @@ import React from "react";
 const News = () => {
   return (
     <div>
-      <div class="bg-[#EEEEEE] flex flex-col py-6 pl-10">
+      <div class="bg-[#EEEEEE] flex flex-col py-6 md:pl-10 pl-5">
         <div class="uppercase font-magistraal font-bold text-xl text-[#002D62] m-8">
           Latest News
         </div>
-        <div class=" grid grid-cols-5 justify-between overflow-x-scroll custom-scrollbar">
+        <div class=" grid grid-cols-1 md:grid-cols-5 mr-[1rem] md:mr-0 justify-between overflow-x-scroll custom-scrollbar">
           <div class=" bg-white md:m-5 m-0 border border-gray-200 rounded-lg shadow">
             <a href="#">
               <img class="rounded-t-lg" src="/Home/news1.svg" alt="News" />
