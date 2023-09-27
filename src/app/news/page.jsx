@@ -7,9 +7,9 @@ export default function NewsMain() {
     <div class="h-fit ">
       <Header activepage={"news"} />
       <div class="h-screen  bg-white">
-        <div class="bg-[url('/news/newsbg.svg')] bg-cover h-full grid grid-cols-3  text-white font-roboto p-20 place-items-end">
-          <div class="flex flex-col gap-4">
-            <p class="text-3xl font-bold leading-tight">
+        <div class="bg-[url('/news/newsbg.svg')] bg-cover   md:h-[86%] h-2/5 grid md:grid-cols-3 grid-cols-1 text-white font-roboto md:p-20 p-10 md:place-items-end">
+          <div class="flex flex-col gap-4 ">
+            <p class="md:text-3xl text-2xl font-bold leading-tight">
               Arena Football League Relaunch Press release
             </p>
             <p class="">
