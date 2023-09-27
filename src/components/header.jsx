@@ -103,28 +103,28 @@ export default function Header({ activepage }) {
         >
           <Link href="/about">
             <div
-              className={`${activepage == "about" ? "text-headingblue" : ""}`}
+              className={`${activepage == "about" ? "text-headingblue" : "text-white"} `}
             >
               about
             </div>
           </Link>
           <Link href="/news">
             <div
-              className={`${activepage == "news" ? "text-headingblue" : ""}`}
+              className={`${activepage == "news" ? "text-headingblue" : "text-white"} `}
             >
               news
             </div>
           </Link>
           <Link href="/teams">
             <div
-              className={`${activepage == "teams" ? "text-headingblue" : ""}`}
+              className={`${activepage == "teams" ? "text-headingblue" : "text-white"} `}
             >
               teams
             </div>
           </Link>
           <Link href="/shop">
             <div
-              className={`${activepage == "shop" ? "text-headingblue" : ""}`}
+              className={`${activepage == "shop" ? "text-headingblue" : "text-white"} `}
             >
               shop
             </div>
@@ -132,15 +132,15 @@ export default function Header({ activepage }) {
           <Link href="/partners">
             <div
               className={`${
-                activepage == "partners" ? "text-headingblue" : ""
-              }`}
+                activepage == "partners" ? "text-headingblue" : "text-white"
+              } `}
             >
               partners
             </div>
           </Link>
           <Link href="/tickets">
             <div
-              className={`${activepage == "tickets" ? "text-headingblue" : ""}`}
+              className={`${activepage == "tickets" ? "text-headingblue" : "text-white"} `}
             >
               tickets
             </div>
