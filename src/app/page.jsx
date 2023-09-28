@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import HomeMain from "@/components/homeMain";
@@ -7,9 +7,9 @@ import News from "@/components/news";
 import NewsLetter from "@/components/newsLetter";
 export default function Home() {
   return (
-    <div class="h-fit">
+    <div className="h-fit">
       <Header />
-      <div class="h-screen  bg-white">
+      <div className="h-screen  bg-white">
         <HomeMain />
         <Cards />
         <News />

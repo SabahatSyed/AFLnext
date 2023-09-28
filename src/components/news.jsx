@@ -18,7 +18,7 @@ export default async function News  ()  {
           <div className=" bg-white md:m-5 m-0 border border-gray-200  rounded-3xl shadow " >
             <div key={index} className="w-[300px]">
             <a href="#">
-              <img classNameName="rounded-t-lg w-full" src={result.attributes.image_url} alt="News" />
+              <img className="rounded-t-xl w-full" src={result.attributes.image_url} alt="News" />
             </a>
             <div className="p-5 flex flex-col gap-3">
               <a href="#">
