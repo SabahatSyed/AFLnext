@@ -3,12 +3,13 @@ import React from "react";
 const OurMission = () => {
   return (
     <div>
-      <div className="font-roboto flex md:grid md:grid-cols-2 gap-7 justify-items-center flex-col justify-center items-center md:gap-2 md:py-16 py-8 md:px-20 p-10">
-        <div className=" md:p-3 p-1 ">
+      <div className="font-roboto flex w-full  justify-around lg:flex-row flex-col  lg:items-center  md:py-16 py-8 md:px-20 p-10 lg:gap-0 gap-5">
+        <div className=" md:p-3 p-1 lg:w-[50%] flex justify-center mb-5 md:mb-0">
+          <div className="lg:w-4/5">
           <p className="text-headingblue font-magistral font-bold text-4xl mb-5">
             OUR MISSION
           </p>
-          <div className="flex flex-col gap-4 font-normal text-base ">
+          <div className="flex flex-col gap-4 font-normal text-base md:text-justify">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed
               fermentum tellus, vel scelerisque eros. Aliquam posuere, risus et
@@ -34,18 +35,26 @@ const OurMission = () => {
               posuere cubilia curae; Pellentesque habitant morbi tristique
               senectus et netus et malesuada fames ac turpis egestas.
             </p>
+            </div>
           </div>
         </div>
-        <div className="md:p-3 ">
-          <img src="/about/ourmission.svg" />
+        <div className="md:p-3 lg:w-1/2 lg:flex lg:justify-start">
+          <img src="/about/ourmission.svg" className="lg:w-[85%] md:w-full" />
         </div>
       </div>
-      <div className="md:ml-20 ml-10 mr-10 md:mr-20 overflow-y-hidden overflow-x-scroll flex gap-4 mb-28 mt-14 custom-scrollbar">
-        <img src="/about/slider1.svg" />
-        <img src="/about/slider2.svg" />
-        <img src="/about/slider3.svg" className="p-5" />
+      
+      <div className="md:ml-20 ml-10 mr-10 pr-5 md:mr-20 w-11/12 overflow-y-hidden overflow-x-scroll flex gap-4  items-center lg:mb-28 lg:mt-14 md:mt-0 mt-6 mb-10 custom-scrollbar   md:justify-center">
+        
+        <img src="/about/slider1.svg" className=" md:w-1/3 w-full" />
+      
+
+        <img src="/about/slider2.svg" className="md:w-1/3 w-full"/>
+      
+        <img src="/about/slider3.svg" className="md:w-[30%]  w-11/12" />
+        
       </div>
     </div>
+    // </div>
   );
 };
 

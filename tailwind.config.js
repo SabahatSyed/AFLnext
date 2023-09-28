@@ -39,7 +39,10 @@ module.exports = {
        "bgblue":"#002D62",
        "headingblue":"#002D62",
        "outlaws":"#043274",
-       "hawks":"#0909A4"
+       "hawks":"#0909A4",
+       "bggray":"#e1e1e5",
+       "textInput":"#d0d0d0",
+       "bgNews":"#EEEEEE",
       },
     }
   },

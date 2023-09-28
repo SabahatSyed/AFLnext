@@ -3,7 +3,7 @@ import React from "react";
 const NewsLetter = () => {
   return (
     <div>
-      <div className="bg-[#e1e1e5] py-[5rem]">
+      <div className=" py-[5rem] bg-bggray">
         <div className="flex justify-center md:flex-row flex-col gap-16">
           <div className="flex justify-center ">
             <img src="/Home/logo.svg " alt="Logo" />
@@ -17,12 +17,12 @@ const NewsLetter = () => {
                   placeholder="Email"
                   //   value={inputValue}
                   //   onChange={handleInputChange}
-                  className="bg-[#d0d0d0] rounded-2xl p-4 font-roboto text-base font-bold w-full"
+                  className="bg-textInput rounded-2xl p-4 font-roboto text-base font-bold w-full"
                 />
               </div>
               <div className="m-3">
                 <button
-                  className="font-roboto text-base font-bold text-white p-4 bg-[#002D62] inline-flex rounded-2xl"
+                  className="font-roboto text-base font-bold text-white p-4 bg-bgblue inline-flex rounded-2xl"
                   // onClick={handleSubmit}
                 >
                   Subscribe

@@ -4,7 +4,7 @@ const Partners = () => {
   return (
     <div>
       <div className=" flex flex-col md:py-6 py-4 md:px-14 px-1 ">
-        <div className=" uppercase font-magistraal text-4xl text-[#002D62] md:m-8 m-5 text-center">
+        <div className=" uppercase font-magistraal text-4xl text-headingblue md:m-8 m-5 text-center">
           Partners
         </div>
         <p className="w-3/4 lg:w-4/5 text-xl mx-auto">
