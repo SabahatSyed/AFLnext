@@ -8,15 +8,16 @@ import NewsLetter from "@/components/newsLetter";
 export default function Home() {
   return (
     <div className="h-fit">
-      <Header />
-      <div className="h-screen  bg-white">
+      {/* <Header /> */}
+      <div className="  bg-white">
         <HomeMain />
+        </div>
         <Cards />
         <News />
         <NewsLetter />
         {/* </div> */}
         <Footer />
       </div>
-    </div>
+    // </div>
   );
 }

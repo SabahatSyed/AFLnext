@@ -4,7 +4,7 @@ const Partners = () => {
   return (
     <div>
       <div className=" flex flex-col md:py-6 py-4 md:px-14 px-1 ">
-        <div className=" uppercase font-magistraal text-4xl text-headingblue md:m-8 m-5 text-center">
+        <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white md:m-8 m-5 text-center">
           Partners
         </div>
         <p className="w-3/4 lg:w-4/5 text-xl mx-auto">
@@ -27,7 +27,7 @@ const Partners = () => {
                 services. Interested in becoming a partner? Contact us to find
                 out more.
               </p>
-              <p className="inline-flex text-headingblue items-center mt-1 text-base font-bold">
+              <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
                 Visit Their Website{" "}
                 <span className=" ml-3">
                   <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
@@ -49,7 +49,7 @@ const Partners = () => {
                 services. Interested in becoming a partner? Contact us to find
                 out more.
               </p>
-              <p className="inline-flex text-headingblue items-center mt-1 text-base font-bold">
+              <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
                 Visit Their Website{" "}
                 <span className=" ml-3">
                   <img src="/Home/UnionBlack.svg" alt="Arrow svg " />

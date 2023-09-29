@@ -4,11 +4,11 @@ import { getData } from "@/api/FetchData";
 import Link from "next/link";
 export default async function News() {
   const data = await getData();
-  // console.log("News is :", data.data);
+  // console.log("News is :", data.data);       
   return (
     <div>
-      <div className="bg-bgNews flex flex-col py-6 md:pl-10 pl-5">
-        <div className="uppercase font-magistraal font-bold text-xl text-headingblue m-8">
+      <div className="bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 md:pl-10 pl-5">
+        <div className="uppercase font-magistraal font-bold text-xl text-headingblue dark:text-white m-8">
           Latest News
         </div>
         {/* {data.data.map((result,index) => ( */}
@@ -17,10 +17,10 @@ export default async function News() {
         <Link href="/news">
           <div className=" flex gap-5  mr-[1rem] md:mr-0  overflow-x-scroll custom-scrollbar">
             {data.data.map((result, index) => (
-              <div className=" bg-white md:m-5 m-0 border border-gray-200  rounded-3xl shadow ">
-                <div key={index} className="md:w-[400px] w-[300px]">
+              <div key={index} className=" bg-white dark:bg-bgdark md:m-5 m-0 border border-gray-200  rounded-3xl shadow ">
+                <div  className="md:w-[400px] w-[300px]">
                   <img
-                    className="rounded-t-xl w-full"
+                    className=" w-full rounded-t-3xl"
                     src={result.attributes.image_url}
                     alt="News"
                   />
@@ -33,7 +33,7 @@ export default async function News() {
                     <p className="font-roboto font-light text-base text-gray-500  text-ellipsis h-[10rem] overflow-hidden">
                       {result.attributes.description}...
                     </p>
-                    <div className="font-roboto font-bold text-xl text-headingblue inline-flex items-center">
+                    <div className="font-roboto font-bold text-xl text-headingblue dark:text-bgNews inline-flex items-center">
                       Keep Reading
                       <span className=" ml-3 ">
                         <img src="/Home/UnionBlack.svg" alt="Arrow svg " />

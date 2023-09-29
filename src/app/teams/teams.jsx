@@ -4,12 +4,12 @@ const Teams = () => {
   return (
     <div>
       <div className=" flex flex-col py-6 px-14">
-        <div className=" uppercase font-magistraal text-4xl text-headingblue m-8 text-center">
+        <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white m-8 text-center">
           Teams
         </div>
         <div className=" flex flex-col gap-10">
           <div className="">
-            <p className="font-magistraal text-lg text-headingblue uppercase">
+            <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 1
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-roboto my-6">
@@ -27,7 +27,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue dark:text-white font-medium">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -61,7 +61,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -96,7 +96,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -130,7 +130,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -153,7 +153,7 @@ const Teams = () => {
             </div>
           </div>
           <div className="">
-            <p className="font-magistraal text-lg text-headingblue uppercase">
+            <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 2
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center lg:gap-3 gap-7 font-roboto my-6">
@@ -171,12 +171,12 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
                     <div>
-                      <img src="/teams/facebook.svg" />
+                      <img src="/teams/facebook.svg"  />
                     </div>
                     <div>
                       {" "}
@@ -205,7 +205,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -240,7 +240,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">
@@ -274,7 +274,7 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
                   <div className=" flex gap-2">

@@ -3,12 +3,12 @@ import React from "react";
 const NewsLetter = () => {
   return (
     <div>
-      <div className=" py-[5rem] bg-bggray">
+      <div className=" py-[5rem] bg-bggray dark:bg-bgdark">
         <div className="flex justify-center md:flex-row flex-col gap-16">
           <div className="flex justify-center ">
             <img src="/Home/logo.svg " alt="Logo" />
           </div>
-          <div className="font-roboto font-bold text-3xl text-black text-center">
+          <div className="font-roboto font-bold text-3xl text-black dark:text-white text-center">
             Subscribe For Updates About The AFL!
             <div className="flex md:justify-around justify-center px-5 md:px-0">
               <div className="w-3/4 m-3">

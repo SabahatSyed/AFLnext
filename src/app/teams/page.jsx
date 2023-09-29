@@ -5,8 +5,8 @@ import Teams from "@/app/teams/teams";
 export default function TeamsMain() {
   return (
     <div className="h-fit ">
-      <Header activepage={"teams"} />
-      <div className="h-screen bg-white w-full">
+      {/* <Header activepage={"teams"} /> */}
+      <div className=" bg-white dark:bg-bgdark w-full">
         <img src="/teams/bg.svg" className="w-full" />
         <Teams />
         <Footer />

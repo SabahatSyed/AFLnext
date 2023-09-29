@@ -4,7 +4,7 @@ const Tickets = () => {
   return (
     <div>
       <div className=" flex flex-col py-6 md:px-14 px-7">
-        <div className=" uppercase font-magistraal text-4xl text-headingblue m-8 text-center">
+        <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white m-8 text-center">
           Tickets
         </div>
         <div className=" flex flex-col gap-10">

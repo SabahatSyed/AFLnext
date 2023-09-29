@@ -3,7 +3,7 @@ import React from "react";
 const Cards = () => {
   return (
     <div>
-      <div className="flex md:flex-row flex-col justify-center items-center md:gap-2 py-5 lg:px-0 md:px-5">
+      <div className="flex md:flex-row flex-col justify-center items-center md:gap-2 py-5 lg:px-0 md:px-5 dark:bg-bgdark">
         <div className="lg:w-[600px] md:w-[500px] w-[370px] h-[350px] p-4">
           <div className="h-full p-6 rounded-lg  rounded-r-2xl bg-[url('/Home/cardBg.svg')]  bg-cover flex items-end">
             <div>
