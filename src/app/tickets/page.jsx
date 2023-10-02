@@ -5,7 +5,7 @@ import Tickets from "@/app/tickets/tickets";
 export default function TicketsMain() {
   return (
     <div className="h-fit ">
-      {/* <Header activepage={"tickets"} /> */}
+      <Header activepage={"tickets"} />
       <div className=" bg-white dark:bg-bgdark w-full">
         <img src="/teams/ticketsbg.svg" className="w-full" />
         <Tickets />

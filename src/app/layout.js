@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/app/theme-provider";
 import Header from '@/components/header';
+
 import Head from 'next/head'
 // import { switchThemeDuration } from "./constants";
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +30,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className}` }>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           
-            <Header />
+            {/* <Header /> */}
         {children}
         </ThemeProvider>
         

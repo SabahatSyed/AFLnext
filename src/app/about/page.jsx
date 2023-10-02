@@ -6,7 +6,7 @@ import OurMission from "@/components/ourmission";
 export default function About() {
   return (
     <div className="h-fit ">
-      {/* <Header activepage={"about"} /> */}
+      <Header activepage={"about"} />
       <div className="h-screen  bg-white">
         <AboutMain />
         <OurMission />

@@ -8,7 +8,7 @@ import NewsLetter from "@/components/newsLetter";
 export default function Home() {
   return (
     <div className="h-fit">
-      {/* <Header /> */}
+      <Header />
       <div className="  bg-white">
         <HomeMain />
         </div>

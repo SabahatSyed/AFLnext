@@ -17,7 +17,7 @@ export default async function News() {
         <Link href="/news">
           <div className=" flex gap-5  mr-[1rem] md:mr-0  overflow-x-scroll custom-scrollbar">
             {data.data.map((result, index) => (
-              <div key={index} className=" bg-white dark:bg-bgdark md:m-5 m-0 border border-gray-200  rounded-3xl shadow ">
+              <div key={index} className=" bg-white dark:bg-bgdark md:m-5 m-0 border border-gray-400  rounded-3xl shadow ">
                 <div  className="md:w-[400px] w-[300px]">
                   <img
                     className=" w-full rounded-t-3xl"
