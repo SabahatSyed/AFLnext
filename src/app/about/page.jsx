@@ -5,9 +5,9 @@ import AboutMain from "@/components/aboutmain";
 import OurMission from "@/components/ourmission";
 export default function About() {
   return (
-    <div class="h-fit ">
+    <div className="h-fit ">
       <Header activepage={"about"} />
-      <div class="h-screen  bg-white">
+      <div className="h-screen  bg-white">
         <AboutMain />
         <OurMission />
         <Footer />

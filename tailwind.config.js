@@ -5,6 +5,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode:['class'],
   theme: {
     extend: {
       backgroundImage: {
@@ -39,7 +40,12 @@ module.exports = {
        "bgblue":"#002D62",
        "headingblue":"#002D62",
        "outlaws":"#043274",
-       "hawks":"#0909A4"
+       "hawks":"#0909A4",
+       "bggray":"#e1e1e5",
+       "textInput":"#d0d0d0",
+       "bgNews":"#EEEEEE",
+       "bgdark":"#101926",
+       "bg-dark2":"#171f2c",
       },
     }
   },
