@@ -3,7 +3,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import News from "@/components/news";
 export default function NewsMain() {
-  return (
+    return (
     <div class="h-fit ">
       <Header activepage={"news"} />
       <div class="h-screen  bg-white">
@@ -30,3 +30,4 @@ export default function NewsMain() {
     </div>
   );
 }
+

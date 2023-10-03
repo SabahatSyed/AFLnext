@@ -1,9 +1,12 @@
 // "use client"
 import React from "react";
 import { getData } from "@/api/FetchData";
-export default async function News  ()  {
-  const data = await getData()
+
+
+export default async function News() {
+  const data=await getData()
   // console.log("News is :", data.data);
+
   return (
     <div>
       <div className="bg-[#EEEEEE] flex flex-col py-6 md:pl-10 pl-5">
@@ -14,7 +17,7 @@ export default async function News  ()  {
 
         {/* // ))} */}
         <div className=" flex gap-5  mr-[1rem] md:mr-0  overflow-x-scroll custom-scrollbar"  >
-          {data.data.map((result,index) => (
+          {data?.data?.map((result,index) => (
           <div className=" bg-white md:m-5 m-0 border border-gray-200  rounded-3xl shadow " >
             <div key={index} className="w-[300px]">
             <a href="#">
@@ -44,6 +47,6 @@ export default async function News  ()  {
       </div>
     </div>
   );
-};
-
-
+}
+ 
+// This gets called on every request
