@@ -4,10 +4,10 @@ import Footer from "@/components/footer";
 import Teams from "@/app/teams/teams";
 export default function TeamsMain() {
   return (
-    <div class="h-fit ">
+    <div className="h-fit ">
       <Header activepage={"teams"} />
-      <div class="h-screen bg-white w-full">
-        <img src="/teams/bg.svg" class="w-full" />
+      <div className=" bg-white dark:bg-bgdark w-full">
+        <img src="/teams/bg.svg" className="w-full" />
         <Teams />
         <Footer />
       </div>

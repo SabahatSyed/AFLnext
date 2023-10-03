@@ -8,6 +8,7 @@ export async function getData() {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },
+    cache:"no-cache",
   });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

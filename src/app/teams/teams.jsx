@@ -3,22 +3,22 @@ import React from "react";
 const Teams = () => {
   return (
     <div>
-      <div class=" flex flex-col py-6 px-14">
-        <div class=" uppercase font-magistraal text-4xl text-[#002D62] m-8 text-center">
+      <div className=" flex flex-col py-6 px-14">
+        <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white m-8 text-center">
           Teams
         </div>
-        <div class=" flex flex-col gap-10">
-          <div class="">
-            <p class="font-magistraal text-lg text-headingblue uppercase">
+        <div className=" flex flex-col gap-10">
+          <div className="">
+            <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 1
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-roboto my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-roboto my-6">
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -27,10 +27,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue dark:text-white font-medium">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -48,11 +48,11 @@ const Teams = () => {
                 </div>
               </div>
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/hawks.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -61,10 +61,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -83,11 +83,11 @@ const Teams = () => {
               </div>
 
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -96,10 +96,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -117,11 +117,11 @@ const Teams = () => {
                 </div>
               </div>
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/hawks.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -130,10 +130,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -152,17 +152,17 @@ const Teams = () => {
               </div>
             </div>
           </div>
-          <div class="">
-            <p class="font-magistraal text-lg text-headingblue uppercase">
+          <div className="">
+            <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 2
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center lg:gap-3 gap-7 font-roboto my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center lg:gap-3 gap-7 font-roboto my-6">
               <div className=" w-3/4 flex flex-col gap-4 ">
-                <div class="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -171,12 +171,12 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
-                      <img src="/teams/facebook.svg" />
+                      <img src="/teams/facebook.svg"  />
                     </div>
                     <div>
                       {" "}
@@ -192,11 +192,11 @@ const Teams = () => {
                 </div>
               </div>
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/hawks.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -205,10 +205,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -227,11 +227,11 @@ const Teams = () => {
               </div>
 
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -240,10 +240,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
@@ -261,11 +261,11 @@ const Teams = () => {
                 </div>
               </div>
               <div className=" w-3/4 flex flex-col gap-4">
-                <div class="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
+                <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/hawks.svg" />
                   <p className="inline-flex text-white items-center mt-1">
                     Visit Their Website{" "}
-                    <span class=" text-white ml-3">
+                    <span className=" text-white ml-3">
                       <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
                     </span>{" "}
                   </p>
@@ -274,10 +274,10 @@ const Teams = () => {
                   <p className="uppercase font-semibold text-lg">
                     billings outlaws
                   </p>
-                  <p className="text-headingblue font-medium">
+                  <p className="text-headingblue font-medium dark:text-white">
                     www.outlawsfootball.com
                   </p>{" "}
-                  <div class=" flex gap-2">
+                  <div className=" flex gap-2">
                     <div>
                       <img src="/teams/facebook.svg" />
                     </div>
