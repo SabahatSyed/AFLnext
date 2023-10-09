@@ -22,7 +22,7 @@ export default async function Partners({data}) {
                 alt="athletic gaines"
               />
               {/* {ticket.attributes.Image.data[0].attributes.url} */}
-              <div className="flex flex-col gap-5 justify-center font-roboto">
+              <div className="flex flex-col gap-5 justify-center font-Roboto">
                 <div>
                   <p className="uppercase text-2xl font-semibold">
                     {result.attributes.Title}

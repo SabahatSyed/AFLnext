@@ -2,10 +2,11 @@ import React from "react";
 import { saveEmail } from "@/api/FetchData";
 // import NewsLetterForm from "@/components/newsLetterForm";
 const NewsLetter = () => {
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     "use server";
-    // saveEmail(e.get("Email"));
-    saveEmail({data : {Subscribers:e.get("Email")}});
+    const res = saveEmail({ data: { Subscribers: e.get("Email") } });
+    console.log(e.target);
+    if (res) e.set("Email", "");
   };
   return (
     <div>
@@ -14,7 +15,7 @@ const NewsLetter = () => {
           <div className="flex justify-center ">
             <img src="/Home/logo.svg " alt="Logo" />
           </div>
-          <div className="font-roboto font-bold text-3xl text-black dark:text-white text-center">
+          <div className="font-Roboto font-bold text-3xl text-black dark:text-white text-center">
             Subscribe For Updates About The AFL!
             {/* <NewsLetterForm/> */}
             <form action={handleSubmit}>
@@ -24,16 +25,15 @@ const NewsLetter = () => {
                     type="text"
                     placeholder="Email"
                     name="Email"
-                    className="bg-textInput rounded-2xl p-4 font-roboto text-base font-bold w-full"
+                    className="bg-textInput rounded-2xl p-4 font-Roboto text-base font-bold w-full"
                   />
                 </div>
                 <div className="m-3">
                   <button
-                  type="submit"
-                  className="font-roboto text-base font-bold text-white p-4 bg-bgblue inline-flex rounded-2xl"
-                  >
+                    type="submit"
+                    className="font-Roboto text-base font-bold text-white p-4 bg-bgblue inline-flex rounded-2xl items-center justify-center">
                     Subscribe
-                    <span className="mt-1 ml-3">
+                    <span className=" ml-3">
                       <img src="/Home/Union.svg" alt="Arrow svg" />
                     </span>
                   </button>

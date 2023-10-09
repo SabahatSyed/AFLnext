@@ -1,4 +1,3 @@
-
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import HomeMain from "@/components/homeMain";
@@ -9,7 +8,6 @@ import { getData } from "@/api/FetchData";
 
 export default async function Home() {
       const data =await getData();
-
   return (
     <div className="h-fit">
       <Header />
@@ -18,7 +16,7 @@ export default async function Home() {
         </div>
         <Cards />
         <News data={data}/>
-        <NewsLetter />
+        <NewsLetter/>
         {/* </div> */}
         <Footer />
       </div>
