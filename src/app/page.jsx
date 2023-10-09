@@ -5,7 +5,11 @@ import HomeMain from "@/components/homeMain";
 import Cards from "@/components/cards";
 import News from "@/components/news";
 import NewsLetter from "@/components/newsLetter";
-export default function Home() {
+import { getData } from "@/api/FetchData";
+
+export default async function Home() {
+      const data =await getData();
+
   return (
     <div className="h-fit">
       <Header />
@@ -13,7 +17,7 @@ export default function Home() {
         <HomeMain />
         </div>
         <Cards />
-        <News />
+        <News data={data}/>
         <NewsLetter />
         {/* </div> */}
         <Footer />
