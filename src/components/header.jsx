@@ -48,6 +48,13 @@ export default function Header({ activepage }) {
               teams
             </div>
           </Link>
+          <Link href="/stats">
+            <div
+              className={`${activepage == "stats" ? "text-headingblue" : ""}`}
+            >
+              Stats
+            </div>
+          </Link>
           <Link href="/shop">
             <div
               className={`${activepage == "shop" ? "text-headingblue" : ""}`}

@@ -90,7 +90,7 @@ export function saveEmail(props) {
   })
     .then(async (res) => {
       const data = await res.json();
-      console.log("res", data);
+      // console.log("res", data);
       console.log("Subscribed successfully!");
     })
     .catch((err) => {
@@ -98,6 +98,25 @@ export function saveEmail(props) {
       //   });catch (error) {
       // console.error("Error:", error);
     });
+}
+
+export async function getStatsData() {
+  try {
+    const res = await fetch(apiEndpoint + "stats?populate=Image", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      cache: "no-store",
+      // next: { revalidate: 0 } ,
+    });
+    const response = await res.json();
+    return response;
+  } catch (error) {
+    // Handle the error here or rethrow it as needed
+    console.error("An error occurred while fetching data:", error);
+    throw error; // You can rethrow the error to handle it in the calling code
+  }
 }
 
 // }

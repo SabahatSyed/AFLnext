@@ -2,7 +2,8 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import HomeMain from "@/components/homeMain";
-import Cards from "@/components/cards";
+// import Cards from "@/components/cards";
+import AflPyramid from "@/components/aflPyramid";
 import News from "@/components/news";
 import NewsLetter from "@/components/newsLetter";
 import { getData } from "@/api/FetchData";
@@ -16,7 +17,8 @@ export default async function Home() {
       <div className="  bg-white">
         <HomeMain />
         </div>
-        <Cards />
+        {/* <Cards /> */}
+        <AflPyramid/>
         <News data={data}/>
         <NewsLetter />
         {/* </div> */}
