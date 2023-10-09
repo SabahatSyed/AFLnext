@@ -1,10 +1,7 @@
 // "use client"
 import React from "react";
-import { getData } from "@/api/FetchData";
 import Link from "next/link";
-export default async function News() {
-  const data = await getData();
-  // console.log("News is :", data.data);       
+export default function News({data}) {
   return (
     <div>
       <div className="bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 md:pl-10 pl-5">
@@ -16,7 +13,7 @@ export default async function News() {
         {/* // ))} */}
         <Link href="/news">
           <div className=" flex gap-5  mr-[1rem] md:mr-0  overflow-x-scroll custom-scrollbar">
-            {data.data.map((result, index) => (
+            {data?.data?.map((result, index) => (
               <div key={index} className=" bg-white dark:bg-bgdark md:m-5 m-0 border border-gray-400  rounded-3xl shadow ">
                 <div  className="md:w-[400px] w-[300px]">
                   <img

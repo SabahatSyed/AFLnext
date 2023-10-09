@@ -2,7 +2,10 @@ import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import News from "@/components/news";
-export default function NewsMain() {
+import { getData } from "@/api/FetchData";
+
+export default async function NewsMain() {
+    const data =await getData();
   return (
     <div className="h-fit ">
       <Header activepage={"news"} />
@@ -24,7 +27,7 @@ export default function NewsMain() {
             </p>
           </div>
         </div>
-        <News />
+        <News data={data}/>
         <Footer />
       </div>
     </div>

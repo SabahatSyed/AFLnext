@@ -1,25 +1,106 @@
+const authToken =
+  "ddb964bf42dff984f6c786583a7c51afd0bf7bf1074d6d387966398089e2701089f643fa3071dbc1392fcde6377390c068df595e812fd3613df234f5d9a8528ca9ff355f75b39b67eebbdd3219e4bda55ccb73209f85c3e441319f97b867935bd884ffa3a956ccab546e967050adb59c4c242073bb6f8d48cd7c60356a387a3e";
+const apiEndpoint = "https://afl-cms.logixsy.com/api/";
+
 export async function getData() {
-  try{
-    
-    const apiEndpoint = 'http://afl-cms.logixsy.com/api/newss';
-  const authToken = '429c6884072159c86dcf477440284159f070c6f2bb4c17f5d801dcd5962a42962bfe19afe7a25290895e79338b34ceed915e29d1beaa14a15ae606dcea31738b4dfad76b0a06ed0d48312482a840140d6c1b57ac8d587df923195bc6b3e8ee9c1b8b7994833863c56e300049f25de8b340f67dd0ad74c7dedf1e09893c6ff3e0';
-  const res = await fetch(apiEndpoint, {
-    method: 'GET',
+  try {
+    const data = await fetch(apiEndpoint + "newss", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      cache: "no-store",
+      // next: { revalidate: 0 } ,
+    });
+    const response = await data.json();
+    return response;
+  } catch (error) {
+    // Handle the error here or rethrow it as needed
+    console.error("An error occurred while fetching data:", error);
+    throw error; // You can rethrow the error to handle it in the calling code
+  }
+}
+export async function getPartnersData() {
+  try {
+    const res = await fetch(apiEndpoint + "partners?populate=Image", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      cache: "no-store",
+      // next: { revalidate: 0 } ,
+    });
+    const response = await res.json();
+    return response;
+  } catch (error) {
+    // Handle the error here or rethrow it as needed
+    console.error("An error occurred while fetching data:", error);
+    throw error; // You can rethrow the error to handle it in the calling code
+  }
+}
+
+export async function getTeamsData() {
+  try {
+    const res = await fetch(apiEndpoint + "teams?populate=Image", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      cache: "no-store",
+      // next: { revalidate: 0 } ,
+    });
+    const response = await res.json();
+    return response;
+  } catch (error) {
+    // Handle the error here or rethrow it as needed
+    console.error("An error occurred while fetching data:", error);
+    throw error; // You can rethrow the error to handle it in the calling code
+  }
+}
+
+export async function getTicketsData() {
+  try {
+    const res = await fetch(apiEndpoint + "tickets?populate=Image", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      cache: "no-store",
+      // next: { revalidate: 0 } ,
+    });
+    const response = await res.json();
+    return response;
+  } catch (error) {
+    // Handle the error here or rethrow it as needed
+    console.error("An error occurred while fetching data:", error);
+    throw error; // You can rethrow the error to handle it in the calling code
+  }
+}
+
+export function saveEmail(props) {
+  // try {
+  // Send a POST request to your Strapi backend to subscribe the user
+  fetch(apiEndpoint + "news-letters", {
+    method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${authToken}`,
     },
-    cache:"no-cache",
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
- // console.log("hello",res.json())
- 
-   const data = await res.json();
+    body: JSON.stringify(props),
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      console.log("res", data);
+      console.log("Subscribed successfully!");
+    })
+    .catch((err) => {
+      console.log("Subscription failed. Please try again.");
+      //   });catch (error) {
+      // console.error("Error:", error);
+    });
+}
 
-   console.log("data",data)
-  return data
-}
-catch(err){
-  console.log("error",err)
-}
-}
+// }
+// catch(error){
+//   console.log("Error:", error);
+// }
