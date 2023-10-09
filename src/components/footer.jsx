@@ -10,25 +10,25 @@ export default function Footer({ activePage }) {
             <p>Division 1</p>
             <img src="/Home/outlaws.svg" />
             <img src="/Home/hawks.svg" />
-            <img src="/Home/outlaws.svg" /> <img src="/Home/hawks.svg" />
+            <img src="/Home/p.svg" /> <img src="/Home/firebirds.svg" />
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
             <p>Division 2</p>
             <img src="/Home/outlaws.svg" />
             <img src="/Home/hawks.svg" />
-            <img src="/Home/outlaws.svg" /> <img src="/Home/hawks.svg" />
+            <img src="/Home/p.svg" /> <img src="/Home/firebirds.svg" />
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
             <p>Division 3</p>
             <img src="/Home/outlaws.svg" />
             <img src="/Home/hawks.svg" />
-            <img src="/Home/outlaws.svg" /> <img src="/Home/hawks.svg" />
+            <img src="/Home/p.svg" /> <img src="/Home/firebirds.svg" />
           </div>
           <div className="flex flex-col justify-center items-center gap-6 ">
             <p>Division 4</p>
             <img src="/Home/outlaws.svg" />
             <img src="/Home/hawks.svg" />
-            <img src="/Home/outlaws.svg" /> <img src="/Home/hawks.svg" />
+            <img src="/Home/p.svg" /> <img src="/Home/firebirds.svg" />
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function Footer({ activePage }) {
           <img src="/Home/logo.svg" className="w-16 mx-auto" />
         </div>
         <div>
-          <p className="text-xs text-center text-white font-roboto">
+          <p className="text-xs text-center text-white font-Roboto">
             © 2023 AFL - Arena Football League. AFL and the AFL shield design
             are registered trademarks of the Arena Football League. The team
             names, logos and uniform designs are registered trademarks of the

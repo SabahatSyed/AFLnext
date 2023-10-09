@@ -5,12 +5,12 @@ import News from "@/components/news";
 import { getData } from "@/api/FetchData";
 
 export default async function NewsMain() {
-    const data =await getData();
+  const data = await getData();
   return (
     <div className="h-fit ">
       <Header activepage={"news"} />
       <div className="h-screen  bg-white">
-        <div className="bg-[url('/news/newsbg.svg')] bg-cover   lg:h-[86%] md:h-1/2 h-2/5 grid lg:grid-cols-3 grid-cols-1 text-white font-roboto md:p-20 p-10 md:place-items-end">
+        <div className="bg-[url('/news/newsbg.svg')] bg-cover   lg:h-[86%] md:h-1/2 h-2/5 grid lg:grid-cols-3 grid-cols-1 text-white font-Roboto md:p-20 p-10 md:place-items-end">
           <div className="flex flex-col gap-4 ">
             <p className="md:text-3xl text-2xl font-bold leading-tight">
               Arena Football League Relaunch Press release
@@ -27,10 +27,9 @@ export default async function NewsMain() {
             </p>
           </div>
         </div>
-        <News data={data}/>
+        <News data={data} />
         <Footer />
       </div>
     </div>
   );
 }
-

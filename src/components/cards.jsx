@@ -8,14 +8,14 @@ const Cards = () => {
           <div className="h-full p-6 rounded-lg  rounded-r-2xl bg-[url('/Home/cardBg.svg')]  bg-cover flex items-end">
             <div>
               {/* <img className="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/720x400" alt="content"/> */}
-              <h3 className=" font-bold text-3xl font-roboto text-white">
+              <h3 className=" font-bold text-3xl font-Roboto text-white">
                 Gear Up With AFL Merch!
               </h3>
-              <h2 className="font-roboto font-normal text-base text-white">
+              <h2 className="font-Roboto font-normal text-base text-white">
                 Online shop coming soon...
               </h2>
               <div className="mt-5 ">
-                <div className="font-roboto font-bold text-xl text-white inline-flex">
+                <div className="font-Roboto font-bold text-xl text-white inline-flex">
                   Coming Soon
                   <span className="mt-3 ml-3">
                     <img src="/Home/Union.svg" alt="Arrow svg " />
@@ -29,14 +29,14 @@ const Cards = () => {
           <div className="h-full p-6 rounded-lg  rounded-r-2xl bg-[url('/Home/cardBg1.svg')]  bg-cover flex items-end">
             <div>
               {/* <img className="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/720x400" alt="content"/> */}
-              <h3 className=" font-bold text-3xl font-roboto text-white">
+              <h3 className=" font-bold text-3xl font-Roboto text-white">
                 Get your tickets now!
               </h3>
-              <h2 className="font-roboto font-normal text-base text-white">
+              <h2 className="font-Roboto font-normal text-base text-white">
                 Tickets available soon...
               </h2>
               <div className="mt-5 ">
-                <div className="font-roboto font-bold text-xl text-white inline-flex">
+                <div className="font-Roboto font-bold text-xl text-white inline-flex">
                   Tickets
                   <span className="mt-3 ml-3">
                     <img src="/Home/Union.svg" alt="Arrow svg " />

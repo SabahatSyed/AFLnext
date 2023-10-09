@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default  function Teams({data}) {
+export default function Teams({ data }) {
   return (
     <div>
       <div className=" flex flex-col py-6 px-14">
@@ -13,7 +13,7 @@ export default  function Teams({data}) {
             <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 1
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-roboto my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-Roboto my-6">
               {data?.data?.map((result, index) => (
                 <div key={index} className=" w-3/4 flex flex-col gap-4">
                   <div
@@ -21,8 +21,7 @@ export default  function Teams({data}) {
                       result.attributes.Label == `Dessert Hawks`
                         ? "bg-hawks"
                         : "bg-outlaws"
-                    } flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center`}
-                  >
+                    } flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center`}>
                     <img
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="Teams"
@@ -176,7 +175,7 @@ export default  function Teams({data}) {
             <p className="font-magistraal text-lg text-headingblue dark:text-white uppercase">
               Division 2
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center lg:gap-3 gap-7 font-roboto my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center lg:gap-3 gap-7 font-Roboto my-6">
               {/* <div className=" w-3/4 flex flex-col gap-4 ">
                 <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />
@@ -218,8 +217,7 @@ export default  function Teams({data}) {
                       result.attributes.Label == `Dessert Hawks`
                         ? "bg-hawks"
                         : "bg-outlaws"
-                    } flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center`}
-                  >
+                    } flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center`}>
                     <img
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="Teams"

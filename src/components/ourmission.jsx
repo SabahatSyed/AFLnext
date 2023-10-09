@@ -1,11 +1,9 @@
-
 import React from "react";
 
 const OurMission = () => {
- 
   return (
     <div className="dark:bg-bgdark">
-      <div className="font-roboto flex w-full   justify-around lg:flex-row flex-col  lg:items-center  md:py-16 py-8 md:px-20 p-10 lg:gap-0 gap-5">
+      <div className="font-Roboto flex w-full   justify-around lg:flex-row flex-col  lg:items-center  md:py-16 py-8 md:px-20 p-10 lg:gap-0 gap-5">
         <div className=" md:p-3 p-1 lg:w-[50%] flex justify-center mb-5 md:mb-0">
           <div className="lg:w-4/5">
             <p className="text-headingblue font-magistral font-bold text-4xl mb-5">
@@ -46,23 +44,15 @@ const OurMission = () => {
       </div>
 
       <div className="flex justify-center items-center">
-       
-        <div
-          className="md:ml-20 ml-10 mr-10 pr-5 md:mr-20 w-11/12 overflow-y-hidden overflow-x-scroll flex gap-4 items-center lg:mb-28 lg:mt-14 md:mt-0 mt-6 mb-10 custom-scrollbar md:justify-center"
-          
-        >
-         
+        <div className="md:ml-20 ml-10 mr-10 pr-5 md:mr-20 w-11/12 overflow-y-hidden overflow-x-scroll flex gap-4 items-center lg:mb-28 lg:mt-14 md:mt-0 mt-6 mb-10 custom-scrollbar md:justify-center">
           <img src="/about/slider1.svg" className="md:w-1/3 w-full" />
 
           <img src="/about/slider2.svg" className="md:w-1/3 w-full" />
 
           <img src="/about/slider3.svg" className="md:w-[30%] w-11/12" />
-        
         </div>
-     
       </div>
     </div>
-  
   );
 };
 
