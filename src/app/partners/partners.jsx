@@ -1,15 +1,6 @@
 import React from "react";
-import { getPartnersData } from "@/api/FetchData";
-export default async function Partners() {
-  const data = await getPartnersData();
-  //  console.log("Partners  :", data.data[1].attributes.Image);
-
-  // const imagesData = await res.json();
-  // const firstImage = imagesData[0]; // Assuming you want the first image
-  // const imageUrl = firstImage.attributes.Image[0].url; // Adjust the field name as needed
-  // Now you can use the imageUrl in your Next.js app
-  // console.log(data.data[1].attributes.Image.data[0].attributes);
-
+export default async function Partners({data}) {
+ 
   return (
     <div>
       <div className=" flex flex-col md:py-6 py-4 md:px-14 px-1 ">
@@ -22,7 +13,6 @@ export default async function Partners() {
         </p>
         <div className=" flex flex-col gap-10 w-10/12 md:w-11/12 lg:w-7/12 mx-auto mt-10 mb-20">
           {data.data.map((result, index) => (
-            // console.log(result.attributes.Image.url);
             <div
               key={index}
               className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32"

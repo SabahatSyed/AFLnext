@@ -1,11 +1,10 @@
-const api_Token =
+const authToken =
   "ddb964bf42dff984f6c786583a7c51afd0bf7bf1074d6d387966398089e2701089f643fa3071dbc1392fcde6377390c068df595e812fd3613df234f5d9a8528ca9ff355f75b39b67eebbdd3219e4bda55ccb73209f85c3e441319f97b867935bd884ffa3a956ccab546e967050adb59c4c242073bb6f8d48cd7c60356a387a3e";
+const apiEndpoint = "https://afl-cms.logixsy.com/api/";
 
 export async function getData() {
   try {
-    const apiEndpoint = "http://afl-cms.logixsy.com/api/newss";
-    const authToken = api_Token;
-    const res = await fetch(apiEndpoint, {
+    const data = await fetch(apiEndpoint + "newss", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -13,15 +12,8 @@ export async function getData() {
       cache: "no-store",
       // next: { revalidate: 0 } ,
     });
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
+    const response = await data.json();
+    return response;
   } catch (error) {
     // Handle the error here or rethrow it as needed
     console.error("An error occurred while fetching data:", error);
@@ -30,10 +22,7 @@ export async function getData() {
 }
 export async function getPartnersData() {
   try {
-    const apiEndpoint =
-      "http://afl-cms.logixsy.com/api/partners?populate=Image";
-    const authToken = api_Token;
-    const res = await fetch(apiEndpoint, {
+    const res = await fetch(apiEndpoint + "partners?populate=Image", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -41,15 +30,8 @@ export async function getPartnersData() {
       cache: "no-store",
       // next: { revalidate: 0 } ,
     });
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
+    const response = await res.json();
+    return response;
   } catch (error) {
     // Handle the error here or rethrow it as needed
     console.error("An error occurred while fetching data:", error);
@@ -59,9 +41,7 @@ export async function getPartnersData() {
 
 export async function getTeamsData() {
   try {
-    const apiEndpoint = "http://afl-cms.logixsy.com/api/teams?populate=Image";
-    const authToken = api_Token;
-    const res = await fetch(apiEndpoint, {
+    const res = await fetch(apiEndpoint + "teams?populate=Image", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -69,15 +49,8 @@ export async function getTeamsData() {
       cache: "no-store",
       // next: { revalidate: 0 } ,
     });
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
+    const response = await res.json();
+    return response;
   } catch (error) {
     // Handle the error here or rethrow it as needed
     console.error("An error occurred while fetching data:", error);
@@ -87,9 +60,7 @@ export async function getTeamsData() {
 
 export async function getTicketsData() {
   try {
-    const apiEndpoint = "http://afl-cms.logixsy.com/api/tickets?populate=Image";
-    const authToken = api_Token;
-    const res = await fetch(apiEndpoint, {
+    const res = await fetch(apiEndpoint + "tickets?populate=Image", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -97,15 +68,8 @@ export async function getTicketsData() {
       cache: "no-store",
       // next: { revalidate: 0 } ,
     });
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
+    const response = await res.json();
+    return response;
   } catch (error) {
     // Handle the error here or rethrow it as needed
     console.error("An error occurred while fetching data:", error);
@@ -113,23 +77,20 @@ export async function getTicketsData() {
   }
 }
 
-export async function saveEmail(props) {
+export function saveEmail(props) {
   // try {
-  const authToken = api_Token;
   // Send a POST request to your Strapi backend to subscribe the user
-  const apiEndpoint = "https://afl-cms.logixsy.com/api/news-letters";
-  await fetch(apiEndpoint, {
+  fetch(apiEndpoint + "news-letters", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${authToken}`,
     },
-    body:{
-      props
-    },
+    body: JSON.stringify(props),
   })
-    .then((res) => {
-       console.log("res", res.json());
+    .then(async (res) => {
+      const data = await res.json();
+      console.log("res", data);
       console.log("Subscribed successfully!");
     })
     .catch((err) => {
@@ -137,7 +98,6 @@ export async function saveEmail(props) {
       //   });catch (error) {
       // console.error("Error:", error);
     });
-  console.log(props);
 }
 
 // }

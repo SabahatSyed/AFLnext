@@ -1,12 +1,7 @@
 import React from "react";
-import { getTeamsData } from "@/api/FetchData";
 import Link from "next/link";
 
-export default async function Teams() {
-  const data = await getTeamsData();
-  // console.log("teams data : ", data.data[1].attributes.Image.data[0].attributes);
-  // console.log(data.data[0].attributes);
-
+export default  function Teams({data}) {
   return (
     <div>
       <div className=" flex flex-col py-6 px-14">
@@ -19,7 +14,7 @@ export default async function Teams() {
               Division 1
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:gap-3 gap-7 font-roboto my-6">
-              {data.data.map((result, index) => (
+              {data?.data?.map((result, index) => (
                 <div key={index} className=" w-3/4 flex flex-col gap-4">
                   <div
                     className={`${

@@ -1,8 +1,5 @@
 import React from "react";
-import { getTicketsData } from "@/api/FetchData";
-export default async function Tickets  () {
- const data = await getTicketsData();
-//  console.log("Tickets data: ", data.data[0].attributes.Image.data[0].attributes);
+export default async function Tickets({data}) {
   return (
     <div>
       <div className=" flex flex-col py-6 md:px-14 px-7">
@@ -27,7 +24,7 @@ export default async function Tickets  () {
               <div  key={index}  className=" ">
               
                   <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl place-items-center  justify-center items-center">
-                  <img  src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`} alt="Tickets" />
+                  <img  src={`https://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`} alt="Tickets" />
                   
                   <p className="inline-flex text-white items-center mt-1 text-base font-bold">
                   Get Tickets{" "}
