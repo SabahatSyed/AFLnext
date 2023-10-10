@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Teams({ data }) {
   return (
     <div>
-      <div className="lg:w-full md:w-[500px] w-[370px] h-fit px-4 pb-4 flex flex-col justify-center items-center">
+      <div className="w-full h-fit px-4 pb-4 flex flex-col justify-center items-center">
         <img
           src="/teams/AFLpyramid.svg"
           alt="Afl Pyramid"
