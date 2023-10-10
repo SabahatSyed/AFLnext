@@ -1,6 +1,5 @@
 import React from "react";
-export default async function Partners({data}) {
- 
+export default async function Partners({ data }) {
   return (
     <div>
       <div className=" flex flex-col md:py-6 py-4 md:px-14 px-1 ">
@@ -15,14 +14,13 @@ export default async function Partners({data}) {
           {data.data.map((result, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32"
-            >
+              className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32">
               <img
                 src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                 alt="athletic gaines"
               />
               {/* {ticket.attributes.Image.data[0].attributes.url} */}
-              <div className="flex flex-col gap-5 justify-center font-Roboto">
+              <div className="flex flex-col gap-5 justify-center font-roboto">
                 <div>
                   <p className="uppercase text-2xl font-semibold">
                     {result.attributes.Title}

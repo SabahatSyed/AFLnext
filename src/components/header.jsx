@@ -17,12 +17,12 @@ export default function Header({ activepage }) {
   return (
     <div>
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
-      <div className="bg-[url('/Home/Navbar.svg')]  relative z-10 grid grid-cols-12 place-content-center px-4 md:px-14 py-3 md:py-4">
+      <div className="bg-[url('/Home/Navbar.svg')]  relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-4">
         <div className="col-span-1">
           <Link href="/">
             <img
               src="/Home/logo.svg"
-              className="absolute -translate-y-2/4 md:-translate-y-[60%] w-20 md:w-28 lg:w-auto"
+              className="absolute -translate-y-2/4 md:-translate-y-[60%] w-20 lg:w-auto"
             />
           </Link>
         </div>
@@ -80,10 +80,10 @@ export default function Header({ activepage }) {
               tickets
             </div>
           </Link>
-          <Link href="">
+          <Link href="/live">
             <div
               className={`flex gap-2 px-2 items-center bg-hawks rounded-md  ${
-                activepage == "line" ? "text-headingblue" : ""
+                activepage == "live" ? "text-headingblue" : ""
               }`}>
               <p>live</p>
               <p className="bg-white w-2 h-2 rounded-full"></p>
@@ -147,7 +147,7 @@ export default function Header({ activepage }) {
       {/* Sliding Menu */}
       {menuOpen && (
         <div
-          className="w-fit p-5 mx-2 flex flex-col gap-3 font-Roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
+          className="w-fit p-5 mx-2 z-10 flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
           style={{
             transform: menuOpen ? "translateX(0)" : "translateX(100%)",
             transition: "transform 0.3s ease-in-out",
@@ -190,7 +190,9 @@ export default function Header({ activepage }) {
             href="https://afl-shop.logixsy.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${activepage === "shop" ? "text-headingblue" : ""} text-white`}>
+            className={`${
+              activepage === "shop" ? "text-headingblue" : ""
+            } text-white`}>
             shop
           </a>
           <Link href="/stats">
@@ -217,10 +219,10 @@ export default function Header({ activepage }) {
               tickets
             </div>
           </Link>
-          <Link href="">
+          <Link href="/live">
             <div
               className={`flex gap-2 px-2 items-center bg-hawks rounded-md  ${
-                activepage == "line" ? "text-headingblue" : ""
+                activepage == "live" ? "text-headingblue" : ""
               }`}>
               <p>live</p>
               <p className="bg-white w-2 h-2 rounded-full"></p>

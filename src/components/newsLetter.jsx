@@ -1,12 +1,12 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { saveEmail } from "@/api/FetchData";
-// import NewsLetterForm from "@/components/newsLetterForm";
 const NewsLetter = () => {
-  const handleSubmit = async (e) => {
-    "use server";
-    const res = saveEmail({ data: { Subscribers: e.get("Email") } });
-    console.log(e.target);
-    if (res) e.set("Email", "");
+  const [email, setEmail] = useState("");
+  const handleSubmit =  (e) => {
+    const res = saveEmail({ data: { Subscribers: email } });
+    setEmail("");
+    alert("Subscribed successfully!");
   };
   return (
     <div>
@@ -15,23 +15,24 @@ const NewsLetter = () => {
           <div className="flex justify-center ">
             <img src="/Home/logo.svg " alt="Logo" />
           </div>
-          <div className="font-Roboto font-bold text-3xl text-black dark:text-white text-center">
+          <div className="font-roboto font-bold text-3xl text-black dark:text-white text-center">
             Subscribe For Updates About The AFL!
-            {/* <NewsLetterForm/> */}
             <form action={handleSubmit}>
               <div className="flex md:justify-around justify-center px-5 md:px-0">
                 <div className="w-3/4 m-3">
                   <input
                     type="text"
                     placeholder="Email"
-                    name="Email"
-                    className="bg-textInput rounded-2xl p-4 font-Roboto text-base font-bold w-full"
+                    //name="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-textInput rounded-2xl p-4 font-roboto text-base font-bold w-full"
                   />
                 </div>
                 <div className="m-3">
                   <button
                     type="submit"
-                    className="font-Roboto text-base font-bold text-white p-4 bg-bgblue inline-flex rounded-2xl items-center justify-center">
+                    className="font-roboto text-base font-bold text-white p-4 bg-bgblue inline-flex rounded-2xl items-center justify-center">
                     Subscribe
                     <span className=" ml-3">
                       <img src="/Home/Union.svg" alt="Arrow svg" />

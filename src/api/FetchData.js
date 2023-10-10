@@ -91,10 +91,11 @@ export function saveEmail(props) {
     .then(async (res) => {
       const data = await res.json();
       // console.log("res", data);
-      console.log("Subscribed successfully!");
+      return ("Subscribed successfully!");
     })
     .catch((err) => {
       console.log("Subscription failed. Please try again.");
+      return "Subscription failed. Please try again.";
       //   });catch (error) {
       // console.error("Error:", error);
     });
