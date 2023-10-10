@@ -1,6 +1,6 @@
 import React from "react";
 export default async function Partners({data}) {
- 
+ console.log(data.data)
   return (
     <div>
       <div className=" flex flex-col md:py-6 py-4 md:px-14 px-1 ">
