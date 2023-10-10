@@ -1,7 +1,8 @@
 import React from "react";
 export default async function Stats({ data }) {
+  // console.log(data.data[1].attributes.icon.data.attributes.url);
   // console.log(data.data);
-  //   console.log(data.data.attributes.icon.data[0].attributes.url);
+
   return (
     <div>
       <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white md:m-12 p-6 m-5 text-center">
@@ -41,13 +42,12 @@ export default async function Stats({ data }) {
                 alt="athletic gaines"
               /> */}
                   <td
-                    className={`font-semibold flex items-center w-48 lg:min-w-fit ${
-                      result.attributes.Team === "Billing Outlaws"
-                        ? "border-l-8 border-l-headingblue"
-                        : "border-l-8 border-l-red-700"
-                    }`}
+                  style={{borderLeftColor:`${result.attributes.svgColor.replace(/\s/g, "")}`,borderLeftWidth:5}}
+                    className={`font-semibold flex items-center  w-48 lg:min-w-fit `}
                   >
-                    <img src="/teams/outlaws.svg" alt="outLaws"  className="w-10 h-10 m-2"/>
+  
+
+                    <img src={`http://afl-cms.logixsy.com${result.attributes.icon.data.attributes.url}`} alt="outLaws"  className="w-10 h-10 m-2"/>
                     {result.attributes.Team}
                   </td>
                   <td className="border-l-4 border-headingblue">

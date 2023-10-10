@@ -103,7 +103,7 @@ export function saveEmail(props) {
 
 export async function getStatsData() {
   try {
-    const res = await fetch(apiEndpoint + "stats?populate=Image", {
+    const res = await fetch(apiEndpoint + "stats?populate=icon", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
