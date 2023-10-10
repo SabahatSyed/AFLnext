@@ -37,7 +37,7 @@ export default function Footer({ activePage }) {
           <img src="/Home/logo.svg" className="w-16 mx-auto" />
         </div>
         <div>
-          <p className="text-xs text-center text-white font-Roboto">
+          <p className="text-xs text-center text-white font-roboto">
             © 2023 AFL - Arena Football League. AFL and the AFL shield design
             are registered trademarks of the Arena Football League. The team
             names, logos and uniform designs are registered trademarks of the
