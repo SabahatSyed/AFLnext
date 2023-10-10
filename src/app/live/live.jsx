@@ -1,6 +1,8 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import ReactPlayer from "react-player";
+
 const result = [
   {
     id: 1,
@@ -53,15 +55,21 @@ export default function Watch({ data }) {
   };
   return (
     <div>
-      <video
+      <ReactPlayer
+        poster="/watch/livevid.svg"
+        url="https://www.twitch.tv/thisisfg"
+        width="100%"
+        height="640px"
+      />
+
+     {/*} <video
         ref={videoRef}
         className="relative w-full"
-        src="/watch/viewfeedbacks.mp4"
-        poster="/watch/livevid.svg"
+        src="https://www.youtube.com/watch?v=Ok1PRNGvXZg"
         controls
         onClick={handlePlayClick1}
         onEnded={() => setIsVideoPlaying1(false)}
-      />
+  />*/}
       <div className=" flex flex-col py-6 px-14">
         <div className=" flex flex-col gap-10 ">
           <div className="mx-6 gap-10 place-items-center">
@@ -85,8 +93,7 @@ export default function Watch({ data }) {
                   <span
                     onClick={() => setRead(true)}
                     className="text-bgblue cursor-pointer font-medium">
-                   
-                  ...Read More{" "}
+                    ...Read More{" "}
                   </span>
                 )}
                 {read && (
@@ -101,7 +108,7 @@ export default function Watch({ data }) {
                     onClick={() => setRead(false)}
                     className="text-bgblue cursor-pointer font-medium">
                     {" "}
-                  Read Less{" "}
+                    Read Less{" "}
                   </span>
                 )}
               </p>

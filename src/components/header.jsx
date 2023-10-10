@@ -126,16 +126,16 @@ export default function Header({ activepage }) {
           <div>
             <img src="/Home/h.svg" />
           </div>
-          <div>
+         <Link href={"https://www.facebook.com/AFL"}>
             {" "}
             <img src="/Home/facebook.svg" />
-          </div>
-          <div>
+          </Link>
+          <Link href={"https://www.instagram.com/afl/"}>
             <img src="/Home/instagram.svg" />{" "}
-          </div>
-          <div>
+          </Link>
+          <Link href={"https://www.youtube.com/@AFL"}>
             <img src="/Home/youtube.svg" />
-          </div>
+          </Link>
         </div>
         <div className="md:hidden col-start-12 col-span-4">
           {/* Toggle Menu Button */}

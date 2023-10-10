@@ -109,9 +109,9 @@ export default function Watch({ data }) {
                 quis ultrices libero. Integer at gravida elit. Fusce consectetur
                 bibendum luctus. Nulla porta metus non rhoncus vehicula.
               </p>
-              <p className="flex gap-2 cursor-pointer font-bold text-bgblue mt-2">
+              <Link href="/live" className="flex gap-2 cursor-pointer font-bold text-bgblue mt-2">
                 Live Stream <img src="/Home/UnionBlack.svg" />
-              </p>
+              </Link>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 font-roboto place-items-center mb-8">
