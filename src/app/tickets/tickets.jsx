@@ -8,7 +8,7 @@ export default async function Tickets({ data }) {
         </div>
         <div className=" flex flex-col gap-10">
           <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4   lg:gap-4 gap-7 font-Roboto my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4   lg:gap-4 gap-7 font-roboto my-6">
               {/* <div className=" w-full flex flex-col gap-4 ">
                 <div className="bg-outlaws flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
                   <img src="/teams/outlaws.svg" />

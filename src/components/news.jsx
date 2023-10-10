@@ -25,14 +25,14 @@ export default function News({ data }) {
                   />
 
                   <div className="p-5 flex flex-col gap-3">
-                    <div className="font-Roboto text-base font-bold h-[4rem] overflow-hidden">
+                    <div className="font-roboto text-base font-bold h-[4rem] overflow-hidden">
                       {result.attributes.title}
                     </div>
 
-                    <p className="font-Roboto font-light text-base text-gray-500  text-ellipsis h-[10rem] overflow-hidden">
+                    <p className="font-roboto font-light text-base text-gray-500  text-ellipsis h-[10rem] overflow-hidden">
                       {result.attributes.description}...
                     </p>
-                    <div className="font-Roboto font-bold text-xl text-headingblue dark:text-bgNews inline-flex items-center">
+                    <div className="font-roboto font-bold text-xl text-headingblue dark:text-bgNews inline-flex items-center">
                       Keep Reading
                       <span className=" ml-3 ">
                         <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
