@@ -10,43 +10,44 @@ export default async function Stats({ data }) {
       <div className="p-4 ">
         <div className="flex justify-center items-center">
       <div className="w-full  overflow-x-scroll custom-scrollbar">
-          <table className="min-w-full divide-y divide-gray-200 ">
+          <table className="min-w-full divide-y divide-gray-200 font-roboto">
             <thead className="">
               <tr className="border-b border-headingblue">
-                <th className="col-span-4 ">Teams</th>
-                <th className="border-l-4 border-headingblue border-t min-w-[4rem] md:min-w-[5rem] ">Att</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">Cmp</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">Cmp %</th>
-                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">YdsAtt</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">PassYds</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">TD</th>
-                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">INT</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">Rate</th>
-                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">1st</th>
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">1st %</th>
-                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">20+</th>
+                <th className="col-span-4 text-base">Teams</th>
+                <th className="border-l-4 border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">Att</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">Cmp</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">Cmp %</th>
+                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">YdsAtt</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">PassYds</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">TD</th>
+                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">INT</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">Rate</th>
+                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">1st</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">1st %</th>
+                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">20+</th>
 
-                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem]">40+</th>
-                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">Lng</th>
+                <th className="border-t border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">40+</th>
+                <th className="border-r border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">Lng</th>
 
-                <th className="border-t border-r border-headingblue min-w-[4rem] md:min-w-[5rem]">Sck</th>
-                <th className="border-r-4 border-headingblue border-t min-w-[4rem] md:min-w-[5rem]">SckY</th>
+                <th className="border-t border-r border-headingblue min-w-[4rem] md:min-w-[5rem] text-xs">Sck</th>
+                <th className="border-r-4 border-headingblue border-t min-w-[4rem] md:min-w-[5rem] text-xs">SckY</th>
               </tr>
             </thead>
             {data.data.map((result, index) => (
-              <tbody key={index} className="text-center">
-                <tr className="h-12 border border-headingblue">
+              <tbody key={index} className="text-center text-xs">
+                <tr className="h-12 border border-headingblue ">
                   {/* <img
                 src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                 alt="athletic gaines"
               /> */}
                   <td
-                    className={`${
+                    className={`font-semibold flex items-center w-48 lg:min-w-fit ${
                       result.attributes.Team === "Billing Outlaws"
                         ? "border-l-8 border-l-headingblue"
                         : "border-l-8 border-l-red-700"
                     }`}
                   >
+                    <img src="/teams/outlaws.svg" alt="outLaws"  className="w-10 h-10 m-2"/>
                     {result.attributes.Team}
                   </td>
                   <td className="border-l-4 border-headingblue">
