@@ -18,7 +18,7 @@ module.exports = {
     
       fontFamily: {
         magistral: ['Magistral', 'sans'],
-        roboto: ['Roboto', 'sans'],
+        roboto: ['Roboto'],
         magistraal:['Magistraal', 'sans'],
       },
     fontSize: {
