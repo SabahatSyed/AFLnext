@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 export default async function Partners({ data }) {
   return (
     <div>
@@ -28,12 +29,14 @@ export default async function Partners({ data }) {
                   <p className="text-sm ">{result.attributes.Label}</p>
                 </div>
                 <p className="text-[16px]">{result.attributes.Description}</p>
-                <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
-                  Visit Their Website{" "}
-                  <span className=" ml-3">
-                    <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
-                  </span>{" "}
-                </p>
+                <Link href={"https://" + result.attributes.website}>
+                  <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
+                    Visit Their Website{" "}
+                    <span className=" ml-3">
+                      <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
+                    </span>{" "}
+                  </p>
+                </Link>
               </div>
             </div>
           ))}
