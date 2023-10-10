@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 export default async function Tickets({ data }) {
   return (
@@ -28,12 +29,15 @@ export default async function Tickets({ data }) {
                       alt="Tickets"
                     />
 
-                    <p className="inline-flex text-white items-center mt-1 text-base font-bold">
-                      Get Tickets{" "}
-                      <span className=" text-white ml-3">
-                        <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
-                      </span>{" "}
-                    </p>
+                    <Link href={"https://" + result.attributes.website}>
+                      {" "}
+                      <p className="inline-flex text-white items-center mt-1 text-base font-bold">
+                        Get Tickets{" "}
+                        <span className=" text-white ml-3">
+                          <img src="/Home/UnionWhite.svg" alt="Arrow svg " />
+                        </span>{" "}
+                      </p>
+                    </Link>
                   </div>
 
                   {/* <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl justify-center items-center">
