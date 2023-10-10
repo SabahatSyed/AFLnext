@@ -3,7 +3,7 @@ import Link from "next/link";
 const AflPyramid = () => {
   return (
     <div>
-      <div className="lg:w-full md:w-[500px] w-[370px] h-fit px-4 pb-4 flex flex-col justify-center items-center">
+      <div className="w-full h-fit px-4 pb-4 flex flex-col justify-center items-center">
         <img
           src="/teams/AFLpyramid.svg"
           alt="Afl Pyramid"
@@ -13,7 +13,7 @@ const AflPyramid = () => {
         <div className="mt-4">
           <Link
             href="/teams"
-            className="font-roboto text-base font-semibold mr-20  text-headingblue">
+            className="font-roboto text-base font-semibold    text-headingblue">
             View All
             <span className=" ml-3 ">
               <img
