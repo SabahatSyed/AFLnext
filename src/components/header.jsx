@@ -51,13 +51,11 @@ export default function Header({ activepage }) {
               watch
             </div>
           </Link>
-          <a
-            href="https://afl-shop.logixsy.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/shop"
             className={`${activepage === "shop" ? "text-headingblue" : ""}`}>
             shop
-          </a>
+          </Link>
           <Link href="/stats">
             <div
               className={`${activepage == "stats" ? "text-headingblue" : ""}`}>
@@ -122,11 +120,15 @@ export default function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className="col-start-12 col-span-1 hidden md:grid grid-cols-4 justify-items-center place-content-center place-items-center gap-2">
+        <div className="col-start-12 col-span-1 hidden md:grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+          <Link href={""}>
+            {" "}
+            <img src="/Home/cart.svg" />
+          </Link>
           <div>
             <img src="/Home/h.svg" />
           </div>
-         <Link href={"https://www.facebook.com/AFL"}>
+          <Link href={"https://www.facebook.com/AFL"}>
             {" "}
             <img src="/Home/facebook.svg" />
           </Link>
