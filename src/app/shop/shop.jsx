@@ -1,6 +1,15 @@
  "use client"
 import React,{useState,useEffect} from "react";
 import Link from "next/link";
+import { getProducts } from "@/api/shopifyapis";
+import { Amplify } from "aws-amplify";
+// import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+
+import awsconfig from "../../aws-exports";
+Amplify.configure(awsconfig);
+
 const products = [
   {
     id: 2,
@@ -39,40 +48,45 @@ const products = [
     picture: "../../../shop/product2.svg",
   },
 ];
-export default function Shop({ data }) {
-  
-   const steps = [
-     "New 2024 Collection Available!",
-     "New Billing Outlaws Collection 2024 Collection Available!",
-     "New Merch!",
-   ];
+export function Shop({ data,  signOut, user,customers }) {
+  const steps = [
+    "New 2024 Collection Available!",
+    "New Billing Outlaws Collection 2024 Collection Available!",
+    "New Merch!",
+  ];
+  console.log("user",customers)
+  useEffect(()=>{
+    if(user.attributes){
+       
+    }
+  },[])
+  const [activeStep, setActiveStep] = useState(1);
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "ArrowRight") {
+        setActiveStep((prevValue) => prevValue + 1);
+      } else if (event.key === "ArrowLeft") {
+        setActiveStep((prevValue) => prevValue - 1);
+      }
+    };
 
-   const [activeStep, setActiveStep] = useState(1);
-   useEffect(() => {
-     const handleKeyPress = (event) => {
-       if (event.key === "ArrowRight") {
-         setActiveStep((prevValue) => prevValue + 1);
-       } else if (event.key === "ArrowLeft") {
-         setActiveStep((prevValue) => prevValue - 1);
-       }
-     };
+    if (typeof window !== "undefined") {
+      window.addEventListener("keydown", handleKeyPress);
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        // Access window object here
 
-     if (typeof window !== "undefined") {
-       window.addEventListener("keydown", handleKeyPress);
-     }
-     return () => {
-       if (typeof window !== "undefined") {
-         // Access window object here
-
-         window.removeEventListener("keydown", handleKeyPress);
-       }
-     };
-   }, []);
-   useEffect(() => {
-     if (activeStep > 3 || activeStep < 1) {
-       setActiveStep(1);
-     }
-   }, [activeStep]);
+        window.removeEventListener("keydown", handleKeyPress);
+      }
+    };
+  }, []);
+  useEffect(() => {
+    if (activeStep > 3 || activeStep < 1) {
+      setActiveStep(1);
+    }
+    //const data= getProducts()
+  }, [activeStep]);
   return (
     <div className="bg-white h-full">
       <div className="bg-[url('/Home/shopbg.svg')] gap-40  relative z-10 bg-cover w-10/12 my-14 mx-auto   lg:h-[86%] md:h-1/2 h-2/5 flex flex-col justify-between items-center text-white font-roboto md:p-10 p-10  rounded-xl">
@@ -131,12 +145,12 @@ export default function Shop({ data }) {
 
         {/* // ))} */}
         <div className="  gap-3 grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4">
-          {products.map((result, index) => (
+          {data?.products.map((result, index) => (
             <div key={result.id} className=" col-span-1  md:m-5 m-0  ">
               <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md group relative">
                 <img
                   className=" w-full rounded-t-3xl"
-                  src={result.picture}
+                  src={result.image.src}
                   alt="News"
                 />
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-40 absolute inset-0 flex items-center justify-center">
@@ -149,11 +163,11 @@ export default function Shop({ data }) {
               </div>
               <div className="p-5 flex flex-col ">
                 <div className="font-roboto uppercase text-xl font-medium  ">
-                  {result.name}
+                  {result.title}
                 </div>
 
                 <p className="font-roboto font-bold text-xl text-bgblue  ">
-                  $ {result.price}
+                  $ {result.variants[0].price}
                 </p>
               </div>
             </div>
@@ -163,3 +177,5 @@ export default function Shop({ data }) {
     </div>
   );
 }
+
+export default withAuthenticator(Shop)

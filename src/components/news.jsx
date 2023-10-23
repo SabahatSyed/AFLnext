@@ -3,24 +3,16 @@ import React from "react";
 import Link from "next/link";
 
 
-import { Amplify } from 'aws-amplify';
-// import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-
-import awsconfig from '../aws-exports';
-Amplify.configure(awsconfig);
 
 
-export function News({ data, signOut, user } ) {
+export function News({ data } ) {
   return (
     <div>
       <div className="bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 md:pl-10 pl-5">
         <div className="uppercase font-magistraal font-bold text-xl text-headingblue dark:text-white m-8">
           Latest News
 
-          <h1>Hello {user?.username}</h1>
-          <button onClick={signOut}>Sign out</button>
+         
 
         </div>
         {/* {data.data.map((result,index) => ( */}
@@ -64,4 +56,4 @@ export function News({ data, signOut, user } ) {
   );
 }
 
-export default withAuthenticator(News);
+export default (News);

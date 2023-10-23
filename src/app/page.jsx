@@ -9,6 +9,7 @@ import { getData } from "@/api/FetchData";
 
 export default async function Home() {
       const data =await getData();
+
   return (
     <div className="h-fit">
       <Header />
