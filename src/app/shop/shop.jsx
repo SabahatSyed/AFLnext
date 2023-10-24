@@ -1,65 +1,168 @@
  "use client"
 import React,{useState,useEffect} from "react";
 import Link from "next/link";
-import { getProducts } from "@/api/shopifyapis";
+import { createCustomer, getProducts } from "@/api/shopifyapis";
 import { Amplify } from "aws-amplify";
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-
+import { gql } from "@apollo/client";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import awsconfig from "../../aws-exports";
 Amplify.configure(awsconfig);
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
+const query = gql`
+  mutation RegisterAccount(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+    $acceptsMarketing: Boolean = false
+    $id:String!
+  ) {
+    customerCreate(
+      input: {
+        email: $email
+        password: $password
+        firstName: $firstName
+        lastName: $lastName
+        acceptsMarketing: $acceptsMarketing
+        id:$id
+      }
+    ) {
+      customer {
+        id
+      }
+      customerUserErrors {
+        code
+        message
+      }
+    }
+  }
+`;
+const addtocart = gql`
+  mutation createCart($cartInput: CartInput) {
+    cartCreate(input: $cartInput) {
+      cart {
+        id
+        createdAt
+        updatedAt
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              merchandise {
+                ... on ProductVariant {
+                  id
+                }
+              }
+            }
+          }
+        }
+        attributes {
+          key
+          value
+        }
+        estimatedCost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+          totalTaxAmount {
+            amount
+            currencyCode
+          }
+          totalDutyAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`;
+export function Shop({ formdata,  signOut, user,customers }) {
+ const router=useRouter()
+  const [registerCustomer, { data, loading, error }] = useMutation(
+    query
+  );
+  const [AddtoCart, { data1, loading1, error1 }] = useMutation(addtocart);
+const handleRegistration = async (data) => {
+  try {
+    const response = await registerCustomer({
+      variables: {
+        email: data.email,
+        firstName: data.first_name,
+        lastName: data.last_name,
+        acceptsMarketing: true,
+        password: "12345678",
+        id: user.attributes.sub,
+      },
+    });
 
-const products = [
-  {
-    id: 2,
-    name: "black afl logo hoodie",
-    price: 29.99,
-    picture: "../../../shop/product1.svg",
-  },
-  {
-    id: 3,
-    name: "afl logo football",
-    price: 39.99,
-    picture: "../../../shop/product2.svg",
-  },
-  {
-    id: 4,
-    name: "black afl logo hoodie",
-    price: 29.99,
-    picture: "../../../shop/product1.svg",
-  },
-  {
-    id: 5,
-    name: "afl logo football",
-    price: 39.99,
-    picture: "../../../shop/product2.svg",
-  },
-  {
-    id: 6,
-    name: "black afl logo hoodie",
-    price: 29.99,
-    picture: "../../../shop/product1.svg",
-  },
-  {
-    id: 7,
-    name: "afl logo football",
-    price: 39.99,
-    picture: "../../../shop/product2.svg",
-  },
-];
-export function Shop({ data,  signOut, user,customers }) {
+    // Handle the response, e.g., show success message or redirect
+    console.log(
+      "Registration successful:",
+      response.data.customerCreate.customer
+    );
+  } catch (error) {
+    // Handle registration error
+    console.error("Registration error:", error.message);
+  }
+};
   const steps = [
     "New 2024 Collection Available!",
     "New Billing Outlaws Collection 2024 Collection Available!",
     "New Merch!",
   ];
-  console.log("user",customers)
+  console.log("user",formdata)
   useEffect(()=>{
     if(user.attributes){
-       
+       if(!customers.customers.find((item)=>item.email==user.attributes.email))
+       {
+          const obj={
+            email:user.attributes.email,
+            phone:user.attributes.phone_number,
+            first_name:user.attributes.name.split(" ")[0],
+            last_name:user.attributes.name.split(" ")[1]
+          }
+           handleRegistration(obj)
+       }
+          	
     }
   },[])
+ const addtoCart = async (data) => {
+   try {
+     const response = await AddtoCart({
+       variables: {
+        cartInput:{
+         lines: [
+           {
+             quantity: 1,
+             merchandiseId: data.variants[0].admin_graphql_api_id,
+           },
+         ],
+        }
+       },
+     });
+     //get cart id and save it in the localstorage
+
+     // Handle the response, e.g., show success message or redirect
+     console.log(
+       "Item successfully Added:",
+       response.data
+     );
+     router.push("/cart")
+   } catch (error) {
+     // Handle registration error
+     console.error("Registration error:", error.message);
+   }
+ };
   const [activeStep, setActiveStep] = useState(1);
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -145,7 +248,7 @@ export function Shop({ data,  signOut, user,customers }) {
 
         {/* // ))} */}
         <div className="  gap-3 grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4">
-          {data?.products.map((result, index) => (
+          {formdata?.products?.map((result, index) => (
             <div key={result.id} className=" col-span-1  md:m-5 m-0  ">
               <div className="max-w-sm mx-auto bg-white p-6 rounded-md shadow-md group relative">
                 <img
@@ -154,11 +257,9 @@ export function Shop({ data,  signOut, user,customers }) {
                   alt="News"
                 />
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-40 absolute inset-0 flex items-center justify-center">
-                  <Link href="/cart">
-                    <button className="bg-black text-white px-4 py-2 rounded">
+                    <button className="bg-black text-white px-4 py-2 rounded" onClick={()=>addtoCart(result)}>
                       Add to Cart
                     </button>
-                  </Link>
                 </div>
               </div>
               <div className="p-5 flex flex-col ">

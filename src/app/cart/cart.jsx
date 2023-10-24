@@ -1,23 +1,82 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { Amplify } from "aws-amplify";
+// import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import { gql } from "@apollo/client";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import awsconfig from "../../aws-exports";
+Amplify.configure(awsconfig);
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
 const product = {
   id: 1,
   picture: "../../../shop/product1.svg",
-  name:"black afl logo hoodie",
-  size:"XL",
-  quantity:"1",
-  price:29.99
+  name: "black afl logo hoodie",
+  size: "XL",
+  quantity: "1",
+  price: 29.99,
 };
-export default async function Cart() {
+const query = gql`
+  query GetCart($cartId: ID!) {
+    cart(id: $cartId) {
+      checkoutUrl
+      estimatedCost {
+        totalAmount {
+          amount
+        }
+      }
+      lines(first: 100) {
+        edges {
+          node {
+            quantity
+            estimatedCost {
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
+            merchandise {
+              ... on ProductVariant {
+                title
+                product {
+                  title
+                }
+                priceV2 {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export function Cart({ user }) {
+  const router=useRouter()
+  {/*const { data, error } = useSuspenseQuery(query,{variables: {
+      cartId: "sa83712e8whsky28uedu38",
+    }})
+  console.log("data",data)*/}
+
+ 
   return (
     <div>
       <div className=" flex flex-col w-2/4 mx-auto my-28">
         <div className=" uppercase font-magistraal text-2xl text-headingblue dark:text-white ">
           Shopping Cart
         </div>
-        <div className="m-10 flex justify-around items-center ">
+        <div className="m-10 lg:flex  justify-around items-center ">
           <img src={product.picture} className="h-48" />
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mt-4 lg:mt-0">
             <p className=" font-roboto font-bold text-sm capitalize">
               {product.name}
             </p>
@@ -67,7 +126,9 @@ export default async function Cart() {
             </div>
           </div>
         </div>
-        <div className="bg-headingblue py-3 mt-10 rounded-md ">
+        <div
+          onClick={() => router.push("/checkout")}
+          className="bg-headingblue py-3 mt-10 rounded-md ">
           <p className="capitalize font-roboto font-bold text-lg text-white flex items-center justify-center">
             Checkout
             <span className=" mx-3 ">
@@ -82,10 +143,15 @@ export default async function Cart() {
         <div className=" py-3  rounded-md ">
           <p className="capitalize font-roboto  text-black flex items-center justify-center">
             or
-            <span className="mx-1 font-bold text-headingblue"> Continue Shopping</span>
+            <span className="mx-1 font-bold text-headingblue">
+              {" "}
+              Continue Shopping
+            </span>
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+export default withAuthenticator(Cart);
