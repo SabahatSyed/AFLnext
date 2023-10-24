@@ -23,14 +23,14 @@ export default async function Tickets({ data }) {
               </div> */}
               {data.data.map((result, index) => (
                 <div key={index} className=" ">
-                  <div className="bg-hawks flex flex-col gap-3 px-8 py-5 rounded-xl place-items-center  justify-center items-center">
+                  <div style={{backgroundColor:`#${result.attributes.bgcolor}`}} className=" flex flex-col gap-3 px-8 py-5 rounded-xl place-items-center  justify-center items-center">
                     <img
                       src={`https://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="Tickets"
+                      className="h-28 w-32"
                     />
 
                     <Link href={"https://" + result.attributes.website}>
-                      {" "}
                       <p className="inline-flex text-white items-center mt-1 text-base font-bold">
                         Get Tickets{" "}
                         <span className=" text-white ml-3">

@@ -2,7 +2,47 @@ import React from "react";
 export default async function Stats({ data }) {
   // console.log(data.data[1].attributes.icon.data.attributes.url);
   // console.log(data.data);
-
+    const renderItem = ({ item, index }) => (
+      <View style={{ borderBottomColor: "#002D62", borderBottomWidth: 1 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            height: 40,
+            alignItems: "center",
+            paddingLeft: 10,
+            paddingRight: 10,
+          }}>
+          <View
+            style={{
+              borderLeftColor: item.attributes.svgColor.replace(/\s/g, ""),
+              borderLeftWidth: 5,
+            }}>
+            <Image
+              source={{
+                uri: `http://afl-cms.logixsy.com${item.attributes.icon.data.attributes.url}`,
+              }}
+              style={{ width: 20, height: 20, marginRight: 10 }}
+            />
+          </View>
+          <Text style={{ flex: 1 }}>{item.attributes.Team}</Text>
+          <Text>{item.attributes.Att}</Text>
+          <Text>{item.attributes.Cmp}</Text>
+          <Text>{item.attributes.CmpPer}</Text>
+          <Text>{item.attributes.YdsAtt}</Text>
+          <Text>{item.attributes.PassYds}</Text>
+          <Text>{item.attributes.TD}</Text>
+          <Text>{item.attributes.INT}</Text>
+          <Text>{item.attributes.Rate}</Text>
+          <Text>{item.attributes.first}</Text>
+          <Text>{item.attributes.firstPer}</Text>
+          <Text>{item.attributes.twentyPlus}</Text>
+          <Text>{item.attributes.fortyPlus}</Text>
+          <Text>{item.attributes.Lng}</Text>
+          <Text>{item.attributes.Sck}</Text>
+          <Text>{item.attributes.SckY}</Text>
+        </View>
+      </View>
+    );
   return (
     <div>
       <div className=" uppercase font-magistraal text-4xl text-headingblue dark:text-white md:m-12 p-6 m-5 text-center">

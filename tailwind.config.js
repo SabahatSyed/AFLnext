@@ -46,6 +46,11 @@ module.exports = {
        "bgNews":"#EEEEEE",
        "bgdark":"#101926",
        "bg-dark2":"#171f2c",
+       "lightgray":"#D9D9D9",
+       "gray":"#4E4E4E",
+       "formtext":"#3F5065",
+       "formbg":"#E4E7E9",
+       "googlebg":"#222232"
       },
     }
   },

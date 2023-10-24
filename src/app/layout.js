@@ -1,5 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { ApolloWrapper } from "@/lib/apollo-wrapper";
+
 import { ThemeProvider } from "@/app/theme-provider";
 import Header from "@/components/header";
 
@@ -29,7 +31,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/* <Header /> */}
-          {children}
+          <ApolloWrapper>{children}</ApolloWrapper>
         </ThemeProvider>
       </body>
     </html>

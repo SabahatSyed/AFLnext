@@ -45,25 +45,23 @@ export default function Header({ activepage }) {
               teams
             </div>
           </Link>
-          <Link href="/watch">
+          {/*<Link href="/watch">
             <div
               className={`${activepage == "watch" ? "text-headingblue" : ""}`}>
               watch
             </div>
-          </Link>
-          <a
-            href="https://afl-shop.logixsy.com"
-            target="_blank"
-            rel="noopener noreferrer"
+  </Link>*/}
+          <Link
+            href="/shop"
             className={`${activepage === "shop" ? "text-headingblue" : ""}`}>
             shop
-          </a>
-          <Link href="/stats">
+          </Link>
+          {/*<Link href="/stats">
             <div
               className={`${activepage == "stats" ? "text-headingblue" : ""}`}>
               stats
             </div>
-          </Link>
+  </Link>*/}
           <Link href="/partners">
             <div
               className={`${
@@ -80,7 +78,7 @@ export default function Header({ activepage }) {
               tickets
             </div>
           </Link>
-          <Link href="/live">
+          {/*} <Link href="/live">
             <div
               className={`flex gap-2 px-2 items-center bg-hawks rounded-md  ${
                 activepage == "live" ? "text-headingblue" : ""
@@ -88,7 +86,7 @@ export default function Header({ activepage }) {
               <p>live</p>
               <p className="bg-white w-2 h-2 rounded-full"></p>
             </div>
-          </Link>
+            </Link>*/}
         </div>
         {/*<div
           onClick={toggleTheme}
@@ -122,12 +120,14 @@ export default function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className="col-start-12 col-span-1 hidden md:grid grid-cols-4 justify-items-center place-content-center place-items-center gap-2">
+        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+          <Link href={"/cart"}>
+            <img src="/Home/cart.svg" />
+          </Link>
           <div>
             <img src="/Home/h.svg" />
           </div>
-         <Link href={"https://www.facebook.com/AFL"}>
-            {" "}
+          <Link href={"https://www.facebook.com/AFL"}>
             <img src="/Home/facebook.svg" />
           </Link>
           <Link href={"https://www.instagram.com/afl/"}>
@@ -178,31 +178,29 @@ export default function Header({ activepage }) {
               teams
             </div>
           </Link>
-          <Link href="/watch">
+          {/*}  <Link href="/watch">
             <div
               className={`${
                 activepage == "watch" ? "text-headingblue" : "text-white"
               } `}>
               watch
             </div>
-          </Link>
+            </Link>*/}
           <a
-            href="https://afl-shop.logixsy.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/shop"
             className={`${
               activepage === "shop" ? "text-headingblue" : ""
             } text-white`}>
             shop
           </a>
-          <Link href="/stats">
+          {/*} <Link href="/stats">
             <div
               className={`${
                 activepage == "stats" ? "text-headingblue" : "text-white"
               } `}>
               stats
             </div>
-          </Link>
+            </Link>*/}
           <Link href="/partners">
             <div
               className={`${
@@ -219,7 +217,7 @@ export default function Header({ activepage }) {
               tickets
             </div>
           </Link>
-          <Link href="/live">
+          {/*<Link href="/live">
             <div
               className={`flex gap-2 px-2 items-center bg-hawks rounded-md  ${
                 activepage == "live" ? "text-headingblue" : ""
@@ -227,13 +225,16 @@ export default function Header({ activepage }) {
               <p>live</p>
               <p className="bg-white w-2 h-2 rounded-full"></p>
             </div>
-          </Link>
-          <div className="grid grid-cols-4 justify-items-center place-content-center place-items-center gap-2">
+            </Link>*/}
+
+          <div className="grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+            <Link href={"/cart"}>
+              <img src="/Home/cart.svg" />
+            </Link>
             <div>
               <img src="/Home/h.svg" />
             </div>
             <div>
-              {" "}
               <img src="/Home/facebook.svg" />
             </div>
             <div>

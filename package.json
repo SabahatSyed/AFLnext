@@ -9,8 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.9.0-alpha.2",
+    "@apollo/experimental-nextjs-app-support": "^0.4.3",
+    "@aws-amplify/cli": "^12.7.0",
     "@aws-amplify/ui-react": "^5.3.1",
+    "@shopify/shopify-api": "^8.0.1",
     "aws-amplify": "^5.3.11",
+    "dotenv": "^16.3.1",
+    "graphql": "^16.8.1",
     "next": "latest",
     "next-themes": "^0.2.1",
     "react": "latest",
