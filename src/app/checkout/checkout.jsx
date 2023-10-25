@@ -402,7 +402,6 @@ const [payment,setPayment]=useState(false)
                       checkoutId: localStorage.getItem("checkoutid"),
                     },
                   });
-                  console.log("response", response);
                   setPayment(true);
                   const response1 = await checkout({
                     variables: {
