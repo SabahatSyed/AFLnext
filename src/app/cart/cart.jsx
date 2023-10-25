@@ -137,7 +137,7 @@ const getCheckout=async()=>{
               <p className=" font-roboto font-bold text-sm capitalize">
                 {item.node.merchandise.product.title}
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center w-full">
                 <p className="font-roboto font-normal text-sm capitalize flex-row">
                   Size: <span className="font-bold">{product.size}</span>
                 </p>
@@ -147,7 +147,7 @@ const getCheckout=async()=>{
                 </p>
               </div>
               <select
-                className="text-black w-1/4 font-normal border border-gray-400 rounded-md text-sm "
+                className="text-black w-2/4 font-normal border border-gray-400 rounded-md text-sm "
                 value={item.node.quantity}>
                 <option value={item.node.quantity}>{item.node.quantity}</option>
               </select>

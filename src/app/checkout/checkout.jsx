@@ -189,7 +189,7 @@ const [payment,setPayment]=useState(false)
   return (
     <div>
       <div className=" flex flex-col w-1/2 mx-auto py-10 px-4">
-        <div className="my-10 flex lg:flex-row flex-col gap-8 items-center bg-white py-8 px-8 lg:px-4 rounded-md ">
+        <div className="my-10 flex flex-col gap-8 items-center bg-white py-8 px-8 lg:px-4 rounded-md ">
           {data.cart.lines?.edges?.map((item) => (
             <div>
               <img
