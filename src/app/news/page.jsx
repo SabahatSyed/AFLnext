@@ -27,7 +27,7 @@ export default async function NewsMain() {
             </p>
           </div>
         </div>
-        <News data={data} />
+        <News data={data}/>
         <Footer />
       </div>
     </div>
