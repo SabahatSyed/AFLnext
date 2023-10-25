@@ -7,10 +7,10 @@
   "resolved" "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
   "version" "5.2.0"
 
-"@apollo/client@^3.9.0-alpha.2":
-  "integrity" "sha512-3PcI7PXUFGP9QU4uE7utiMMqhRGmkugQ7XiEvVmaMJtpsJx2P0h9Vb7i9pOq8Foy6Owx5dziMRin6KpTbeXSqg=="
-  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.9.0-alpha.2.tgz"
-  "version" "3.9.0-alpha.2"
+"@apollo/client@^3.8.6":
+  "integrity" "sha512-FnHg3vhQP8tQzgBs6oTJCFFIbovelDGYujj6MK7CJneiHf62TJstCIO0Ot4A1h7XrgFEtgl8a/OgajQWqrTuYw=="
+  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.8.6.tgz"
+  "version" "3.8.6"
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/context" "^0.7.3"
