@@ -140,7 +140,6 @@ export function Shop({ formdata, signOut, user, customers }) {
        cartId: localStorage.getItem("cartid"),
      },
    });
-   console.log(formdata)
   const handleRegistration = async (data) => {
 
     try {
@@ -186,7 +185,6 @@ export function Shop({ formdata, signOut, user, customers }) {
   }, []);
   const addtoCart = async (dataa) => {
     try {
-      console.log("cart",data)
       let line
       if(localStorage.getItem("cartid")){
        
@@ -196,7 +194,6 @@ export function Shop({ formdata, signOut, user, customers }) {
            return { merchandiseId:id, quantity };
          });
       }
-      console.log("line",line)
       const response = await AddtoCart({
         variables: {
           cartInput: {
@@ -213,7 +210,6 @@ export function Shop({ formdata, signOut, user, customers }) {
       //get cart id and save it in the localstorage
 
       // Handle the response, e.g., show success message or redirect
-      console.log("Item successfully Added:", response);
       localStorage.setItem("cartid", response.data.cartCreate.cart.id);
       router.push("/cart");
     } catch (error) {

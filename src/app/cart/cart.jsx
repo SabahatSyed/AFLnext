@@ -94,7 +94,6 @@ export function Cart({ user }) {
       cartId: localStorage.getItem("cartid"),
     },
   });
-  console.log("data", data);
   localStorage.setItem("checkoutId",data.cart.checkoutUrl)
 const cartItems = data.cart.lines.edges;
 
@@ -120,7 +119,6 @@ const getCheckout=async()=>{
         lineItems:lineItems
       },
     });
-    console.log("response",response)
     localStorage.setItem("checkoutid",response.data.checkoutCreate.checkout.id)
 }
   return (

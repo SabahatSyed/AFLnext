@@ -27,7 +27,6 @@ export async function getProducts() {
       }
     );
     const data = await res.json();
-    console.log("data",data.products[0])
     return data;
   } catch (error) {
     console.error("Error:", error);
