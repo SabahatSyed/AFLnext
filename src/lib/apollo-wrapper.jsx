@@ -12,6 +12,7 @@ const {
   ApolloNextAppProvider,
   NextSSRInMemoryCache,
   SSRMultipartLink,
+  NextSSRApolloClient,
 } = require("@apollo/experimental-nextjs-app-support/ssr");
 
 const authLink = setContext((_, { headers }) => {
@@ -23,7 +24,6 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       "X-Shopify-Storefront-Access-Token": token ? `${token}` : "",
-      "Content-Type": "application/graphql",
     },
   };
 });
@@ -35,7 +35,7 @@ function makeClient() {
     
   });
 
-  return new ApolloClient({
+  return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link: authLink.concat(
       typeof window === "undefined"

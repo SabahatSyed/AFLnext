@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ApolloWrapper } from "@/lib/apollo-wrapper";
+import { ApolloWrapper } from "../lib/apollo-wrapper";
 
 import { ThemeProvider } from "@/app/theme-provider";
 import Header from "@/components/header";

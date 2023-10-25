@@ -15,6 +15,7 @@ const storefrontsecret = process.env.STORE_FRONT;
 export async function getProducts() {
   try {
     // Send a POST request to your Strapi backend to subscribe the user
+    
     const res = await fetch(
       `https://${store}.myshopify.com/admin/api/${version}/products.json`,
       {
@@ -26,6 +27,7 @@ export async function getProducts() {
       }
     );
     const data = await res.json();
+    console.log("data",data.products[0])
     return data;
   } catch (error) {
     console.error("Error:", error);

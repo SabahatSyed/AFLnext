@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { Amplify } from "aws-amplify";
@@ -44,9 +44,15 @@ const query = gql`
             }
             merchandise {
               ... on ProductVariant {
+                id
                 title
                 product {
+                  id
                   title
+                  description
+                  featuredImage {
+                    src
+                  }
                 }
                 priceV2 {
                   amount
@@ -60,45 +66,99 @@ const query = gql`
     }
   }
 `;
-export function Cart({ user }) {
-  const router=useRouter()
-  {/*const { data, error } = useSuspenseQuery(query,{variables: {
-      cartId: "sa83712e8whsky28uedu38",
-    }})
-  console.log("data",data)*/}
 
- 
+const getcheckout = gql`
+  mutation checkoutCreate($lineItems: [CheckoutLineItemInput!]!) {
+    checkoutCreate(input: { lineItems: $lineItems }) {
+      checkout {
+        id
+        webUrl
+        lineItems(first: 5) {
+          edges {
+            node {
+              title
+              quantity
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export function Cart({ user }) {
+  const router = useRouter();
+    const [getcheckouturl, { data1, loading1, error1 }] = useMutation(getcheckout);
+
+  const { data, error } = useSuspenseQuery(query, {
+    variables: {
+      cartId: localStorage.getItem("cartid"),
+    },
+  });
+  console.log("data", data);
+  localStorage.setItem("checkoutId",data.cart.checkoutUrl)
+const cartItems = data.cart.lines.edges;
+
+// Calculating the total amount by summing up the totalAmount of each item
+const totalAmount = cartItems.reduce((total, item) => {
+  const itemTotalAmount = parseFloat(
+    item.node.estimatedCost.totalAmount.amount
+  );
+  return total + itemTotalAmount;
+}, 0);
+
+const getCheckout=async()=>{
+  const lineItems = cartItems.map((edge) => {
+    const node = edge.node;
+    const idarr=node.merchandise.id.split("ProductVariant/")
+    return {
+      variantId: node.merchandise.id,
+      quantity: node.quantity,
+    };
+  });
+    const response = await getcheckouturl({
+      variables: {
+        lineItems:lineItems
+      },
+    });
+    console.log("response",response)
+    localStorage.setItem("checkoutid",response.data.checkoutCreate.checkout.id)
+}
   return (
     <div>
       <div className=" flex flex-col w-2/4 mx-auto my-28">
         <div className=" uppercase font-magistraal text-2xl text-headingblue dark:text-white ">
           Shopping Cart
         </div>
-        <div className="m-10 lg:flex  justify-around items-center ">
-          <img src={product.picture} className="h-48" />
-          <div className="flex flex-col gap-4 mt-4 lg:mt-0">
-            <p className=" font-roboto font-bold text-sm capitalize">
-              {product.name}
-            </p>
-            <div className="flex justify-between items-center">
-              <p className="font-roboto font-normal text-sm capitalize flex-row">
-                Size: <span className="font-bold">{product.size}</span>
+        {data.cart.lines?.edges?.map((item) => (
+          <div className="m-10 lg:flex  justify-around items-center ">
+            <img
+              src={item.node.merchandise.product.featuredImage.src}
+              className="h-48"
+            />
+            <div className="flex flex-col gap-4 mt-4 lg:mt-0">
+              <p className=" font-roboto font-bold text-sm capitalize">
+                {item.node.merchandise.product.title}
               </p>
+              <div className="flex justify-between items-center">
+                <p className="font-roboto font-normal text-sm capitalize flex-row">
+                  Size: <span className="font-bold">{product.size}</span>
+                </p>
 
-              <p className="font-roboto font-bold text-sm capitalize text-red-700">
-                Remove
-              </p>
+                <p className="font-roboto font-bold text-sm capitalize text-red-700">
+                  Remove
+                </p>
+              </div>
+              <select
+                className="text-black w-1/4 font-normal border border-gray-400 rounded-md text-sm "
+                value={item.node.quantity}>
+                <option value={item.node.quantity}>{item.node.quantity}</option>
+              </select>
             </div>
-            <select
-              className="text-black w-1/4 font-normal border border-gray-400 rounded-md text-sm "
-              value={product.quantity}>
-              <option value={product.quantity}>{product.quantity}</option>
-            </select>
+            <p className="font-roboto font-bold text-2xl text-gray mb-10">
+              $ {item.node.merchandise.priceV2.amount}
+            </p>
           </div>
-          <p className="font-roboto font-bold text-2xl text-gray mb-10">
-            $ {product.price}
-          </p>
-        </div>
+        ))}
         <div className="h-[0.5px] w-4/5 mx-auto bg-black" />
         <div className="bg-white p-8 mt-10 rounded-2xl">
           <p className=" uppercase font-magistraal text-lg text-headingblue ">
@@ -107,7 +167,7 @@ export function Cart({ user }) {
           <div className="flex flex-col gap-5 mt-5">
             <div className="flex items-center justify-between font-roboto font-normal text-sm">
               <p>Subtotal</p>
-              <p>$25</p>
+              <p>{totalAmount}</p>
             </div>
             <div className="h-[0.5px] w-full mx-auto bg-black" />
             <div className="flex items-center justify-between font-roboto font-normal text-sm">
@@ -117,19 +177,29 @@ export function Cart({ user }) {
             <div className="h-[0.5px] w-full mx-auto bg-black" />
             <div className="flex items-center justify-between font-roboto font-normal text-sm">
               <p>Tax estimate</p>
-              <p>$0</p>
+              <p>
+                $
+                {Math.round(
+                  ((data.cart.estimatedCost.totalAmount.amount - totalAmount) *
+                    100) /
+                    100
+                )}
+              </p>
             </div>
             <div className="h-[0.5px] w-full mx-auto bg-black" />
             <div className="flex items-center justify-between font-roboto font-normal">
               <p>Estimated total</p>
-              <p>$25</p>
+              <p>{data.cart.estimatedCost.totalAmount.amount}</p>
             </div>
           </div>
         </div>
         <div
-          onClick={() => router.push("/checkout")}
-          className="bg-headingblue py-3 mt-10 rounded-md ">
-          <p className="capitalize font-roboto font-bold text-lg text-white flex items-center justify-center">
+          onClick={() => {
+            getCheckout();
+            router.push("/checkout");
+          }}
+          className="bg-headingblue py-3 mt-10 rounded-md cursor-pointer ">
+          <p className="capitalize font-roboto font-bold cursor-pointer text-lg text-white flex items-center justify-center">
             Checkout
             <span className=" mx-3 ">
               <img
@@ -141,10 +211,11 @@ export function Cart({ user }) {
           </p>
         </div>
         <div className=" py-3  rounded-md ">
-          <p className="capitalize font-roboto  text-black flex items-center justify-center">
+          <p
+            onClick={() => router.push("/shop")}
+            className="capitalize font-roboto  text-black flex items-center justify-center">
             or
             <span className="mx-1 font-bold text-headingblue">
-              {" "}
               Continue Shopping
             </span>
           </p>
