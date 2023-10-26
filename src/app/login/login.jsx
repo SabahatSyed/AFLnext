@@ -29,7 +29,7 @@ export default function Login({ data }) {
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
       <div className=' w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-7 text-black'>
-        <img src='/Home/logo.svg' className='h-28 w-28' />
+        <img src='/Home/logo.svg' className='h-28 w-28 mx-auto' />
         <div className='gap-2 flex flex-col'>
           <label className='text-xs font-bold'>Email</label>
           <input
