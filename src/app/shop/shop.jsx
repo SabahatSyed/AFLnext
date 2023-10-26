@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { createCustomer, getProducts } from "@/api/shopifyapis";
-import { Amplify } from "aws-amplify";
+//import { Amplify } from "aws-amplify";
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
+//import { withAuthenticator } from "@aws-amplify/ui-react";
+//import "@aws-amplify/ui-react/styles.css";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import awsconfig from "../../aws-exports";
-Amplify.configure(awsconfig);
+//import awsconfig from "../../aws-exports";
+//Amplify.configure(awsconfig);
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 const query = gql`
@@ -131,17 +131,35 @@ const dataquery = gql`
     }
   }
 `;
-export function Shop({ formdata, signOut, user, customers }) {
+export default function Shop({ formdata, customers }) {
   const router = useRouter();
+  const user = {};
+  const [cartid, setCartId] = useState("");
+  const [customerid,setCustomerId]=useState("")
+  const [pass,setPass]=useState("")
   const [registerCustomer, { data1, loading, error }] = useMutation(query);
+  useEffect(() => {
+    setCartId(localStorage.getItem("cartid"));
+  }, []);
   const [AddtoCart, { data2, loading1, error1 }] = useMutation(addtocart);
-   const { data, error2 } = useSuspenseQuery(dataquery, {
-     variables: {
-       cartId: localStorage.getItem("cartid"),
-     },
-   });
+  const { data, error2 } = useSuspenseQuery(dataquery, {
+    variables: {
+      cartId:
+        cartid ||
+        "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUhERzdLUzYxWldBVlo4Nk1DUDJNUkJHWA",
+    },
+  });
+  useEffect(() => {
+    localStorage.setItem("cartid", cartid);
+  }, [cartid]);
+  useEffect(()=>{
+ localStorage.setItem("customerId", customerid);
+  },[customerid])
+  useEffect(() => {
+     localStorage.setItem("userpass", pass);
+    
+  }, [pass]);
   const handleRegistration = async (data) => {
-
     try {
       const response = await registerCustomer({
         variables: {
@@ -152,12 +170,9 @@ export function Shop({ formdata, signOut, user, customers }) {
           password: "12345678",
         },
       });
-      localStorage.setItem("userpass","1234567")
-
-      localStorage.setItem(
-        "customerId",
-        response.data.customerCreate.customer?.id
-      );
+      setPass("1234567")
+      setCustomerId(response.data.customerCreate.customer?.id);
+        
     } catch (error) {
       // Handle registration error
       console.error("Registration error:", error.message);
@@ -169,15 +184,17 @@ export function Shop({ formdata, signOut, user, customers }) {
     "New Merch!",
   ];
   useEffect(() => {
-    if (user.attributes) {
+    if (user?.attributes) {
       if (
-        !customers.customers.find((item) => item.email == user.attributes.email)
+        !customers.customers.find(
+          (item) => item.email == user?.attributes.email
+        )
       ) {
         const obj = {
-          email: user.attributes.email,
-          phone: user.attributes.phone_number,
-          first_name: user.attributes.name.split(" ")[0],
-          last_name: user.attributes.name.split(" ")[1],
+          email: user?.attributes.email,
+          phone: user?.attributes.phone_number,
+          first_name: user?.attributes.name.split(" ")[0],
+          last_name: user?.attributes.name.split(" ")[1],
         };
         handleRegistration(obj);
       }
@@ -185,14 +202,13 @@ export function Shop({ formdata, signOut, user, customers }) {
   }, []);
   const addtoCart = async (dataa) => {
     try {
-      let line
-      if(localStorage.getItem("cartid")){
-       
-         line = data.cart.lines.edges.map((edge) => {
-           const { quantity } = edge.node;
-           const {id}=edge.node.merchandise
-           return { merchandiseId:id, quantity };
-         });
+      let line;
+      if (cartid) {
+        line = data.cart.lines.edges.map((edge) => {
+          const { quantity } = edge.node;
+          const { id } = edge.node.merchandise;
+          return { merchandiseId: id, quantity };
+        });
       }
       const response = await AddtoCart({
         variables: {
@@ -210,7 +226,7 @@ export function Shop({ formdata, signOut, user, customers }) {
       //get cart id and save it in the localstorage
 
       // Handle the response, e.g., show success message or redirect
-      localStorage.setItem("cartid", response.data.cartCreate.cart.id);
+        setCartId(response.data.cartCreate.cart.id);
       router.push("/cart");
     } catch (error) {
       // Handle registration error
@@ -334,5 +350,3 @@ export function Shop({ formdata, signOut, user, customers }) {
     </div>
   );
 }
-
-export default withAuthenticator(Shop);
