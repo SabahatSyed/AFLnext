@@ -3,7 +3,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Teams from "@/app/teams/teams";
 import { getTeamsData } from "@/api/FetchData";
-import { Image } from "next/image";
 export default async function TeamsMain() {
   const data = await getTeamsData();
   return (
