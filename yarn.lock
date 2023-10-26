@@ -7,10 +7,10 @@
   "resolved" "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
   "version" "5.2.0"
 
-"@apollo/client@^3.9.0-alpha.2":
-  "integrity" "sha512-3PcI7PXUFGP9QU4uE7utiMMqhRGmkugQ7XiEvVmaMJtpsJx2P0h9Vb7i9pOq8Foy6Owx5dziMRin6KpTbeXSqg=="
-  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.9.0-alpha.2.tgz"
-  "version" "3.9.0-alpha.2"
+"@apollo/client@^3.8.0-rc.2":
+  "integrity" "sha512-OQhMbYhNscVwqfxb9diOZpra4m4Vr+CbzkHZGdg51+BADzUeQCEaQyeKhClJqh1HAH3kIqRf+pD9otzuMDhcSg=="
+  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.8.0-rc.2.tgz"
+  "version" "3.8.0-rc.2"
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/context" "^0.7.3"
@@ -2376,16 +2376,16 @@
     "undici-types" "~5.25.1"
 
 "@wry/context@^0.7.0", "@wry/context@^0.7.3":
-  "integrity" "sha512-Nl8WTesHp89RF803Se9X3IiHjdmLBrIvPMaJkl+rKVJAYyPsz1TEUbu89943HpvujtSJgDUx9W4vZw3K1Mr3sA=="
-  "resolved" "https://registry.npmjs.org/@wry/context/-/context-0.7.3.tgz"
-  "version" "0.7.3"
+  "integrity" "sha512-jmT7Sb4ZQWI5iyu3lobQxICu2nC/vbUhP0vIdd6tHC9PTfenmRmuIFqktc6GH9cgi+ZHnsLWPvfSvc4DrYmKiQ=="
+  "resolved" "https://registry.npmjs.org/@wry/context/-/context-0.7.4.tgz"
+  "version" "0.7.4"
   dependencies:
     "tslib" "^2.3.0"
 
 "@wry/equality@^0.5.6":
-  "integrity" "sha512-D46sfMTngaYlrH+OspKf8mIJETntFnf6Hsjb0V41jAXJ7Bx2kB8Rv8RCUujuVWYttFtHkUNp7g+FwxNQAr6mXA=="
-  "resolved" "https://registry.npmjs.org/@wry/equality/-/equality-0.5.6.tgz"
-  "version" "0.5.6"
+  "integrity" "sha512-BRFORjsTuQv5gxcXsuDXx6oGRhuVsEGwZy6LOzRRfgu+eSfxbhUQ9L9YtSEIuIjY/o7g3iWFjrc5eSY1GXP2Dw=="
+  "resolved" "https://registry.npmjs.org/@wry/equality/-/equality-0.5.7.tgz"
+  "version" "0.5.7"
   dependencies:
     "tslib" "^2.3.0"
 
@@ -3136,9 +3136,9 @@
   "version" "7.0.0"
 
 "is-what@^4.1.8":
-  "integrity" "sha512-uKua1wfy3Yt+YqsD6mTUEa2zSi3G1oPlqTflgaPJ7z63vUGN5pxFpnQfeSLMFnJDEsdvOtkp1rUWkYjB4YfhgA=="
-  "resolved" "https://registry.npmjs.org/is-what/-/is-what-4.1.15.tgz"
-  "version" "4.1.15"
+  "integrity" "sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A=="
+  "resolved" "https://registry.npmjs.org/is-what/-/is-what-4.1.16.tgz"
+  "version" "4.1.16"
 
 "isarray@^1.0.0":
   "integrity" "sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ=="
