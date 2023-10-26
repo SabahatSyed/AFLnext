@@ -3,7 +3,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Cart from "./cart";
 import { getData } from "@/api/FetchData";
-
 export default async function NewsMain() {
   //const data = await getData();
   return (

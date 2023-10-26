@@ -1,19 +1,13 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
-
-
-
-
-export function News({ data } ) {
+import Image from "next/image";
+export function News({ data }) {
   return (
     <div>
       <div className="bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 md:pl-10 pl-5">
         <div className="uppercase font-magistraal font-bold text-xl text-headingblue dark:text-white m-8">
           Latest News
-
-         
-
         </div>
         {/* {data.data.map((result,index) => ( */}
 
@@ -56,4 +50,4 @@ export function News({ data } ) {
   );
 }
 
-export default (News);
+export default News;

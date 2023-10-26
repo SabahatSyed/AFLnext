@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 const result = [
   {
     id: 1,
@@ -109,7 +110,9 @@ export default function Watch({ data }) {
                 quis ultrices libero. Integer at gravida elit. Fusce consectetur
                 bibendum luctus. Nulla porta metus non rhoncus vehicula.
               </p>
-              <Link href="/live" className="flex gap-2 cursor-pointer font-bold text-bgblue mt-2">
+              <Link
+                href="/live"
+                className="flex gap-2 cursor-pointer font-bold text-bgblue mt-2">
                 Live Stream <img src="/Home/UnionBlack.svg" />
               </Link>
             </div>

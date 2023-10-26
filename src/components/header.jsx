@@ -1,10 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Auth ,Amplify} from "aws-amplify";
+import Image from "next/image";
 import { useTheme } from "next-themes";
+import awsconfig from "../aws-exports";
+import { useRouter } from "next/navigation";
+Amplify.configure(awsconfig);
 export default function Header({ activepage }) {
+  const router=useRouter()
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [user, setUser] = useState(null);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -14,10 +21,33 @@ export default function Header({ activepage }) {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      } catch (error) {
+        setUser(null);
+      }
+      console.log("user",user)
+    };
+
+    checkAuthStatus();
+  }, []);
+
+
+  const handleLogout = async () => {
+    try {
+      await Auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
   return (
     <div>
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
-      <div className="bg-[url('/Home/Navbar.svg')]  relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-4">
+      <div className="bg-[url('/Home/Navbar.svg')]  relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-2 md:py-3">
         <div className="col-span-1">
           <Link href="/">
             <img
@@ -120,7 +150,7 @@ export default function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
           <Link href={"/cart"}>
             <img src="/Home/cart.svg" />
           </Link>
@@ -136,6 +166,20 @@ export default function Header({ activepage }) {
           <Link href={"https://www.youtube.com/@AFL"}>
             <img src="/Home/youtube.svg" />
           </Link>
+          {user && (
+            <img
+              onClick={() => handleLogout()}
+              src="/logout.svg"
+              className="h-7 cursor-pointer "
+            />
+          )}
+          {user == null && (
+            <img
+              onClick={() => router.push("/login")}
+              src="/profile.svg"
+              className="h-7 cursor-pointer"
+            />
+          )}
         </div>
         <div className="md:hidden col-start-12 col-span-4">
           {/* Toggle Menu Button */}
@@ -147,7 +191,7 @@ export default function Header({ activepage }) {
       {/* Sliding Menu */}
       {menuOpen && (
         <div
-          className="w-fit p-5 mx-2 z-10 flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
+          className="w-fit p-5 mx-2 z-20 flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
           style={{
             transform: menuOpen ? "translateX(0)" : "translateX(100%)",
             transition: "transform 0.3s ease-in-out",
@@ -227,7 +271,7 @@ export default function Header({ activepage }) {
             </div>
             </Link>*/}
 
-          <div className="grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+          <div className="grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
             <Link href={"/cart"}>
               <img src="/Home/cart.svg" />
             </Link>
@@ -243,6 +287,20 @@ export default function Header({ activepage }) {
             <div>
               <img src="/Home/youtube.svg" />
             </div>
+            {user && (
+              <img
+                onClick={() => handleLogout()}
+                src="/logout.svg"
+                className="h-7 cursor-pointer "
+              />
+            )}
+            {user == null && (
+              <img
+                onClick={() => router.push("/login")}
+                src="/profile.svg"
+                className="h-7 cursor-pointer"
+              />
+            )}
           </div>
         </div>
       )}

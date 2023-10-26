@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { Image } from "next/image";
 import News from "@/components/news";
 import { getData } from "@/api/FetchData";
 
@@ -27,7 +28,7 @@ export default async function NewsMain() {
             </p>
           </div>
         </div>
-        <News data={data}/>
+        <News data={data} />
         <Footer />
       </div>
     </div>

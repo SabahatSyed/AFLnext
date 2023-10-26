@@ -1,9 +1,9 @@
 import React from "react";
 import Head from "next/head";
 import { getTeamsData } from "@/api/FetchData";
-
+import Image from "next/image";
 export default async function Footer({ activePage }) {
-     const data = await getTeamsData()
+  const data = await getTeamsData();
   return (
     <div className="">
       {activePage !== "signup" && activePage !== "login" && (

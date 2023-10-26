@@ -2,10 +2,31 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Auth, Amplify } from "aws-amplify";
+import awsconfig from "../../aws-exports";
+Amplify.configure(awsconfig);
 export default function Login({ data }) {
   const history = useRouter();
   const [email, setEmail] = useState("");
+  const [msg, setmsg] = useState("");
   const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    try {
+      setmsg("");
+
+      if (email != "" && password != "")
+      {
+        await Auth.signIn({ username: email, password });
+        history.push("/")
+      }
+
+      else alert("Please fill all Fields");
+    } catch (error) {
+      setmsg(error.message);
+      console.error("Error signing in:", error);
+    }
+  };
 
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
@@ -14,7 +35,7 @@ export default function Login({ data }) {
         <div className="gap-2 flex flex-col">
           <label className="text-xs font-bold">Email</label>
           <input
-            setValue={setEmail}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder={"jamesturner@gmail.com"}
             label={"Email"}
@@ -25,7 +46,7 @@ export default function Login({ data }) {
           <label className="text-xs font-bold">Password</label>
 
           <input
-            setValue={setPassword}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder={"*********"}
             className="h-8 p-6 bg-formbg text-formtext rounded-md"
@@ -40,10 +61,14 @@ export default function Login({ data }) {
             <label>Forget Password?</label>
           </div>
         </div>
+        <p className="text-sm font-bold text-green-900 w-1/3">{msg}</p>
 
-        <button className="bg-bgblue text-white uppercase p-4 rounded-md">
+        <button
+          onClick={() => handleLogin()}
+          className="bg-bgblue text-white uppercase p-4 rounded-md ">
           Login
         </button>
+
         <p className="text-center w-full">Or Login With</p>
         <div className="w-full flex items-center justify-between gap-7 ">
           <button className="bg-bgblue text-white   rounded-md w-1/2 flex items-center justify-center gap-5 p-3">
@@ -58,8 +83,10 @@ export default function Login({ data }) {
         <p className="text-base flex justify-center">
           Don't have an account?
           <span
+            onClick={() => history.push("/Signup")}
             className=" text-bgblue font-semibold cursor-pointer mx-1">
-             {" "}Register Now
+            {" "}
+            Register Now
           </span>
         </p>
       </div>

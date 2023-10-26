@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-//import { Amplify } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-//import { withAuthenticator } from "@aws-amplify/ui-react";
-//import "@aws-amplify/ui-react/styles.css";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-//import awsconfig from "../../aws-exports";
-//Amplify.configure(awsconfig);
+import awsconfig from "../../aws-exports";
+Amplify.configure(awsconfig);
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 const product = {
@@ -85,11 +86,12 @@ const getcheckout = gql`
     }
   }
 `;
-export default function Cart() {
+export function Cart() {
   const router = useRouter();
-  const [cartid,setCartId]=useState("")
-  const [checkoutid,setCheckoutid]=useState("")
-    const [getcheckouturl, { data1, loading1, error1 }] = useMutation(getcheckout);
+  const [cartid, setCartId] = useState("");
+  const [checkoutid, setCheckoutid] = useState("");
+  const [getcheckouturl, { data1, loading1, error1 }] =
+    useMutation(getcheckout);
 
   const { data, error } = useSuspenseQuery(query, {
     variables: {
@@ -98,43 +100,41 @@ export default function Cart() {
         "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUhERzdLUzYxWldBVlo4Nk1DUDJNUkJHWA",
     },
   });
-  useEffect(()=>{
-       setCheckoutid(data.cart.checkoutUrl);
+  useEffect(() => {
+    setCheckoutid(data.cart.checkoutUrl);
 
-    setCartId(localStorage.getItem("cartid"))
+    setCartId(localStorage.getItem("cartid"));
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("checkoutid", checkoutid);
+  }, [checkoutid]);
+  const cartItems = data.cart.lines.edges;
 
-  },[])
-  useEffect(()=>{
-    localStorage.setItem("checkoutid",checkoutid);
-  },[checkoutid])
-const cartItems = data.cart.lines.edges;
+  // Calculating the total amount by summing up the totalAmount of each item
+  const totalAmount = cartItems.reduce((total, item) => {
+    const itemTotalAmount = parseFloat(
+      item.node.estimatedCost.totalAmount.amount
+    );
+    return total + itemTotalAmount;
+  }, 0);
 
-// Calculating the total amount by summing up the totalAmount of each item
-const totalAmount = cartItems.reduce((total, item) => {
-  const itemTotalAmount = parseFloat(
-    item.node.estimatedCost.totalAmount.amount
-  );
-  return total + itemTotalAmount;
-}, 0);
-
-const getCheckout=async()=>{
-  const lineItems = cartItems.map((edge) => {
-    const node = edge.node;
-    const idarr=node.merchandise.id.split("ProductVariant/")
-    return {
-      variantId: node.merchandise.id,
-      quantity: node.quantity,
-    };
-  });
+  const getCheckout = async () => {
+    const lineItems = cartItems.map((edge) => {
+      const node = edge.node;
+      const idarr = node.merchandise.id.split("ProductVariant/");
+      return {
+        variantId: node.merchandise.id,
+        quantity: node.quantity,
+      };
+    });
     const response = await getcheckouturl({
       variables: {
-        lineItems:lineItems
+        lineItems: lineItems,
       },
     });
 
     setCheckoutid(response.data.checkoutCreate.checkout.id);
-      
-}
+  };
   return (
     <div>
       <div className=" flex flex-col w-2/4 mx-auto my-28">
@@ -215,6 +215,7 @@ const getCheckout=async()=>{
             Checkout
             <span className=" mx-3 ">
               <img
+    
                 src="/Home/UnionWhite.svg"
                 alt="Arrow svg "
                 className="h-3"
@@ -237,3 +238,4 @@ const getCheckout=async()=>{
   );
 }
 
+export default withAuthenticator(Cart);
