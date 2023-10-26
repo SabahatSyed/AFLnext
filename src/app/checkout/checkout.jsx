@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Amplify } from "aws-amplify";
+//import { Amplify } from "aws-amplify";
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
+//import { withAuthenticator } from "@aws-amplify/ui-react";
+//import "@aws-amplify/ui-react/styles.css";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import awsconfig from "../../aws-exports";
-Amplify.configure(awsconfig);
+//import awsconfig from "../../aws-exports";
+//Amplify.configure(awsconfig);
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 const product = {
@@ -134,7 +134,11 @@ const updateaddress = gql`
   }
 `;
 
-export function Checkout({ user }) {
+export default function Checkout() {
+  const user = {};
+  const [token, setToken] = useState("");
+  const [checkoutid, setcheckoutid] = useState("");
+  const [cartid,setCartId]=useState("")
   const [formdata, setFormdata] = useState({
     lastName: "",
     firstName: "",
@@ -145,38 +149,45 @@ export function Checkout({ user }) {
     city: "",
   });
 
- const [paymentformdata, setPaymentFormdata] = useState({
+  const [paymentformdata, setPaymentFormdata] = useState({
     cardnumber: "",
     expiry: "",
     cvc: "",
     country: "",
   });
+  useEffect(()=>{
+    setCartId(localStorage.getItem("cartid"));
+  },[])
   const [login, { data1, loading1, error1 }] = useMutation(getlogin);
   const { data, error } = useSuspenseQuery(query, {
     variables: {
-      cartId: localStorage.getItem("cartid"),
+      cartId:
+        cartid ||
+        "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUhERzdLUzYxWldBVlo4Nk1DUDJNUkJHWA",
     },
   });
-  
+
   const [checkout, { data2, loading2, error2 }] =
     useMutation(checkoutwithcustomer);
   const [updateAddress, { data3, loading3, error3 }] =
     useMutation(updateaddress);
-const [payment,setPayment]=useState(false)
-    
+  const [payment, setPayment] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("customeraccesstoken", token);
+  }, [token]);
   const loginuser = async () => {
     const response = await login({
       variables: {
-        email: user.attributes.email,
+        email: user?.attributes?.email,
         password: "1234567",
       },
     });
-    localStorage.setItem(
-      "customeraccesstoken",
+    setToken(
       response.data.customerAccessTokenCreate.customerAccessToken.accessToken
     );
   };
   useEffect(() => {
+    setcheckoutid(localStorage.getItem("checkoutid"))
     loginuser();
   }, []);
   const cartItems = data.cart.lines.edges;
@@ -399,16 +410,15 @@ const [payment,setPayment]=useState(false)
                   const response = await updateAddress({
                     variables: {
                       shippingAddress: formdata,
-                      checkoutId: localStorage.getItem("checkoutid"),
+                      checkoutId:
+                        checkoutid||""
                     },
                   });
                   setPayment(true);
                   const response1 = await checkout({
                     variables: {
-                      checkoutId: localStorage.getItem("checkoutid"),
-                      customerAccessToken: localStorage.getItem(
-                        "customeraccesstoken"
-                      ),
+                      checkoutId:checkoutid||"",
+                      customerAccessToken:token||"",
                     },
                   });
                 }}
@@ -495,10 +505,8 @@ const [payment,setPayment]=useState(false)
                   />
                 </div>
 
-                <div
-                
-                  className="bg-headingblue py-3 mt-4 rounded-md w-1/2 ">
-                  <p  className="capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center">
+                <div className="bg-headingblue py-3 mt-4 rounded-md w-1/2 ">
+                  <p className="capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center">
                     Pay
                   </p>
                 </div>
@@ -511,4 +519,4 @@ const [payment,setPayment]=useState(false)
   );
 }
 
-export default withAuthenticator(Checkout);
+//export default withAuthenticator(Checkout);
