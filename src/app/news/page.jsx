@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Image } from "next/image";
 import News from "@/components/news";
 import { getData } from "@/api/FetchData";
 

@@ -3,7 +3,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Tickets from "@/app/tickets/tickets";
 import { getTicketsData } from "@/api/FetchData";
-import { Image } from "next/image";
 export default async function TicketsMain() {
   const data = await getTicketsData();
 

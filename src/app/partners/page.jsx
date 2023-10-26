@@ -3,7 +3,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Partners from "@/app/partners/partners";
 import { getPartnersData } from "@/api/FetchData";
-import { Image } from "next/image";
 export default async function PartnersMain() {
   const data = await getPartnersData();
   return (
