@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { saveEmail } from "@/api/FetchData";
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     const res = saveEmail({ data: { Subscribers: email } });
     setEmail("");
     alert("Subscribed successfully!");
@@ -13,7 +14,7 @@ const NewsLetter = () => {
       <div className=" py-[5rem] bg-bggray dark:bg-bgdark">
         <div className="flex justify-center md:flex-row flex-col gap-16">
           <div className="flex justify-center ">
-            <img src="/Home/logo.svg " alt="Logo" />
+            <img src="/Home/logo.svg" alt="Logo" />
           </div>
           <div className="font-roboto font-bold text-3xl text-black dark:text-white text-center">
             Subscribe For Updates About The AFL!

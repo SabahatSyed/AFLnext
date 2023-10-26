@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-//import { Amplify } from "aws-amplify";
+import Image from "next/image";
+import { Amplify } from "aws-amplify";
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-//import { withAuthenticator } from "@aws-amplify/ui-react";
-//import "@aws-amplify/ui-react/styles.css";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-//import awsconfig from "../../aws-exports";
-//Amplify.configure(awsconfig);
+import awsconfig from "../../aws-exports";
+Amplify.configure(awsconfig);
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 const product = {
@@ -134,11 +135,10 @@ const updateaddress = gql`
   }
 `;
 
-export default function Checkout() {
-  const user = {};
+export function Checkout({ user }) {
   const [token, setToken] = useState("");
   const [checkoutid, setcheckoutid] = useState("");
-  const [cartid,setCartId]=useState("")
+  const [cartid, setCartId] = useState("");
   const [formdata, setFormdata] = useState({
     lastName: "",
     firstName: "",
@@ -155,9 +155,9 @@ export default function Checkout() {
     cvc: "",
     country: "",
   });
-  useEffect(()=>{
+  useEffect(() => {
     setCartId(localStorage.getItem("cartid"));
-  },[])
+  }, []);
   const [login, { data1, loading1, error1 }] = useMutation(getlogin);
   const { data, error } = useSuspenseQuery(query, {
     variables: {
@@ -187,7 +187,7 @@ export default function Checkout() {
     );
   };
   useEffect(() => {
-    setcheckoutid(localStorage.getItem("checkoutid"))
+    setcheckoutid(localStorage.getItem("checkoutid"));
     loginuser();
   }, []);
   const cartItems = data.cart.lines.edges;
@@ -273,7 +273,7 @@ export default function Checkout() {
             </div>
           </div>
           <div className=" flex justify-center items-end ">
-            <img src="/checkout/seasontickets.svg" />
+          <img  src="/checkout/seasontickets.svg" />
             <div className="bg-headingblue  absolute py-2 px-10 mb-7 ">
               <p
                 onClick={() => router.push("/checkout")}
@@ -410,15 +410,14 @@ export default function Checkout() {
                   const response = await updateAddress({
                     variables: {
                       shippingAddress: formdata,
-                      checkoutId:
-                        checkoutid||""
+                      checkoutId: checkoutid || "",
                     },
                   });
                   setPayment(true);
                   const response1 = await checkout({
                     variables: {
-                      checkoutId:checkoutid||"",
-                      customerAccessToken:token||"",
+                      checkoutId: checkoutid || "",
+                      customerAccessToken: token || "",
                     },
                   });
                 }}
@@ -519,4 +518,4 @@ export default function Checkout() {
   );
 }
 
-//export default withAuthenticator(Checkout);
+export default withAuthenticator(Checkout);

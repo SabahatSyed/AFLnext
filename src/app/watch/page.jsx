@@ -5,13 +5,13 @@ import Watch from "@/app/watch/watch";
 import { getTeamsData } from "@/api/FetchData";
 
 export default async function WatchMain() {
-    const data = await getTeamsData();
+  const data = await getTeamsData();
   return (
     <div className="h-fit ">
       <Header activepage={"watch"} />
       <div className=" bg-white dark:bg-bgdark w-full">
         <img src="/watch/Watchbg.svg" className="w-full" />
-        <Watch data={data}/>
+        <Watch data={data} />
         <Footer />
       </div>
     </div>
