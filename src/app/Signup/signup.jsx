@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Auth, Amplify } from 'aws-amplify'
 import awsconfig from '../../aws-exports'
 Amplify.configure(awsconfig)
+
 export default function Signup({ data }) {
   const history = useRouter()
   const [email, setEmail] = useState('')
@@ -80,8 +81,8 @@ export default function Signup({ data }) {
 
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
-      <div className='w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16  bg-white mx-auto flex flex-col gap-3 text-black'>
-        <img src='/home/logo.svg' className='h-28' />
+      <div className='w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-3 text-black'>
+        <img src='/Home/logo.svg' className='h-28' />
         <p className='font-bold text-2xl text-center'>Create Your Account</p>
         <p className='font-normal text-sm text-center'>
           Create a new account to get information about the AFL and your
