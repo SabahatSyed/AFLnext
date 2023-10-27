@@ -47,9 +47,13 @@ export default function Header({ activepage }) {
     }
   }
   return (
-    <div>
+    <div
+      className={`${
+        pathname === '/login' || pathname === '/Signup' ? 'hidden' : ''
+      }`}
+    >
       <div className='bg-white dark:bg-bgdark h-10 md:h-24 '></div>
-      <div className='bg-gradient-to-t from-darkorange to-lightorange relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-4'>
+      <div className='bg-gradient-to-t from-darkorange to-lightorange relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-0'>
         {/* <Image
           className='object-center object-cover pointer-events-none'
           src={navImg}
@@ -65,17 +69,15 @@ export default function Header({ activepage }) {
             />
           </Link>
         </div>
-        <div className='col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase items-center text-sm md:gap-3 lg:gap-8 hidden'>
-          <Link href='/about'>
+        <div className='col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase text-sm md:gap-3 lg:gap-8 hidden h-full tracking-wider'>
+          <Link href='/about' className='py-5 hover:text-headingblue'>
             <div
-              className={`${
-                pathname == '/about' ? 'text-headingblue' : ''
-              } hover:text-headingblue`}
+              className={`${pathname == '/about' ? 'text-headingblue' : ''} `}
             >
               about
             </div>
           </Link>
-          <Link href='/news'>
+          <Link href='/news' className='py-5 hover:text-headingblue'>
             <div
               className={`${
                 pathname == '/news' ? 'text-headingblue' : ''
@@ -84,7 +86,7 @@ export default function Header({ activepage }) {
               news
             </div>
           </Link>
-          <Link href='/teams'>
+          <Link href='/teams' className='py-5 hover:text-headingblue'>
             <div
               className={`${
                 pathname == '/teams' ? 'text-headingblue' : ''
@@ -103,7 +105,7 @@ export default function Header({ activepage }) {
             href='/shop'
             className={`${
               pathname === '/shop' ? 'text-headingblue' : ''
-            }hover:text-headingblue`}
+            }hover:text-headingblue py-5`}
           >
             shop
           </Link>
@@ -117,7 +119,7 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 pathname == '/partners' ? 'text-headingblue' : ''
-              }hover:text-headingblue`}
+              }hover:text-headingblue py-5`}
             >
               partners
             </div>
@@ -126,7 +128,7 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 pathname == '/tickets' ? 'text-headingblue' : ''
-              }hover:text-headingblue`}
+              }hover:text-headingblue py-5`}
             >
               tickets
             </div>
@@ -193,15 +195,16 @@ export default function Header({ activepage }) {
             <img
               onClick={() => handleLogout()}
               src='/logout.svg'
-              className='h-7 cursor-pointer '
+              className='ml-5 scale-125 cursor-pointer '
             />
           )}
           {user == null && (
-            <img
-              onClick={() => router.push('/login')}
-              src='/profile.svg'
-              className='h-7 cursor-pointer'
-            />
+            <Link href='/login'>
+              <img
+                src='/profile.svg'
+                className='ml-5 scale-125 cursor-pointer'
+              />
+            </Link>
           )}
         </div>
         <div className='md:hidden col-start-12 col-span-4 cursor-pointer'>

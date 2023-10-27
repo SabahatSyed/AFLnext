@@ -36,7 +36,18 @@ body {
   src: url('/fonts/Magistral-ExtraBold.woff') format('truetype');
   
 }
-
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Set the width of the scrollbar */
+  width: 2px; /* Adjust the width of the scrollbar */
+  height: 8px;
+  border-radius: 8px; /* Add rounded corners */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #333; /* Set the background color of the track */
+  border-radius: 8px; /* Add rounded corners to the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #E34C0F; /* Set the color of the thumb */
+  border-radius: 8px; /* Add rounded corners to the thumb */
 }

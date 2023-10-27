@@ -2,9 +2,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import { Auth, Amplify } from 'aws-amplify'
 import awsconfig from '../../aws-exports'
+import Loader from '@/components/Loader'
 Amplify.configure(awsconfig)
 
 export default function Signup({ data }) {
@@ -14,19 +15,25 @@ export default function Signup({ data }) {
   const [emailmsg, setemailmsg] = useState('')
   const [passwordmsg, setpasswordmsg] = useState('')
   const [msg, setmsg] = useState('')
+  const [loading, setLoading] = useState(false)
+
   const handleSignup = async () => {
+    setLoading(true)
     try {
       setmsg('')
 
       // Validate that all fields are filled
       if (!email || !password) {
         alert('Please fill in all fields')
+        setLoading(false)
         return
       }
 
       // Validate the email format
       if (!isValidEmail(email)) {
         setemailmsg('Invalid email format')
+        setLoading(false)
+        return
       }
 
       // Validate password requirements
@@ -37,6 +44,8 @@ export default function Signup({ data }) {
             ', special characters    \n' +
             ', upper case letters    '
         )
+        setLoading(false)
+        return
       }
 
       // Check if password and confirm password match
@@ -64,6 +73,7 @@ export default function Signup({ data }) {
     } catch (error) {
       setmsg(error.message)
       console.error('Error signing up:', error)
+      setLoading(false)
     }
   }
 
@@ -100,7 +110,7 @@ export default function Signup({ data }) {
             label={'Email'}
             className='h-8 p-6 bg-formbg text-formtext rounded-md'
           />
-          <p className='text-xxs font-bold text-red-700'>{emailmsg}</p>
+          <p className='text-xxs font-bold text-red-500'>{emailmsg}</p>
         </div>
         <div className='gap-2 flex flex-col'>
           <label className='text-xs font-bold'>Password</label>
@@ -114,9 +124,9 @@ export default function Signup({ data }) {
             placeholder={'*********'}
             className='h-8 p-6 bg-formbg text-formtext rounded-md'
           />
-          <p className='text-xxs font-bold text-red-700 w-1/3'>{passwordmsg}</p>
+          <p className='text-xxs font-bold text-red-500'>{passwordmsg}</p>
         </div>
-        <p className='text-sm font-bold text-green-900 w-1/3'>{msg}</p>
+        <p className='text-sm font-bold text-red-500'>{msg}</p>
         <div className=' w-full font-medium text-xs flex flex-col items-center justify-center'>
           <p>By signing up, you agree to our</p>
           <p>
@@ -127,10 +137,28 @@ export default function Signup({ data }) {
 
         <button
           onClick={() => handleSignup()}
-          className='bg-bgblue text-white uppercase p-4 rounded-md'
+          className='bg-bgblue text-white uppercase p-4 rounded-md flex justify-center items-center'
+          disabled={loading}
         >
-          Register
+          {loading ? (
+            <>
+              <Loader />
+              Registering...
+            </>
+          ) : (
+            <>Register</>
+          )}
         </button>
+        <p className='text-base flex justify-center'>
+          Already have an account?
+          <span
+            onClick={() => history.push('/login')}
+            className=' text-bgblue font-semibold cursor-pointer mx-1'
+          >
+            {' '}
+            Login Now
+          </span>
+        </p>
       </div>
     </div>
   )
