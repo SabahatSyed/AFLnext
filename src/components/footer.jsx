@@ -15,10 +15,20 @@ export default async function Footer({ activePage }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 1)
                 .map((result) => (
-                  <img
-                    className='scale-125 object-cover'
-                    src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
-                  />
+                  // <img
+                  //   className='scale-125 object-cover'
+                  //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  // />
+                  <div className='relative w-16 h-16'>
+                    <Image
+                      className='object-center object-contain pointer-events-none'
+                      src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      alt='teams images'
+                      priority
+                      fill
+                      quality={100}
+                    />
+                  </div>
                 ))}
             </div>
             <div className='flex flex-col justify-center items-center gap-6'>
@@ -26,10 +36,20 @@ export default async function Footer({ activePage }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 2)
                 .map((result) => (
-                  <img
-                    className='scale-125 object-cover'
-                    src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
-                  />
+                  // <img
+                  //   className='scale-125 object-cover'
+                  //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  // />
+                  <div className='relative w-16 h-16'>
+                    <Image
+                      className='object-center object-contain pointer-events-none'
+                      src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      alt='teams images'
+                      priority
+                      fill
+                      quality={100}
+                    />
+                  </div>
                 ))}
             </div>
             <div className='flex flex-col justify-center items-center gap-6'>
@@ -37,10 +57,20 @@ export default async function Footer({ activePage }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 3)
                 .map((result) => (
-                  <img
-                    className='scale-125 object-cover'
-                    src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
-                  />
+                  // <img
+                  //   className='scale-125 object-cover'
+                  //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  // />
+                  <div className='relative w-16 h-16'>
+                    <Image
+                      className='object-center object-contain pointer-events-none'
+                      src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      alt='teams images'
+                      priority
+                      fill
+                      quality={100}
+                    />
+                  </div>
                 ))}
             </div>
             <div className='flex flex-col  items-center gap-6'>
@@ -48,10 +78,20 @@ export default async function Footer({ activePage }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 4)
                 .map((result) => (
-                  <img
-                    className='scale-125 object-cover'
-                    src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
-                  />
+                  // <img
+                  //   className='scale-125 object-cover'
+                  //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  // />
+                  <div className='relative w-16 h-16'>
+                    <Image
+                      className='object-center object-contain pointer-events-none'
+                      src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      alt='teams images'
+                      priority
+                      fill
+                      quality={100}
+                    />
+                  </div>
                 ))}
             </div>
           </div>

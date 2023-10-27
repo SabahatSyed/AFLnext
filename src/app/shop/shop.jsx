@@ -194,8 +194,8 @@ export function Shop({ formdata, user, logout, customers }) {
         const obj = {
           email: user?.attributes?.email,
           phone: user?.attributes?.phone_number,
-          first_name: user?.attributes?.name.split(' ')[0],
-          last_name: user?.attributes?.name.split(' ')[1],
+          first_name: user?.attributes?.name?.split(' ')[0],
+          last_name: user?.attributes?.name?.split(' ')[1],
         }
         handleRegistration(obj)
       }
