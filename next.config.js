@@ -4,10 +4,19 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'liqueous-news-cms.logixsy.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'afl-cms.logixsy.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
       },
     ],
   },

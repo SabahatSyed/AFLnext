@@ -179,16 +179,16 @@ export default function Header({ activepage }) {
           <Link href={'/cart'}>
             <img src='/Home/cart.svg' />
           </Link>
-          <div>
+          <Link href={'https://www.humbl.com/social/'}>
             <img src='/Home/h.svg' />
-          </div>
-          <Link href={'https://www.facebook.com/AFL'}>
+          </Link>
+          <Link href={'https://www.facebook.com/HUMBLinc'}>
             <img src='/Home/facebook.svg' />
           </Link>
-          <Link href={'https://www.instagram.com/afl/'}>
+          <Link href={'https://instagram.com/humblinc/'}>
             <img src='/Home/instagram.svg' />{' '}
           </Link>
-          <Link href={'https://www.youtube.com/@AFL'}>
+          <Link href={'https://www.youtube.com/c/HUMBL'}>
             <img src='/Home/youtube.svg' />
           </Link>
           {user && (
@@ -318,18 +318,18 @@ export default function Header({ activepage }) {
             <Link href={'/cart'}>
               <img src='/Home/cart.svg' />
             </Link>
-            <div>
+            <Link href={'https://www.humbl.com/social/'}>
               <img src='/Home/h.svg' />
-            </div>
-            <div>
+            </Link>
+            <Link href={'https://www.facebook.com/HUMBLinc'}>
               <img src='/Home/facebook.svg' />
-            </div>
-            <div>
+            </Link>
+            <Link href={'https://www.facebook.com/HUMBLinc'}>
               <img src='/Home/instagram.svg' />{' '}
-            </div>
-            <div>
+            </Link>
+            <Link href={'https://www.youtube.com/c/HUMBL'}>
               <img src='/Home/youtube.svg' />
-            </div>
+            </Link>
             {user && (
               <img
                 onClick={() => handleLogout()}

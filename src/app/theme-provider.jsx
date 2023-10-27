@@ -6,9 +6,15 @@ import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
 
 export function ThemeProvider({ children, ...props }) {
   return (
-    <NextThemesProvider {...props}>
+    // <NextThemesProvider {...props}>
+    //   <ProgressBar height='4px' color='#E34C0F' shallowRouting />
+    //   {children}
+    // </NextThemesProvider>
+
+    //for disabling dark mode for now
+    <div>
       <ProgressBar height='4px' color='#E34C0F' shallowRouting />
       {children}
-    </NextThemesProvider>
+    </div>
   )
 }
