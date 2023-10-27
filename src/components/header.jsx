@@ -199,11 +199,12 @@ export default function Header({ activepage }) {
             />
           )}
           {user == null && (
-            <img
-              onClick={() => router.push('/login')}
-              src='/profile.svg'
-              className='ml-5 scale-125 cursor-pointer'
-            />
+            <Link href='/login'>
+              <img
+                src='/profile.svg'
+                className='ml-5 scale-125 cursor-pointer'
+              />
+            </Link>
           )}
         </div>
         <div className='md:hidden col-start-12 col-span-4 cursor-pointer'>

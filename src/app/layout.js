@@ -2,7 +2,6 @@ import './globals.css'
 import { ApolloWrapper } from '../lib/apollo-wrapper'
 import { ThemeProvider } from '@/app/theme-provider'
 import Header from '@/components/header'
-import NextTopLoader from 'nextjs-toploader'
 import { magistraal, magistral, roboto } from '@/lib/fonts'
 
 // import { switchThemeDuration } from "./constants";
@@ -22,7 +21,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${magistral.variable} ${magistraal.variable} ${roboto.variable}`}
       >
-        <NextTopLoader color='#E34C0F' />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Header />
           <ApolloWrapper>{children}</ApolloWrapper>

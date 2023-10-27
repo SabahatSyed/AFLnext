@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import Image from 'next/image'
 import { Auth, Amplify } from 'aws-amplify'
 import awsconfig from '../../aws-exports'
