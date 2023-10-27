@@ -165,9 +165,9 @@ export function Shop({ formdata, user, logout, customers }) {
     try {
       const response = await registerCustomer({
         variables: {
-          email: data.email,
-          firstName: data.first_name,
-          lastName: data.last_name,
+          email: data?.email,
+          firstName: data?.first_name,
+          lastName: data?.last_name,
           acceptsMarketing: true,
           password: '12345678',
         },
@@ -192,10 +192,10 @@ export function Shop({ formdata, user, logout, customers }) {
         )
       ) {
         const obj = {
-          email: user?.attributes.email,
-          phone: user?.attributes.phone_number,
-          first_name: user?.attributes.name.split(' ')[0],
-          last_name: user?.attributes.name.split(' ')[1],
+          email: user?.attributes?.email,
+          phone: user?.attributes?.phone_number,
+          first_name: user?.attributes?.name.split(' ')[0],
+          last_name: user?.attributes?.name.split(' ')[1],
         }
         handleRegistration(obj)
       }
