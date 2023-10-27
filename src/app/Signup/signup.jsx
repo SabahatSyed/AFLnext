@@ -1,51 +1,130 @@
-'use client'
-import React, { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useRouter } from 'next-nprogress-bar'
-import { Auth, Amplify } from 'aws-amplify'
-import awsconfig from '../../aws-exports'
-import Loader from '@/components/Loader'
-Amplify.configure(awsconfig)
+"use client";
+import React, { useState,useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next-nprogress-bar";
+import { Auth, Amplify } from "aws-amplify";
+import awsconfig from "../../aws-exports";
+import Loader from "@/components/Loader";
 
+import { gql, useMutation } from "@apollo/client";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { useSearchParams } from "next/navigation";
+Amplify.configure(awsconfig);
+const query = gql`
+  mutation RegisterAccount(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+    $acceptsMarketing: Boolean = false
+  ) {
+    customerCreate(
+      input: {
+        email: $email
+        password: $password
+        firstName: $firstName
+        lastName: $lastName
+        acceptsMarketing: $acceptsMarketing
+      }
+    ) {
+      customer {
+        id
+      }
+      customerUserErrors {
+        code
+        message
+      }
+    }
+  }
+`;
+const getlogin = gql`
+  mutation SignInWithEmailAndPassword($email: String!, $password: String!) {
+    customerAccessTokenCreate(input: { email: $email, password: $password }) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        message
+      }
+    }
+  }
+`;
 export default function Signup({ data }) {
-  const history = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailmsg, setemailmsg] = useState('')
-  const [passwordmsg, setpasswordmsg] = useState('')
-  const [msg, setmsg] = useState('')
-  const [loading, setLoading] = useState(false)
+  const params = useSearchParams().get("auth");
+  const history = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailmsg, setemailmsg] = useState("");
+  const [passwordmsg, setpasswordmsg] = useState("");
+  const [msg, setmsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [customerid, setCustomerId] = useState("");
+  const [pass, setPass] = useState("");
+  const [registerCustomer, { data1, loading1, error }] = useMutation(query);
+  const [login, { data2, loading2, error2 }] = useMutation(getlogin);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    localStorage.setItem("customeraccesstoken", token);
+  }, [token]);
 
-  const handleSignup = async () => {
-    setLoading(true)
+  useEffect(() => {
+    localStorage.setItem("customerId", customerid);
+  }, [customerid]);
+  useEffect(() => {
+    localStorage.setItem("userpass", pass);
+  }, [pass]);
+  const handleRegistration = async (data) => {
     try {
-      setmsg('')
+      const response = await registerCustomer({
+        variables: {
+          email: data?.email,
+          firstName: data?.first_name,
+          lastName: data?.last_name,
+          acceptsMarketing: true,
+          password: "12345678",
+        },
+      });
+      setPass("12345678");
+      setCustomerId(response.data.customerCreate.customer?.id);
+      return true;
+    } catch (error) {
+      // Handle registration error
+      console.error("Registration error:", error.message);
+      return false;
+    }
+  };
+  const handleSignup = async () => {
+    setLoading(true);
+    try {
+      setmsg("");
 
       // Validate that all fields are filled
       if (!email || !password) {
-        alert('Please fill in all fields')
-        setLoading(false)
-        return
+        alert("Please fill in all fields");
+        setLoading(false);
+        return;
       }
 
       // Validate the email format
       if (!isValidEmail(email)) {
-        setemailmsg('Invalid email format')
-        setLoading(false)
-        return
+        setemailmsg("Invalid email format");
+        setLoading(false);
+        return;
       }
 
       // Validate password requirements
       if (!isValidPassword(password)) {
         setpasswordmsg(
-          'Password must have at least 8 characters\n' +
-            ', numbers \n' +
-            ', special characters    \n' +
-            ', upper case letters    '
-        )
-        setLoading(false)
-        return
+          "Password must have at least 8 characters\n" +
+            ", numbers \n" +
+            ", special characters    \n" +
+            ", upper case letters    "
+        );
+        setLoading(false);
+        return;
       }
 
       // Check if password and confirm password match
@@ -53,93 +132,132 @@ export default function Signup({ data }) {
       // For simplicity, assuming you have a state `confirmPassword`
 
       // Use Auth.signUp to create a new user
-      if (passwordmsg == '' && emailmsg == '') {
+      if (passwordmsg == "" && emailmsg == "") {
         const signUpResponse = await Auth.signUp({
           username: email,
           password: password,
           attributes: {
             email: email,
-            phone_number: '',
-            name: '',
+            phone_number: "",
+            name: "",
 
             // You can add additional attributes here if needed
           },
-        })
+        });
+        console.log("Signup successful", signUpResponse);
+        await Auth.signIn({ username: email, password });
+        const currentUser = await Auth.currentAuthenticatedUser();
+
+        const obj = {
+          email: currentUser?.attributes?.email,
+          phone: currentUser?.attributes?.phone_number,
+          first_name: currentUser?.attributes?.name?.split(" ")[0],
+          last_name: currentUser?.attributes?.name?.split(" ")[1],
+        };
+
+        if (handleRegistration(obj)) {
+          setmsg("Successfully Registered!!");
+
+          const response = await login({
+            variables: {
+              email: email,
+              password: "12345678",
+            },
+          });
+
+          if (
+            response.data.customerAccessTokenCreate.customerAccessToken != null
+          ) {
+            setToken(
+              response.data.customerAccessTokenCreate.customerAccessToken
+                .accessToken
+            );
+            if (query == "auth") history.push("/checkout");
+            else history.push("/");
+          } else {
+            setmsg("Login Failed");
+            setLoading(false);
+
+            Auth.signOut();
+          }
+        } else {
+          setmsg("Registeration Failed");
+          const user = await Auth.currentAuthenticatedUser();
+          await Auth.deleteUser(user);
+        }
       }
-      setmsg('Successfully Registered!!')
-      console.log('Signup successful', signUpResponse)
+
       // Optionally, you can redirect the user to a confirmation page
       // or show a confirmation message.
     } catch (error) {
-      setmsg(error.message)
-      console.error('Error signing up:', error)
-      setLoading(false)
+      setmsg(error.message);
+      console.error("Error signing up:", error);
+      setLoading(false);
     }
-  }
+  };
 
   const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const isValidPassword = (password) => {
     const passwordRegex =
-      /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z]).{8,}$/
+      /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z]).{8,}$/;
 
-    return passwordRegex.test(password)
-  }
+    return passwordRegex.test(password);
+  };
 
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
-      <div className='w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-3 text-black'>
-        <img src='/Home/logo.svg' className='h-28' />
-        <p className='font-bold text-2xl text-center'>Create Your Account</p>
-        <p className='font-normal text-sm text-center'>
+      <div className="w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-3 text-black">
+        <img src="/Home/logo.svg" className="h-28" />
+        <p className="font-bold text-2xl text-center">Create Your Account</p>
+        <p className="font-normal text-sm text-center">
           Create a new account to get information about the AFL and your
           favorite teams.
         </p>
-        <div className='gap-2 flex flex-col'>
-          <label className='text-xs font-bold'>Email</label>
+        <div className="gap-2 flex flex-col">
+          <label className="text-xs font-bold">Email</label>
           <input
             onChange={(e) => {
-              setEmail(e.target.value)
-              setemailmsg('')
+              setEmail(e.target.value);
+              setemailmsg("");
             }}
             value={email}
-            placeholder={'jamesturner@gmail.com'}
-            label={'Email'}
-            className='h-8 p-6 bg-formbg text-formtext rounded-md'
+            placeholder={"jamesturner@gmail.com"}
+            label={"Email"}
+            className="h-8 p-6 bg-formbg text-formtext rounded-md"
           />
-          <p className='text-xxs font-bold text-red-500'>{emailmsg}</p>
+          <p className="text-xxs font-bold text-red-500">{emailmsg}</p>
         </div>
-        <div className='gap-2 flex flex-col'>
-          <label className='text-xs font-bold'>Password</label>
+        <div className="gap-2 flex flex-col">
+          <label className="text-xs font-bold">Password</label>
 
           <input
             onChange={(e) => {
-              setPassword(e.target.value)
-              setpasswordmsg('')
+              setPassword(e.target.value);
+              setpasswordmsg("");
             }}
             value={password}
-            placeholder={'*********'}
-            className='h-8 p-6 bg-formbg text-formtext rounded-md'
+            placeholder={"*********"}
+            className="h-8 p-6 bg-formbg text-formtext rounded-md"
           />
-          <p className='text-xxs font-bold text-red-500'>{passwordmsg}</p>
+          <p className="text-xxs font-bold text-red-500">{passwordmsg}</p>
         </div>
-        <p className='text-sm font-bold text-red-500'>{msg}</p>
-        <div className=' w-full font-medium text-xs flex flex-col items-center justify-center'>
+        <p className="text-sm font-bold text-red-500">{msg}</p>
+        <div className=" w-full font-medium text-xs flex flex-col items-center justify-center">
           <p>By signing up, you agree to our</p>
           <p>
-            <span className='text-bgblue'>Terms & Conditions</span> and
-            <span className='text-bgblue'> Privacy Policy.</span>
+            <span className="text-bgblue">Terms & Conditions</span> and
+            <span className="text-bgblue"> Privacy Policy.</span>
           </p>
         </div>
 
         <button
           onClick={() => handleSignup()}
-          className='bg-bgblue text-white uppercase p-4 rounded-md flex justify-center items-center'
-          disabled={loading}
-        >
+          className="bg-bgblue text-white uppercase p-4 rounded-md flex justify-center items-center"
+          disabled={loading}>
           {loading ? (
             <>
               <Loader />
@@ -149,17 +267,16 @@ export default function Signup({ data }) {
             <>Register</>
           )}
         </button>
-        <p className='text-base flex justify-center'>
+        <p className="text-base flex justify-center">
           Already have an account?
           <span
-            onClick={() => history.push('/login')}
-            className=' text-bgblue font-semibold cursor-pointer mx-1'
-          >
-            {' '}
+            onClick={() => history.push("/login")}
+            className=" text-bgblue font-semibold cursor-pointer mx-1">
+            {" "}
             Login Now
           </span>
         </p>
       </div>
     </div>
-  )
+  );
 }

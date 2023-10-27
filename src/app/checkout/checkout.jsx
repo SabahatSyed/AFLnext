@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Amplify } from 'aws-amplify'
+import { Amplify ,Auth} from 'aws-amplify'
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
@@ -68,20 +68,7 @@ const query = gql`
     }
   }
 `
-const getlogin = gql`
-  mutation SignInWithEmailAndPassword($email: String!, $password: String!) {
-    customerAccessTokenCreate(input: { email: $email, password: $password }) {
-      customerAccessToken {
-        accessToken
-        expiresAt
-      }
-      customerUserErrors {
-        code
-        message
-      }
-    }
-  }
-`
+
 
 const checkoutwithcustomer = gql`
   mutation associateCustomerWithCheckout(
@@ -135,10 +122,12 @@ const updateaddress = gql`
   }
 `
 
-export function Checkout({ user }) {
+export function Checkout() {
+  const router=useRouter()
   const [token, setToken] = useState('')
   const [checkoutid, setcheckoutid] = useState('')
   const [cartid, setCartId] = useState('')
+  const [data,setData]=useState()
   const [formdata, setFormdata] = useState({
     lastName: '',
     firstName: '',
@@ -148,7 +137,6 @@ export function Checkout({ user }) {
     zip: '',
     city: '',
   })
-
   const [paymentformdata, setPaymentFormdata] = useState({
     cardnumber: '',
     expiry: '',
@@ -158,15 +146,7 @@ export function Checkout({ user }) {
   useEffect(() => {
     setCartId(localStorage.getItem('cartid'))
   }, [])
-  const [login, { data1, loading1, error1 }] = useMutation(getlogin)
-  const { data, error } = useSuspenseQuery(query, {
-    variables: {
-      cartId:
-        cartid ||
-        'gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUhERzdLUzYxWldBVlo4Nk1DUDJNUkJHWA',
-    },
-  })
-
+  
   const [checkout, { data2, loading2, error2 }] =
     useMutation(checkoutwithcustomer)
   const [updateAddress, { data3, loading3, error3 }] =
@@ -175,54 +155,63 @@ export function Checkout({ user }) {
   useEffect(() => {
     localStorage.setItem('customeraccesstoken', token)
   }, [token])
-  const loginuser = async () => {
-    const response = await login({
-      variables: {
-        email: user?.attributes?.email,
-        password: '1234567',
-      },
-    })
-    setToken(
-      response.data.customerAccessTokenCreate.customerAccessToken.accessToken
-    )
-  }
+ 
   useEffect(() => {
     setcheckoutid(localStorage.getItem('checkoutid'))
-    loginuser()
+        setToken(localStorage.getItem("customeraccesstoken"))
+
+
+    //loginuser()
   }, [])
-  const cartItems = data.cart.lines.edges
-  const totalAmount = cartItems.reduce((total, item) => {
+  useEffect(()=>{
+            Auth.currentAuthenticatedUser().then((res)=>{}).catch((err)=>{
+            router.push("/shop");
+
+           })
+  },[])
+  const cartItems = data?.cart.lines.edges
+  const totalAmount = cartItems?.reduce((total, item) => {
     const itemTotalAmount = parseFloat(
       item.node.estimatedCost.totalAmount.amount
     )
     return total + itemTotalAmount
   }, 0)
+     const CartComponent = ({setData,cartid}) => {
+       const { data, error2 } = useSuspenseQuery(query, {
+         variables: {
+           cartId: cartid,
+         },
+       });
+       setData(data);
+     };
+
   return (
     <div>
-      <div className=' flex flex-col w-1/2 mx-auto py-10 px-4'>
-        <div className='my-10 flex flex-col gap-8 items-center bg-white py-8 px-8 lg:px-4 rounded-md '>
-          {data.cart.lines?.edges?.map((item) => (
+      {cartid && <CartComponent setData={setData} cartid={cartid} />}
+
+      <div className=" flex flex-col w-1/2 mx-auto py-10 px-4">
+        <div className="my-10 flex flex-col gap-8 items-center bg-white py-8 px-8 lg:px-4 rounded-md ">
+          {data?.cart.lines?.edges?.map((item) => (
             <div>
               <img
                 src={item.node.merchandise.product.featuredImage.src}
-                className='h-48 border border-stone-200 shadow-md rounded-2xl'
+                className="h-48 border border-stone-200 shadow-md rounded-2xl"
               />
-              <div className='flex flex-col w-full'>
-                <p className=' font-roboto font-bold text-2xl capitalize'>
+              <div className="flex flex-col w-full">
+                <p className=" font-roboto font-bold text-2xl capitalize">
                   {item.node.merchandise.product.title}
                 </p>
-                <p className=' font-roboto font-medium text-xl text-bggray capitalize'>
+                <p className=" font-roboto font-medium text-xl text-bggray capitalize">
                   Black - {product.size}
                 </p>
-                <div className='flex justify-between items-center gap-3 py-4'>
-                  <p className='font-roboto font-bold text-xl text-bgblue'>
+                <div className="flex justify-between items-center gap-3 py-4">
+                  <p className="font-roboto font-bold text-xl text-bgblue">
                     $ {item.node.merchandise.priceV2.amount}
                   </p>
 
                   <select
-                    className='text-black w-1/5 font-normal border border-gray-400  text-sm '
-                    value={item.node.quantity}
-                  >
+                    className="text-black w-1/5 font-normal border border-gray-400  text-sm "
+                    value={item.node.quantity}>
                     <option value={item.node.quantity}>
                       {item.node.quantity}
                     </option>
@@ -232,73 +221,71 @@ export function Checkout({ user }) {
             </div>
           ))}
 
-          <div className='flex justify-between items-center gap-3  font-roboto  text-lg'>
-            <p className=' text-gray'>Sub-Total</p>
+          <div className="flex justify-between items-center gap-3  font-roboto  text-lg">
+            <p className=" text-gray">Sub-Total</p>
 
-            <p className='font-bold text-black'>$ {totalAmount}</p>
+            <p className="font-bold text-black">$ {totalAmount}</p>
           </div>
-          <div className='flex justify-between items-center gap-3  font-roboto  text-lg'>
-            <p className=' text-gray'>Shipping</p>
+          <div className="flex justify-between items-center gap-3  font-roboto  text-lg">
+            <p className=" text-gray">Shipping</p>
 
-            <p className='font-bold text-black'>$ 5.99</p>
+            <p className="font-bold text-black">$ 5.99</p>
           </div>
-          <div className='flex justify-between items-center gap-3  font-roboto  text-lg'>
-            <p className=' text-gray'>Tax</p>
+          <div className="flex justify-between items-center gap-3  font-roboto  text-lg">
+            <p className=" text-gray">Tax</p>
 
-            <p className='font-bold text-black'>
+            <p className="font-bold text-black">
               $
               {Math.round(
-                ((data.cart.estimatedCost.totalAmount.amount - totalAmount) *
+                ((data?.cart.estimatedCost.totalAmount.amount - totalAmount) *
                   100) /
                   100
               )}
             </p>
           </div>
-          <div className='flex justify-between items-center gap-3 font-roboto text-lg'>
-            <p className=' text-gray'>Total</p>
+          <div className="flex justify-between items-center gap-3 font-roboto text-lg">
+            <p className=" text-gray">Total</p>
 
-            <p className='font-bold text-black'>
-              $ {data.cart.estimatedCost.totalAmount.amount}
+            <p className="font-bold text-black">
+              $ {data?.cart.estimatedCost.totalAmount.amount}
             </p>
           </div>
         </div>
-        <div className='flex lg:flex-row flex-col justify-between items-center w-full gap-4'>
-          <div className=' flex justify-center items-end'>
-            <img src='/checkout/concertticket.svg' />
-            <div className='bg-headingblue  absolute py-2 px-10 mb-7'>
+        <div className="flex lg:flex-row flex-col justify-between items-center w-full gap-4">
+          <div className=" flex justify-center items-end">
+            <img src="/checkout/concertticket.svg" />
+            <div className="bg-headingblue  absolute py-2 px-10 mb-7">
               <p
-                onClick={() => router.push('/checkout')}
-                className='uppercase font-roboto  font-bold text-sm text-white flex items-center justify-center'
-              >
+                onClick={() => router.push("/checkout")}
+                className="uppercase font-roboto cursor-pointer font-bold text-sm text-white flex items-center justify-center">
                 Add to Cart
               </p>
             </div>
           </div>
-          <div className=' flex justify-center items-end '>
-            <img src='/checkout/seasontickets.svg' />
-            <div className='bg-headingblue  absolute py-2 px-10 mb-7 '>
+          <div className=" flex justify-center items-end ">
+            <img src="/checkout/seasontickets.svg" />
+            <div className="bg-headingblue  absolute py-2 px-10 mb-7 ">
               <p
-                onClick={() => router.push('/checkout')}
-                className='uppercase font-roboto  font-bold text-sm text-white flex items-center justify-center'
-              >
+                onClick={() => router.push("/checkout")}
+                className="uppercase font-roboto cursor-pointer font-bold text-sm text-white flex items-center justify-center">
                 Add to Cart
               </p>
             </div>
-          </div>{' '}
+          </div>
         </div>
-        <div className='bg-white p-12 mt-10 rounded-2xl'>
-          <p className=' uppercase font-magistraal text-lg text-headingblue '>
+        <div className="bg-white p-12 mt-10 rounded-2xl">
+          <p className=" uppercase font-magistraal text-lg text-headingblue ">
             Shipping address
           </p>
           <form>
-            <div className='flex flex-col gap-4 font-roboto font-normal text-lg mt-5'>
-              <div className='flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center'>
-                <div className='flex flex-col gap-2'>
-                  <label for='firstname'>First Name</label>
+            <div className="flex flex-col gap-4 font-roboto font-normal text-lg mt-5">
+              <div className="flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center">
+                <div className="flex flex-col gap-2">
+                  <label for="firstname">First Name</label>
                   <input
-                    type='text'
-                    id='firstname'
-                    placeholder='first name'
+                    type="text"
+                    id="firstname"
+                    placeholder="first name"
                     value={formdata.firstName}
                     onChange={(e) =>
                       setFormdata({
@@ -306,16 +293,16 @@ export function Checkout({ user }) {
                         firstName: e.target.value,
                       })
                     }
-                    className='border rounded-md border-bggray p-2'
+                    className="border rounded-md border-bggray p-2"
                   />
                 </div>
-                <div className='flex flex-col gap-2'>
-                  <label for='lastname'>Last Name</label>
+                <div className="flex flex-col gap-2">
+                  <label for="lastname">Last Name</label>
                   <input
-                    type='text'
-                    id='lastname'
-                    placeholder='last name'
-                    className='border rounded-md border-bggray p-2'
+                    type="text"
+                    id="lastname"
+                    placeholder="last name"
+                    className="border rounded-md border-bggray p-2"
                     value={formdata.lastName}
                     onChange={(e) =>
                       setFormdata({
@@ -326,13 +313,13 @@ export function Checkout({ user }) {
                   />
                 </div>
               </div>
-              <div className='flex flex-col gap-2'>
-                <label for='address'>Address</label>
+              <div className="flex flex-col gap-2">
+                <label for="address">Address</label>
                 <input
-                  type='text'
-                  id='address'
-                  placeholder='Street # '
-                  className='border rounded-md border-bggray p-2'
+                  type="text"
+                  id="address"
+                  placeholder="Street # "
+                  className="border rounded-md border-bggray p-2"
                   value={formdata.address1}
                   onChange={(e) =>
                     setFormdata({
@@ -342,13 +329,13 @@ export function Checkout({ user }) {
                   }
                 />
               </div>
-              <div className='flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center'>
-                <div className='flex flex-col gap-2'>
-                  <label for='province'>Province</label>
+              <div className="flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center">
+                <div className="flex flex-col gap-2">
+                  <label for="province">Province</label>
                   <input
-                    type='text'
-                    id='province'
-                    placeholder='province'
+                    type="text"
+                    id="province"
+                    placeholder="province"
                     value={formdata.province}
                     onChange={(e) =>
                       setFormdata({
@@ -356,16 +343,16 @@ export function Checkout({ user }) {
                         province: e.target.value,
                       })
                     }
-                    className='border rounded-md border-bggray p-2'
+                    className="border rounded-md border-bggray p-2"
                   />
                 </div>
-                <div className='flex flex-col gap-2'>
-                  <label for='city'>City</label>
+                <div className="flex flex-col gap-2">
+                  <label for="city">City</label>
                   <input
-                    type='text'
-                    id='city'
-                    placeholder='city'
-                    className='border rounded-md border-bggray p-2'
+                    type="text"
+                    id="city"
+                    placeholder="city"
+                    className="border rounded-md border-bggray p-2"
                     value={formdata.city}
                     onChange={(e) =>
                       setFormdata({
@@ -376,13 +363,13 @@ export function Checkout({ user }) {
                   />
                 </div>
               </div>
-              <div className='flex flex-col gap-2'>
-                <label for='country'>Country</label>
+              <div className="flex flex-col gap-2">
+                <label for="country">Country</label>
                 <input
-                  type='text'
-                  id='country'
-                  placeholder='Your Country'
-                  className='border rounded-md border-bggray p-2'
+                  type="text"
+                  id="country"
+                  placeholder="Your Country"
+                  className="border rounded-md border-bggray p-2"
                   value={formdata.country}
                   onChange={(e) =>
                     setFormdata({
@@ -392,13 +379,13 @@ export function Checkout({ user }) {
                   }
                 />
               </div>
-              <div className='flex flex-col gap-2'>
-                <label for='zip'>Zip</label>
+              <div className="flex flex-col gap-2">
+                <label for="zip">Zip</label>
                 <input
-                  type='text'
-                  id='zip'
-                  placeholder='Your Zip Code'
-                  className='border rounded-md border-bggray p-2'
+                  type="text"
+                  id="zip"
+                  placeholder="Your Zip Code"
+                  className="border rounded-md border-bggray p-2"
                   value={formdata.zip}
                   onChange={(e) =>
                     setFormdata({
@@ -410,23 +397,23 @@ export function Checkout({ user }) {
               </div>
               <div
                 onClick={async () => {
+               
                   const response = await updateAddress({
                     variables: {
                       shippingAddress: formdata,
-                      checkoutId: checkoutid || '',
+                      checkoutId: checkoutid || "",
                     },
-                  })
-                  setPayment(true)
+                  });
+                  setPayment(true);
                   const response1 = await checkout({
                     variables: {
-                      checkoutId: checkoutid || '',
-                      customerAccessToken: token || '',
+                      checkoutId: checkoutid || "",
+                      customerAccessToken: token || "",
                     },
-                  })
+                  });
                 }}
-                className='bg-headingblue py-3 mt-4 rounded-md w-1/2 '
-              >
-                <p className='capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center'>
+                className="bg-headingblue py-3 mt-4 rounded-md w-1/2 ">
+                <p className="capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center">
                   Save
                 </p>
               </div>
@@ -434,18 +421,18 @@ export function Checkout({ user }) {
           </form>
         </div>
         {payment && (
-          <div className='bg-white p-12 mt-10 rounded-2xl'>
-            <p className=' uppercase font-magistraal text-lg text-headingblue '>
+          <div className="bg-white p-12 mt-10 rounded-2xl">
+            <p className=" uppercase font-magistraal text-lg text-headingblue ">
               payment
             </p>
             <form>
-              <div className='flex flex-col gap-4 font-roboto font-normal text-lg mt-5'>
-                <div className='flex flex-col gap-2'>
-                  <label for='cardNumber'>Card Number</label>
+              <div className="flex flex-col gap-4 font-roboto font-normal text-lg mt-5">
+                <div className="flex flex-col gap-2">
+                  <label for="cardNumber">Card Number</label>
                   <input
-                    type='text'
-                    id='cardNumber'
-                    placeholder='1234 5678 9012 3456'
+                    type="text"
+                    id="cardNumber"
+                    placeholder="1234 5678 9012 3456"
                     value={paymentformdata.cardnumber}
                     onChange={(e) =>
                       setPaymentFormdata({
@@ -453,17 +440,17 @@ export function Checkout({ user }) {
                         cardnumber: e.target.value,
                       })
                     }
-                    className='border rounded-md border-bggray p-2'
+                    className="border rounded-md border-bggray p-2"
                   />
                 </div>
 
-                <div className='flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center'>
-                  <div className='flex flex-col gap-2'>
-                    <label for='expiration'>Expiration</label>
+                <div className="flex flex-col lg:flex-row gap-4 w-full lg:justify-between lg:items-center">
+                  <div className="flex flex-col gap-2">
+                    <label for="expiration">Expiration</label>
                     <input
-                      type='text'
-                      id='expiration'
-                      placeholder='MM/YYYY'
+                      type="text"
+                      id="expiration"
+                      placeholder="MM/YYYY"
                       value={paymentformdata.expiry}
                       onChange={(e) =>
                         setPaymentFormdata({
@@ -471,16 +458,16 @@ export function Checkout({ user }) {
                           expiry: e.target.value,
                         })
                       }
-                      className='border rounded-md border-bggray p-2'
+                      className="border rounded-md border-bggray p-2"
                     />
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <label for='cvc'>CVC</label>
+                  <div className="flex flex-col gap-2">
+                    <label for="cvc">CVC</label>
                     <input
-                      type='text'
-                      id='cvc'
-                      placeholder='123'
-                      className='border rounded-md border-bggray p-2'
+                      type="text"
+                      id="cvc"
+                      placeholder="123"
+                      className="border rounded-md border-bggray p-2"
                       value={paymentformdata.cvc}
                       onChange={(e) =>
                         setPaymentFormdata({
@@ -491,13 +478,13 @@ export function Checkout({ user }) {
                     />
                   </div>
                 </div>
-                <div className='flex flex-col gap-2'>
-                  <label for='country'>Country</label>
+                <div className="flex flex-col gap-2">
+                  <label for="country">Country</label>
                   <input
-                    type='text'
-                    id='country'
-                    placeholder='Your Country'
-                    className='border rounded-md border-bggray p-2'
+                    type="text"
+                    id="country"
+                    placeholder="Your Country"
+                    className="border rounded-md border-bggray p-2"
                     value={paymentformdata.country}
                     onChange={(e) =>
                       setPaymentFormdata({
@@ -508,8 +495,8 @@ export function Checkout({ user }) {
                   />
                 </div>
 
-                <div className='bg-headingblue py-3 mt-4 rounded-md w-1/2 '>
-                  <p className='capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center'>
+                <div className="bg-headingblue py-3 mt-4 rounded-md w-1/2 ">
+                  <p className="capitalize cursor-pointer font-roboto font-bold text-lg text-white flex items-center justify-center">
                     Pay
                   </p>
                 </div>
@@ -519,7 +506,7 @@ export function Checkout({ user }) {
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default withAuthenticator(Checkout)
+export default (Checkout)

@@ -8,7 +8,6 @@ export default async function CheckoutMain() {
   //const data = await getData();
   return (
     <div className="h-fit ">
-      <Header activepage={"checkout"} />
       <div className=" bg-bgNews dark:bg-bgdark w-full">
         <Checkout />
         <Footer />
