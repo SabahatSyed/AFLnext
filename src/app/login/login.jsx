@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Auth, Amplify } from 'aws-amplify'
 import awsconfig from '../../aws-exports'
+import Loader from '@/components/Loader'
 Amplify.configure(awsconfig)
 
 export default function Login({ data }) {
@@ -12,17 +13,24 @@ export default function Login({ data }) {
   const [email, setEmail] = useState('')
   const [msg, setmsg] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const handleLogin = async () => {
+    setLoading(true)
     try {
       setmsg('')
-
       if (email != '' && password != '') {
         await Auth.signIn({ username: email, password })
         history.push('/')
-      } else alert('Please fill all Fields')
+      } else {
+        alert('Please fill all Fields')
+        setLoading(false)
+      }
     } catch (error) {
       setmsg(error.message)
       console.error('Error signing in:', error)
+      setLoading(false)
+      setEmail('')
+      setPassword('')
     }
   }
 
@@ -59,22 +67,30 @@ export default function Login({ data }) {
             <label>Forget Password?</label>
           </div>
         </div>
-        <p className='text-sm font-bold text-green-900 w-1/3'>{msg}</p>
+        <p className='text-sm font-bold text-red-500'>{msg}</p>
 
         <button
           onClick={() => handleLogin()}
-          className='bg-bgblue text-white uppercase p-4 rounded-md '
+          className='bg-bgblue text-white uppercase p-4 rounded-md flex justify-center items-center'
+          disabled={loading}
         >
-          Login
+          {loading ? (
+            <>
+              <Loader />
+              Logging in...
+            </>
+          ) : (
+            <>Log in</>
+          )}
         </button>
 
         <p className='text-center w-full'>Or Login With</p>
         <div className='w-full flex items-center justify-between gap-7 '>
-          <button className='bg-bgblue text-white   rounded-md w-1/2 flex items-center justify-center gap-5 p-3'>
+          {/* <button className='bg-bgblue text-white   rounded-md w-1/2 flex items-center justify-center gap-5 p-3'>
             <img src='/auth/facebook.svg' />
             <span classname='text-white font-bold'>Facebook</span>
-          </button>
-          <button className='bg-googlebg text-white rounded-md w-1/2 flex items-center justify-center gap-5 p-1'>
+          </button> */}
+          <button className='bg-googlebg text-white rounded-md w-full flex items-center justify-center gap-2 p-1'>
             <img src='/auth/google.svg' className='mt-2' />
             <span classname='text-white font-bold'>Google</span>
           </button>
