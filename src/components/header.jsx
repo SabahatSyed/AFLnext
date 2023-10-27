@@ -68,19 +68,27 @@ export default function Header({ activepage }) {
         <div className='col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase items-center text-sm md:gap-3 lg:gap-8 hidden'>
           <Link href='/about'>
             <div
-              className={`${pathname == '/about' ? 'text-headingblue' : ''} `}
+              className={`${
+                pathname == '/about' ? 'text-headingblue' : ''
+              } hover:text-headingblue`}
             >
               about
             </div>
           </Link>
           <Link href='/news'>
-            <div className={`${pathname == '/news' ? 'text-headingblue' : ''}`}>
+            <div
+              className={`${
+                pathname == '/news' ? 'text-headingblue' : ''
+              } hover:text-headingblue`}
+            >
               news
             </div>
           </Link>
           <Link href='/teams'>
             <div
-              className={`${pathname == '/teams' ? 'text-headingblue' : ''}`}
+              className={`${
+                pathname == '/teams' ? 'text-headingblue' : ''
+              } hover:text-headingblue`}
             >
               teams
             </div>
@@ -93,7 +101,9 @@ export default function Header({ activepage }) {
   </Link>*/}
           <Link
             href='/shop'
-            className={`${pathname === '/shop' ? 'text-headingblue' : ''}`}
+            className={`${
+              pathname === '/shop' ? 'text-headingblue' : ''
+            }hover:text-headingblue`}
           >
             shop
           </Link>
@@ -105,14 +115,18 @@ export default function Header({ activepage }) {
   </Link>*/}
           <Link href='/partners'>
             <div
-              className={`${pathname == '/partners' ? 'text-headingblue' : ''}`}
+              className={`${
+                pathname == '/partners' ? 'text-headingblue' : ''
+              }hover:text-headingblue`}
             >
               partners
             </div>
           </Link>
           <Link href='/tickets'>
             <div
-              className={`${pathname == '/tickets' ? 'text-headingblue' : ''}`}
+              className={`${
+                pathname == '/tickets' ? 'text-headingblue' : ''
+              }hover:text-headingblue`}
             >
               tickets
             </div>
@@ -204,7 +218,7 @@ export default function Header({ activepage }) {
       {/* Sliding Menu */}
       {menuOpen && (
         <div
-          className='w-fit p-5 mx-2 mt-10 z-20 flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange'
+          className='w-fit p-5 mx-2 mt-10 !z-[100] flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange'
           style={{
             transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.3s ease-in-out',
@@ -217,6 +231,7 @@ export default function Header({ activepage }) {
               className={`${
                 pathname == 'about' ? 'text-headingblue' : 'text-white'
               } `}
+              onClick={toggleMenu}
             >
               about
             </div>
@@ -226,6 +241,7 @@ export default function Header({ activepage }) {
               className={`${
                 activepage == 'news' ? 'text-headingblue' : 'text-white'
               } `}
+              onClick={toggleMenu}
             >
               news
             </div>
@@ -235,6 +251,7 @@ export default function Header({ activepage }) {
               className={`${
                 activepage == 'teams' ? 'text-headingblue' : 'text-white'
               } `}
+              onClick={toggleMenu}
             >
               teams
             </div>
@@ -252,6 +269,7 @@ export default function Header({ activepage }) {
             className={`${
               activepage === 'shop' ? 'text-headingblue' : ''
             } text-white`}
+            onClick={toggleMenu}
           >
             shop
           </a>
@@ -268,6 +286,7 @@ export default function Header({ activepage }) {
               className={`${
                 activepage == 'partners' ? 'text-headingblue' : 'text-white'
               } `}
+              onClick={toggleMenu}
             >
               partners
             </div>
@@ -277,6 +296,7 @@ export default function Header({ activepage }) {
               className={`${
                 activepage == 'tickets' ? 'text-headingblue' : 'text-white'
               } `}
+              onClick={toggleMenu}
             >
               tickets
             </div>
