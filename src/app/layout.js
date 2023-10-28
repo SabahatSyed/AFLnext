@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Header />
           <ApolloWrapper>{children}</ApolloWrapper>
-          <Footer />
+          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>
