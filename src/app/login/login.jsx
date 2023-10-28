@@ -25,6 +25,7 @@ const getlogin = gql`
   }
 `;
 export default function Login({ data }) {
+
   const query = useSearchParams().get("auth");
   console.log(query);
   const history = useRouter();
@@ -108,8 +109,12 @@ export default function Login({ data }) {
             <input type="checkbox" className="h-5 w-5 text-blue-500" />
             <label>Remember Me</label>
           </div>
-          <div>
-            <label>Forget Password?</label>
+          <div
+           onClick={()=>history.push("/forgotpassword")}
+            className=" cursor-pointer hover:text-bgblue">
+            <label className=" cursor-pointer hover:text-bgblue">
+              Forget Password?
+            </label>
           </div>
         </div>
         <p className="text-sm font-bold text-red-500">{msg}</p>

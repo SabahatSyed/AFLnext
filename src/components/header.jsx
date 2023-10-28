@@ -49,11 +49,15 @@ export default function Header({ activepage }) {
   return (
     <div
       className={`${
-        pathname === '/login' || pathname === '/Signup' ? 'hidden' : ''
-      }`}
-    >
-      <div className='bg-white dark:bg-bgdark h-10 md:h-24 '></div>
-      <div className='bg-gradient-to-t from-darkorange to-lightorange relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-0'>
+        pathname === "/login" ||
+        pathname === "/Signup" ||
+        pathname === "/forgotpassword" ||
+        pathname === "/resetpassword"
+          ? "hidden"
+          : ""
+      }`}>
+      <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
+      <div className="bg-gradient-to-t from-darkorange to-lightorange relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-0">
         {/* <Image
           className='object-center object-cover pointer-events-none'
           src={navImg}
@@ -61,37 +65,34 @@ export default function Header({ activepage }) {
           priority
           fill
         /> */}
-        <div className='col-span-1'>
-          <Link href='/'>
+        <div className="col-span-1">
+          <Link href="/">
             <img
-              src='/Home/logo.svg'
-              className='absolute -translate-y-2/4 md:-translate-y-[60%] w-20 lg:w-auto'
+              src="/Home/logo.svg"
+              className="absolute -translate-y-2/4 md:-translate-y-[60%] w-20 lg:w-auto"
             />
           </Link>
         </div>
-        <div className='col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase text-sm md:gap-3 lg:gap-8 hidden h-full tracking-wider'>
-          <Link href='/about' className='py-5 hover:text-headingblue'>
+        <div className="col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase text-sm md:gap-3 lg:gap-8 hidden h-full tracking-wider">
+          <Link href="/about" className="py-5 hover:text-headingblue">
             <div
-              className={`${pathname == '/about' ? 'text-headingblue' : ''} `}
-            >
+              className={`${pathname == "/about" ? "text-headingblue" : ""} `}>
               about
             </div>
           </Link>
-          <Link href='/news' className='py-5 hover:text-headingblue'>
+          <Link href="/news" className="py-5 hover:text-headingblue">
             <div
               className={`${
-                pathname == '/news' ? 'text-headingblue' : ''
-              } hover:text-headingblue`}
-            >
+                pathname == "/news" ? "text-headingblue" : ""
+              } hover:text-headingblue`}>
               news
             </div>
           </Link>
-          <Link href='/teams' className='py-5 hover:text-headingblue'>
+          <Link href="/teams" className="py-5 hover:text-headingblue">
             <div
               className={`${
-                pathname == '/teams' ? 'text-headingblue' : ''
-              } hover:text-headingblue`}
-            >
+                pathname == "/teams" ? "text-headingblue" : ""
+              } hover:text-headingblue`}>
               teams
             </div>
           </Link>
@@ -102,11 +103,10 @@ export default function Header({ activepage }) {
             </div>
   </Link>*/}
           <Link
-            href='/shop'
+            href="/shop"
             className={`${
-              pathname === '/shop' ? 'text-headingblue' : ''
-            }hover:text-headingblue py-5`}
-          >
+              pathname === "/shop" ? "text-headingblue" : ""
+            }hover:text-headingblue py-5`}>
             shop
           </Link>
           {/*<Link href="/stats">
@@ -115,21 +115,19 @@ export default function Header({ activepage }) {
               stats
             </div>
   </Link>*/}
-          <Link href='/partners'>
+          <Link href="/partners">
             <div
               className={`${
-                pathname == '/partners' ? 'text-headingblue' : ''
-              }hover:text-headingblue py-5`}
-            >
+                pathname == "/partners" ? "text-headingblue" : ""
+              }hover:text-headingblue py-5`}>
               partners
             </div>
           </Link>
-          <Link href='/tickets'>
+          <Link href="/tickets">
             <div
               className={`${
-                pathname == '/tickets' ? 'text-headingblue' : ''
-              }hover:text-headingblue py-5`}
-            >
+                pathname == "/tickets" ? "text-headingblue" : ""
+              }hover:text-headingblue py-5`}>
               tickets
             </div>
           </Link>
@@ -175,45 +173,45 @@ export default function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className='col-start-11 col-span-2 hidden md:grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2'>
-          <Link href={'/cart'}>
-            <img src='/Home/cart.svg' />
+        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
+          <Link href={"/cart"}>
+            <img src="/Home/cart.svg" />
           </Link>
           <div>
-            <img src='/Home/h.svg' />
+            <img src="/Home/h.svg" />
           </div>
-          <Link href={'https://www.facebook.com/AFL'}>
-            <img src='/Home/facebook.svg' />
+          <Link href={"https://www.facebook.com/AFL"}>
+            <img src="/Home/facebook.svg" />
           </Link>
-          <Link href={'https://www.instagram.com/afl/'}>
-            <img src='/Home/instagram.svg' />{' '}
+          <Link href={"https://www.instagram.com/afl/"}>
+            <img src="/Home/instagram.svg" />{" "}
           </Link>
-          <Link href={'https://www.youtube.com/@AFL'}>
-            <img src='/Home/youtube.svg' />
+          <Link href={"https://www.youtube.com/@AFL"}>
+            <img src="/Home/youtube.svg" />
           </Link>
           {user && (
             <img
               onClick={() => handleLogout()}
-              src='/logout.svg'
-              className='ml-5 scale-125 cursor-pointer '
+              src="/logout.svg"
+              className="ml-5 scale-125 cursor-pointer "
             />
           )}
           {user == null && (
-            <Link href='/login'>
+            <Link href="/login">
               <img
-                src='/profile.svg'
-                className='ml-5 scale-125 cursor-pointer'
+                src="/profile.svg"
+                className="ml-5 scale-125 cursor-pointer"
               />
             </Link>
           )}
         </div>
-        <div className='md:hidden col-start-12 col-span-4 cursor-pointer'>
+        <div className="md:hidden col-start-12 col-span-4 cursor-pointer">
           {/* Toggle Menu Button */}
-          <div onClick={toggleMenu} className='w-10 h-10'>
+          <div onClick={toggleMenu} className="w-10 h-10">
             {menuOpen ? (
-              <img src='/Home/close-icon.svg' alt='Close Menu SVG' />
+              <img src="/Home/close-icon.svg" alt="Close Menu SVG" />
             ) : (
-              <img src='/Home/burger-menu.svg' alt='Bars Menu SVG' />
+              <img src="/Home/burger-menu.svg" alt="Bars Menu SVG" />
             )}
           </div>
         </div>
@@ -221,41 +219,37 @@ export default function Header({ activepage }) {
       {/* Sliding Menu */}
       {menuOpen && (
         <div
-          className='w-fit p-5 mx-2 mt-10 !z-[100] flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange'
+          className="w-fit p-5 mx-2 mt-10 !z-[100] flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
           style={{
-            transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
-            transition: 'transform 0.3s ease-in-out',
-            top: '77px',
-            right: '-6px',
-          }}
-        >
-          <Link href='/about'>
+            transform: menuOpen ? "translateX(0)" : "translateX(100%)",
+            transition: "transform 0.3s ease-in-out",
+            top: "77px",
+            right: "-6px",
+          }}>
+          <Link href="/about">
             <div
               className={`${
-                pathname == 'about' ? 'text-headingblue' : 'text-white'
+                pathname == "about" ? "text-headingblue" : "text-white"
               } `}
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               about
             </div>
           </Link>
-          <Link href='/news'>
+          <Link href="/news">
             <div
               className={`${
-                activepage == 'news' ? 'text-headingblue' : 'text-white'
+                activepage == "news" ? "text-headingblue" : "text-white"
               } `}
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               news
             </div>
           </Link>
-          <Link href='/teams'>
+          <Link href="/teams">
             <div
               className={`${
-                activepage == 'teams' ? 'text-headingblue' : 'text-white'
+                activepage == "teams" ? "text-headingblue" : "text-white"
               } `}
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               teams
             </div>
           </Link>
@@ -268,12 +262,11 @@ export default function Header({ activepage }) {
             </div>
             </Link>*/}
           <a
-            href='/shop'
+            href="/shop"
             className={`${
-              activepage === 'shop' ? 'text-headingblue' : ''
+              activepage === "shop" ? "text-headingblue" : ""
             } text-white`}
-            onClick={toggleMenu}
-          >
+            onClick={toggleMenu}>
             shop
           </a>
           {/*} <Link href="/stats">
@@ -284,23 +277,21 @@ export default function Header({ activepage }) {
               stats
             </div>
             </Link>*/}
-          <Link href='/partners'>
+          <Link href="/partners">
             <div
               className={`${
-                activepage == 'partners' ? 'text-headingblue' : 'text-white'
+                activepage == "partners" ? "text-headingblue" : "text-white"
               } `}
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               partners
             </div>
           </Link>
-          <Link href='/tickets'>
+          <Link href="/tickets">
             <div
               className={`${
-                activepage == 'tickets' ? 'text-headingblue' : 'text-white'
+                activepage == "tickets" ? "text-headingblue" : "text-white"
               } `}
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               tickets
             </div>
           </Link>
@@ -314,39 +305,39 @@ export default function Header({ activepage }) {
             </div>
             </Link>*/}
 
-          <div className='grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2'>
-            <Link href={'/cart'}>
-              <img src='/Home/cart.svg' />
+          <div className="grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
+            <Link href={"/cart"}>
+              <img src="/Home/cart.svg" />
             </Link>
             <div>
-              <img src='/Home/h.svg' />
+              <img src="/Home/h.svg" />
             </div>
             <div>
-              <img src='/Home/facebook.svg' />
+              <img src="/Home/facebook.svg" />
             </div>
             <div>
-              <img src='/Home/instagram.svg' />{' '}
+              <img src="/Home/instagram.svg" />{" "}
             </div>
             <div>
-              <img src='/Home/youtube.svg' />
+              <img src="/Home/youtube.svg" />
             </div>
             {user && (
               <img
                 onClick={() => handleLogout()}
-                src='/logout.svg'
-                className='h-7 cursor-pointer '
+                src="/logout.svg"
+                className="h-7 cursor-pointer "
               />
             )}
             {user == null && (
               <img
-                onClick={() => router.push('/login')}
-                src='/profile.svg'
-                className='h-7 cursor-pointer'
+                onClick={() => router.push("/login")}
+                src="/profile.svg"
+                className="h-7 cursor-pointer"
               />
             )}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
