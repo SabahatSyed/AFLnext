@@ -2,10 +2,11 @@ import { storefront } from "@shopify/shopify-api";
 import { gql } from "@apollo/client";
 import { Darumadrop_One } from "next/font/google";
 
-const ADMIN = "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";
+const ADMIN = "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";
 const API_VERSION = "2023-10";
-const STORE_NAME = "291dfd";
-const API_KEY = "642cff6f1a42e4688de07fc15081b5ab";
+const STORE_NAME = "b6eb23";
+const API_KEY = "71a9c45d22f259cfeea5adc6ebef7e24";
+const STORE_FRONT = "34c989d3cd6e3e330444a4b37e74161b";
 const AdminSecret = process.env.ADMIN;
 const apikey = process.env.API_KEY;
 const store = process.env.STORE_NAME;
@@ -16,7 +17,7 @@ const storefrontsecret = process.env.STORE_FRONT;
 export async function getProducts() {
   try {
     // Send a POST request to your Strapi backend to subscribe the user
-    
+    console.log(AdminSecret);
     const res = await fetch(
       `https://${store}.myshopify.com/admin/api/${version}/products.json`,
       {
@@ -28,6 +29,7 @@ export async function getProducts() {
       }
     );
     const data = await res.json();
+    console.log("data",data)
     return data;
   } catch (error) {
     console.error("Error:", error);
