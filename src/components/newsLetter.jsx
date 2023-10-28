@@ -2,12 +2,20 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { saveEmail } from '@/api/FetchData'
+import toast from 'react-hot-toast'
 const NewsLetter = () => {
   const [email, setEmail] = useState('')
   const handleSubmit = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const validEmail = emailRegex.test(email)
+    if (email === '') {
+      toast.error('Email field cannot be empty')
+      return
+    }
+    if (!validEmail) return toast.error('Please enter a valid email')
     const res = saveEmail({ data: { Subscribers: email } })
     setEmail('')
-    alert('Subscribed successfully!')
+    toast.success('Email saved successfully')
   }
   return (
     <div>

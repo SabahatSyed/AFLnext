@@ -13,7 +13,7 @@ export default async function NewsMain() {
       <div className=' bg-bgNews dark:bg-bgdark w-full'>
         <div className='relative inset-0 w-full h-[40vh] bg-bgdark'>
           <Image
-            className='pointer-events-none object-center object-cover z-50'
+            className='pointer-events-none object-center object-cover '
             src={aboutBgImg}
             alt='about section image'
             priority

@@ -14,6 +14,7 @@ Amplify.configure(awsconfig)
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next-nprogress-bar'
 import shopImg from 'public//Home/shopbg.svg'
+import toast from 'react-hot-toast'
 
 const addtocart = gql`
   mutation createCart($cartInput: CartInput) {
@@ -151,6 +152,7 @@ export function Shop({ formdata, customers }) {
   }
 
   const addtoCart = (dataa) => {
+    const toastId = toast.loading('adding item to cart')
     try {
       let line
       console.log(data)
@@ -184,7 +186,9 @@ export function Shop({ formdata, customers }) {
       }).then((res) => {
         setaddtocart(res.data.cartCreate.cart.id)
         setCartId(res.data.cartCreate.cart.id)
-        router.push('/cart')
+        toast.dismiss(toastId)
+        toast.success('item added to cart successfully')
+        // router.push('/cart')
       })
       //get cart id and save it in the localstorage
 
@@ -192,6 +196,8 @@ export function Shop({ formdata, customers }) {
     } catch (error) {
       // Handle registration error
       console.error('Registration error:', error.message)
+      toast.error('Error adding to cart')
+      toast.dismiss(toastId)
     }
   }
   const [activeStep, setActiveStep] = useState(1)

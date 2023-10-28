@@ -118,7 +118,7 @@ export default function Header({ activepage }) {
           <Link
             href='/shop'
             className={`${
-              pathname === '/shop' ? 'text-headingblue' : ''
+              pathname === '/shop' ? 'text-headingblue ' : ''
             }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
           >
             shop
@@ -132,7 +132,7 @@ export default function Header({ activepage }) {
           <Link href='/partners'>
             <div
               className={`${
-                pathname == '/partners' ? 'text-headingblue' : ''
+                pathname === '/partners' ? 'text-headingblue ' : ''
               }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
             >
               partners
@@ -141,7 +141,7 @@ export default function Header({ activepage }) {
           <Link href='/tickets'>
             <div
               className={`${
-                pathname == '/tickets' ? 'text-headingblue' : ''
+                pathname === '/tickets' ? 'text-headingblue ' : ''
               }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
             >
               tickets
@@ -220,7 +220,7 @@ export default function Header({ activepage }) {
           >
             <img src='/Home/youtube.svg' />
           </Link>
-          {user && (
+          {/* {user && (
             <div
               onClick={() => handleLogout()}
               className='flex items-center lg:ml-5 my-auto w-4 h-4 lg:w-10 lg:h-10 '
@@ -235,7 +235,7 @@ export default function Header({ activepage }) {
             >
               <img src='/profile.svg' className='cursor-pointer' />
             </Link>
-          )}
+          )} */}
         </div>
         <div className='md:hidden col-start-12 col-span-4 cursor-pointer'>
           {/* Toggle Menu Button */}
