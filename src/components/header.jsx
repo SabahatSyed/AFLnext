@@ -177,17 +177,17 @@ export default function Header({ activepage }) {
           <Link href={"/cart"}>
             <img src="/Home/cart.svg" />
           </Link>
-          <div>
-            <img src="/Home/h.svg" />
-          </div>
-          <Link href={"https://www.facebook.com/AFL"}>
-            <img src="/Home/facebook.svg" />
+          <Link href={'https://www.humbl.com/social/'}>
+            <img src='/Home/h.svg' />
           </Link>
-          <Link href={"https://www.instagram.com/afl/"}>
-            <img src="/Home/instagram.svg" />{" "}
+          <Link href={'https://www.facebook.com/HUMBLinc'}>
+            <img src='/Home/facebook.svg' />
           </Link>
-          <Link href={"https://www.youtube.com/@AFL"}>
-            <img src="/Home/youtube.svg" />
+          <Link href={'https://instagram.com/humblinc/'}>
+            <img src='/Home/instagram.svg' />{' '}
+          </Link>
+          <Link href={'https://www.youtube.com/c/HUMBL'}>
+            <img src='/Home/youtube.svg' />
           </Link>
           {user && (
             <img
@@ -309,18 +309,18 @@ export default function Header({ activepage }) {
             <Link href={"/cart"}>
               <img src="/Home/cart.svg" />
             </Link>
-            <div>
-              <img src="/Home/h.svg" />
-            </div>
-            <div>
-              <img src="/Home/facebook.svg" />
-            </div>
-            <div>
-              <img src="/Home/instagram.svg" />{" "}
-            </div>
-            <div>
-              <img src="/Home/youtube.svg" />
-            </div>
+            <Link href={'https://www.humbl.com/social/'}>
+              <img src='/Home/h.svg' />
+            </Link>
+            <Link href={'https://www.facebook.com/HUMBLinc'}>
+              <img src='/Home/facebook.svg' />
+            </Link>
+            <Link href={'https://www.facebook.com/HUMBLinc'}>
+              <img src='/Home/instagram.svg' />{' '}
+            </Link>
+            <Link href={'https://www.youtube.com/c/HUMBL'}>
+              <img src='/Home/youtube.svg' />
+            </Link>
             {user && (
               <img
                 onClick={() => handleLogout()}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import pyramidImg from 'public/teams/AFLpyramid.svg'
+import pyramidImg from 'public/teams/AFLpyramid.png'
 const AflPyramid = () => {
   return (
     <div>

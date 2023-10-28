@@ -124,9 +124,11 @@ export default async function Footer({ activePage }) {
           <Link href={'/'} className='cursor-pointer'>
             media
           </Link>{' '}
-          <Link href={'/'} className=' lowercase flex-wrap font-normal'>
-            powered by{' '}
-            <span className='uppercase font-semibold text-lg'>HUMBL</span>
+          <Link
+            href={'https://www.humbl.com/social/'}
+            className=' lowercase flex-wrap font-bold flex gap-3 items-center'
+          >
+            powered by <img className='w-8 h-8' src='/Home/h.svg' />
           </Link>
         </div>
       </div>
