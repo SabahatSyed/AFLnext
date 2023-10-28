@@ -36,10 +36,14 @@ export default function Login({ data }) {
   const [loading, setLoading] = useState(false);
   const [login, { data1, loading1, error1 }] = useMutation(getlogin);
   const [token, setToken] = useState("");
+  const [checkoutUrl,setCheckoutUrl]=useState('')
   useEffect( () => {
     Auth.currentAuthenticatedUser()
       .then((res) => {history.push("/");})
   });
+  useEffect(() => {
+    setCheckoutUrl(localStorage.getItem("checkouturl"))
+  }, []);
   useEffect(() => {
     localStorage.setItem("customeraccesstoken", token);
   }, [token]);
@@ -64,7 +68,7 @@ export default function Login({ data }) {
             response.data.customerAccessTokenCreate.customerAccessToken
               .accessToken
           );
-          if (query == "auth") history.push("/checkout");
+          if (query == "auth") history.push({checkoutUrl});
           else history.push("/");
         } else {
           setmsg("Login Failed");

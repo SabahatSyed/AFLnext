@@ -135,6 +135,7 @@ export function Cart() {
   const router = useRouter()
   const [cartid, setCartId] = useState('')
   const [checkoutid, setCheckoutid] = useState('')
+  const [checkoutUrl,setCheckoutUrl]=useState('')
   const [getcheckouturl, { data1, loading1, error1 }] = useMutation(getcheckout)
   const [addtocartflag, setaddtocart] = useState('')
   const [AddtoCart, { data2, loading, error }] = useMutation(addtocart)
@@ -148,6 +149,9 @@ export function Cart() {
   useEffect(() => {
     localStorage.setItem('checkoutid', checkoutid)
   }, [checkoutid])
+    useEffect(() => {
+      localStorage.setItem("checkouturl", checkoutUrl);
+    }, [checkoutUrl]);
   const cartItems = data?.cart?.lines.edges
 
   // Calculating the total amount by summing up the totalAmount of each item
@@ -176,9 +180,10 @@ export function Cart() {
     })
 
     setCheckoutid(response.data.checkoutCreate.checkout.id)
+    setCheckoutUrl(response.data.checkoutCreate.checkout.webUrl);
     Auth.currentAuthenticatedUser()
       .then((res) => {
-        router.push('/checkout')
+        router.push(`${data.checkoutCreate.checkout.webUrl}`);
       })
       .catch((err) => {
         router.push('/login?auth=auth')
