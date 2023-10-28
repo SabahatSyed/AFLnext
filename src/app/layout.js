@@ -3,6 +3,7 @@ import { ApolloWrapper } from '../lib/apollo-wrapper'
 import { ThemeProvider } from '@/app/theme-provider'
 import Header from '@/components/header'
 import { magistraal, magistral, roboto } from '@/lib/fonts'
+import Footer from '@/components/footer'
 
 // import { switchThemeDuration } from "./constants";
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Header />
           <ApolloWrapper>{children}</ApolloWrapper>
+          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>

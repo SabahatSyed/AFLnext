@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import pyramidImg from 'public/teams/AFLpyramid.png'
+import { BiSolidChevronRight } from 'react-icons/bi'
 const AflPyramid = () => {
   return (
     <div>
@@ -22,19 +23,13 @@ const AflPyramid = () => {
           />
         </div>
 
-        <div className='mt-4'>
+        <div className='flex items-center gap-3 cursor-pointer transition-all duration-[.15s] ease-in hover:scale-110'>
           <Link
             href='/teams'
-            className='font-roboto text-base font-semibold    text-headingblue'
+            className='p-4 font-roboto text-base font-semibold text-headingblue flex items-center gap-1'
           >
-            View All
-            <span className=' ml-3 '>
-              <img
-                className='inline-flex '
-                src='/Home/UnionBlack.svg'
-                alt='Arrow svg '
-              />
-            </span>{' '}
+            <span>View All</span>
+            <BiSolidChevronRight className='h-6 w-6' strokeWidth={1} />
           </Link>
         </div>
       </div>

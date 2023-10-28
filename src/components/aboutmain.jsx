@@ -8,7 +8,7 @@ const AboutMain = () => {
     // </div>
     <div className='relative inset-0 w-full h-1/2 bg-bgdark'>
       <Image
-        className='pointer-events-none object-center object-cover z-50'
+        className='pointer-events-none object-center object-cover '
         src={aboutBgImg}
         alt='about section image'
         priority
