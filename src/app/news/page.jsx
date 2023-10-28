@@ -4,6 +4,7 @@ import Footer from '@/components/footer'
 import News from '@/components/news'
 import newsBgImg from 'public/news/newsbg.png'
 import { getData } from '@/api/FetchData'
+import NewsGrid from '@/components/newsGrid'
 
 export default async function NewsMain() {
   const data = await getData()
@@ -36,7 +37,8 @@ export default async function NewsMain() {
             </p>
           </div>
         </div>
-        <News data={data} />
+        {/* <News data={data} /> */}
+        <NewsGrid data={data} />
         <Footer />
       </div>
     </div>

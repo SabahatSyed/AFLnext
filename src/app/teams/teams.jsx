@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import pyramidImg from 'public/teams/AFLpyramid.svg'
+import pyramidImg from 'public/teams/AFLpyramid.png'
 export default function Teams({ data }) {
   return (
     <div>
@@ -35,7 +35,11 @@ export default function Teams({ data }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 1)
                 .map((result, index) => (
-                  <div key={index} className=' w-3/4 flex flex-col gap-4'>
+                  <Link
+                    href={'https://' + result.attributes?.Url || ''}
+                    key={index}
+                    className=' w-3/4 flex flex-col gap-4 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <div
                       style={{
                         backgroundColor: `#${result.attributes.bgcolor}`,
@@ -90,7 +94,7 @@ export default function Teams({ data }) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -102,7 +106,11 @@ export default function Teams({ data }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 2)
                 .map((result, index) => (
-                  <div key={index} className=' w-3/4 flex flex-col gap-4'>
+                  <Link
+                    href={'https://' + result.attributes?.Url || ''}
+                    key={index}
+                    className=' w-3/4 flex flex-col gap-4 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <div
                       style={{
                         backgroundColor: `#${result.attributes.bgcolor}`,
@@ -157,7 +165,7 @@ export default function Teams({ data }) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -169,7 +177,11 @@ export default function Teams({ data }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 3)
                 .map((result, index) => (
-                  <div key={index} className=' w-3/4 flex flex-col gap-4'>
+                  <Link
+                    href={'https://' + result.attributes?.Url || ''}
+                    key={index}
+                    className=' w-3/4 flex flex-col gap-4 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <div
                       style={{
                         backgroundColor: `#${result.attributes.bgcolor}`,
@@ -224,7 +236,7 @@ export default function Teams({ data }) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -236,7 +248,11 @@ export default function Teams({ data }) {
               {data?.data
                 ?.filter((item) => item.attributes.division == 4)
                 .map((result, index) => (
-                  <div key={index} className=' w-3/4 flex flex-col gap-4'>
+                  <Link
+                    href={'https://' + result.attributes?.Url || ''}
+                    key={index}
+                    className=' w-3/4 flex flex-col gap-4 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <div
                       style={{
                         backgroundColor: `#${result.attributes.bgcolor}`,
@@ -291,7 +307,7 @@ export default function Teams({ data }) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>

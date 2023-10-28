@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-export function News({ data }) {
+export function NewsGrid({ data }) {
   return (
     <div>
       <div className='bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 md:pl-10 pl-5'>
@@ -11,11 +11,11 @@ export function News({ data }) {
         {/* {data.data.map((result,index) => ( */}
 
         {/* // ))} */}
-        <div className='py-5 flex gap-5 mr-[1rem] overflow-x-scroll md:mr-0 custom-scrollbar'>
+        <div className='py-5 flex gap-5 mr-[1rem] flex-wrap justify-center md:justify-start md:mr-0 '>
           {data?.data?.map((result, index) => (
             <div
               key={index}
-              className=' bg-white min-w-[300px] md:min-w-[350px] dark:bg-bgdark md:m-5 m-0 border border-gray-400 rounded-3xl shadow overflow-hidden'
+              className=' bg-white w-[300px] md:w-[350px] dark:bg-bgdark md:m-5 m-0 border border-gray-400 rounded-3xl shadow overflow-hidden'
             >
               <div className=' min-h-96 '>
                 {/* <img
@@ -62,4 +62,4 @@ export function News({ data }) {
   )
 }
 
-export default News
+export default NewsGrid
