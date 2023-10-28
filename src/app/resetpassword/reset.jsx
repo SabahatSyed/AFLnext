@@ -79,18 +79,19 @@ export default function Reset({ length = 6, customers }) {
       console.log("otp", otp.join(""));
       await Amplify.Auth.forgotPasswordSubmit(query, otp.join(""), password);
       const customer = customers?.customers.find((item) => item.email == query);
-      const res = updateCustomer(customer.id, {
+      const res = await updateCustomer(customer.id, {
         customer: {
           id: customer.id,
           password: password,
           password_confirmation: password,
         },
       });
-      if (res) {
+      console.log(res);
+      if (res.data) {
         setmsg("Password Reset Successfully!");
-        setLoading(false);
         history.push("/login");
       } else setmsg("Reset Password Failed");
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setmsg("Error Reseting Password", error);
@@ -119,6 +120,9 @@ export default function Reset({ length = 6, customers }) {
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
       <div className=" w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-5 text-black">
+        <Link href="/forgotpassword" className="absolute top-8 right-8">
+          <img src="/auth/Back.svg" />
+        </Link>
         <img src="/Home/logo.svg" className="h-28 w-28 mx-auto" />
         <p className="font-bold text-[28px] text-center">OTP Verification</p>
         <p className="text-sm text-center w-80">
@@ -194,11 +198,11 @@ export default function Reset({ length = 6, customers }) {
               value={confirmpassword}
               placeholder={"******"}
               label={"Confirm Password"}
-              type={hide ? "password" : "text"}
+              type={hide1 ? "password" : "text"}
               className="bg-formbg outline-none "
             />
             <img
-              onClick={() => sethide(!hide)}
+              onClick={() => sethide1(!hide1)}
               className="cursor-pointer"
               src="/auth/eye-off.svg"
             />
@@ -223,7 +227,6 @@ export default function Reset({ length = 6, customers }) {
         <button
           onClick={() => {
             if (!passmsg.includes("donot")) {
-              console.log("hello");
               resetPassword();
               setPassmsg("");
             }
