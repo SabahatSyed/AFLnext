@@ -7,7 +7,6 @@ import { getCustomers, getProducts } from '@/api/shopifyapis'
 export default async function Products() {
   const data = await getProducts()
   const customers = await getCustomers()
-
   return (
     <div className='h-fit '>
       {/* <Header activepage={"shop"} /> */}

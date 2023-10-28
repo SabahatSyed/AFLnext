@@ -51,6 +51,7 @@ module.exports = {
         formtext: '#3F5065',
         formbg: '#E4E7E9',
         googlebg: '#222232',
+        underlinegray:"#717679"
       },
     },
   },
