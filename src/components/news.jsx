@@ -48,12 +48,10 @@ export function News({ data }) {
                   </p>
                   <Link
                     href={'/'}
-                    className='font-roboto font-bold text-base mt-3 text-headingblue dark:text-bgNews inline-flex items-center'
+                    className='font-roboto font-bold text-base py-3 text-headingblue dark:text-bgNews inline-flex items-center gap-2 transition-all duration-[.15s] ease-in hover:scale-110 w-fit'
                   >
-                    Keep Reading
-                    <span className=' ml-3 '>
-                      <img src='/Home/UnionBlack.svg' alt='Arrow svg ' />
-                    </span>{' '}
+                    <span>Keep Reading </span>
+                    <img src='/Home/UnionBlack.svg' alt='Arrow svg ' />
                   </Link>
                 </div>
               </div>

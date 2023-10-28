@@ -21,7 +21,6 @@ export default async function Home() {
       <News data={data} />
       <NewsLetter />
       {/* </div> */}
-      <Footer />
     </div>
     // </div>
   )

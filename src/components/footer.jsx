@@ -19,7 +19,10 @@ export default async function Footer({ activePage }) {
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
-                  <div className='relative w-16 h-16'>
+                  <Link
+                    href={'/'}
+                    className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <Image
                       className='object-center object-contain pointer-events-none'
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
@@ -28,7 +31,7 @@ export default async function Footer({ activePage }) {
                       fill
                       quality={100}
                     />
-                  </div>
+                  </Link>
                 ))}
             </div>
             <div className='flex flex-col justify-center items-center gap-6'>
@@ -40,7 +43,10 @@ export default async function Footer({ activePage }) {
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
-                  <div className='relative w-16 h-16'>
+                  <Link
+                    href={'/'}
+                    className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <Image
                       className='object-center object-contain pointer-events-none'
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
@@ -49,7 +55,7 @@ export default async function Footer({ activePage }) {
                       fill
                       quality={100}
                     />
-                  </div>
+                  </Link>
                 ))}
             </div>
             <div className='flex flex-col justify-center items-center gap-6'>
@@ -61,7 +67,10 @@ export default async function Footer({ activePage }) {
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
-                  <div className='relative w-16 h-16'>
+                  <Link
+                    href={'/'}
+                    className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <Image
                       className='object-center object-contain pointer-events-none'
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
@@ -70,7 +79,7 @@ export default async function Footer({ activePage }) {
                       fill
                       quality={100}
                     />
-                  </div>
+                  </Link>
                 ))}
             </div>
             <div className='flex flex-col  items-center gap-6'>
@@ -82,7 +91,10 @@ export default async function Footer({ activePage }) {
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
-                  <div className='relative w-16 h-16'>
+                  <Link
+                    href={'/'}
+                    className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
+                  >
                     <Image
                       className='object-center object-contain pointer-events-none'
                       src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
@@ -91,7 +103,7 @@ export default async function Footer({ activePage }) {
                       fill
                       quality={100}
                     />
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -112,23 +124,35 @@ export default async function Footer({ activePage }) {
         </div>
 
         <div className='grid md:grid-cols-2 lg:flex lg:justify-between lg:w-8/12 gap-2 text-white lg:gap-0 text-xs lg:text-[13px]  mx-auto uppercase font-bold font-magistral text-center place-content-center justify-items-center place-items-center'>
-          <Link href={'/'} className='cursor-pointer'>
+          <Link
+            href={'/'}
+            className='p-3 cursor-pointer transition-all duration-[.15s] ease-in hover:scale-110'
+          >
             privacy policy
           </Link>
-          <Link href={'/'} className='cursor-pointer'>
+          <Link
+            href={'/'}
+            className='p-3 cursor-pointer transition-all duration-[.15s] ease-in hover:scale-110'
+          >
             terms of service
           </Link>
-          <Link href={'/'} className='cursor-pointer'>
+          <Link
+            href={'/'}
+            className='p-3 cursor-pointer transition-all duration-[.15s] ease-in hover:scale-110'
+          >
             subscription terms and conditions
           </Link>
-          <Link href={'/'} className='cursor-pointer'>
+          <Link
+            href={'/'}
+            className='p-3 cursor-pointer transition-all duration-[.15s] ease-in hover:scale-110'
+          >
             media
           </Link>{' '}
           <Link
             href={'https://www.humbl.com/social/'}
-            className=' lowercase flex-wrap font-bold flex gap-3 items-center'
+            className='p-3  lowercase flex-wrap font-bold flex gap-3 items-center transition-all duration-[.15s] ease-in hover:scale-110'
           >
-            powered by <img className='w-8 h-8' src='/Home/h.svg' />
+            <img className='w-36 ' src='/Home/humble.svg' />
           </Link>
         </div>
       </div>
