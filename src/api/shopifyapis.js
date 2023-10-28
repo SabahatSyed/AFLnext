@@ -62,12 +62,12 @@ export async function deleteCustomer(id) {
     // Send a POST request to your Strapi backend to subscribe the user
 
     const res = await fetch(
-      `https://${store}.myshopify.com/admin/api/${version}/customers/${id}.json`,
+      `https://${STORE_NAME}.myshopify.com/admin/api/${API_VERSION}/customers/${id}.json`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "X-Shopify-Access-Token": `${AdminSecret}`,
+          "X-Shopify-Access-Token": `${ADMIN}`,
         },
       }
     );
@@ -83,14 +83,14 @@ export async function updateCustomer(id,props) {
     // Send a POST request to your Strapi backend to subscribe the user
 
     const res = await fetch(
-      `https://${store}.myshopify.com/admin/api/${version}/customers/${id}.json`,
+      `https://${STORE_NAME}.myshopify.com/admin/api/${API_VERSION}/customers/${id}.json`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "X-Shopify-Access-Token": `${AdminSecret}`,
+          "X-Shopify-Access-Token": `${ADMIN}`,
         },
-        body:JSON.stringify(props)
+        body:(props)
       }
     );
     const data = await res.json();

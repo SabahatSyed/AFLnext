@@ -55,6 +55,9 @@ export default function Forgot({ data }) {
   return (
     <div className="bg-[url('/auth/bg.svg')] py-20 font-roboto">
       <div className=" w-11/12 md:w-3/5 lg:w-2/5 rounded-3xl px-6 py-10 md:p-16 bg-white mx-auto flex flex-col gap-7 text-black">
+        <Link href="/login" className="absolute top-8 right-8">
+          <img src="/auth/Back.svg" />
+        </Link>
         <img src="/Home/logo.svg" className="h-28 w-28 mx-auto" />
         <p className="font-bold text-[28px] text-center">Forgot Password?</p>
         <p className="text-sm text-center w-80">
