@@ -35,7 +35,7 @@ export default async function Partners({ data }) {
                     Visit Their Website{" "}
                     <span className=" ml-3">
                       <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
-                    </span>{" "}
+                    </span>
                   </p>
                 </Link>
               </div>

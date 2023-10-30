@@ -12,9 +12,9 @@ export default async function TicketsMain() {
     <div className='h-fit '>
       {/* <Header activepage={"tickets"} /> */}
       <div className=' bg-white dark:bg-bgdark w-full'>
-        <div className='relative inset-0 w-full h-80'>
+        <div className='relative inset-0  h-[501px] m-24'>
           <Image
-            className='pointer-events-none object-center object-cover'
+            className='pointer-events-none object-center'
             src={ticketsBgImg}
             alt='tickets bg image'
             priority
