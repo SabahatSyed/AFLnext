@@ -30,8 +30,9 @@ export default async function Tickets({ data }) {
                     style={{ backgroundColor: `#${result.attributes.bgcolor}` }}
                     className=' flex flex-col gap-3 px-8 py-5 rounded-xl place-items-center  justify-center items-center transition-all duration-[.15s] ease-in hover:scale-110'
                   >
+                    
                     <img
-                      src={`https://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      src={`https://afl-cms.logixsy.com${result.attributes.Image?.data[0]?.attributes.url}`}
                       alt='Tickets'
                       className='h-28 w-32'
                     />

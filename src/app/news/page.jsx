@@ -12,7 +12,7 @@ export default async function NewsMain() {
     <div className='h-fit '>
       {/* <Header activepage={"news"} /> */}
       <div className='h-screen  bg-white'>
-        <div className='bg-cover relative lg:h-[86%] md:h-1/2 h-2/5 grid lg:grid-cols-3 grid-cols-1 text-white font-roboto md:p-20 p-10 md:place-items-end'>
+        <div className='bg-cover relative lg:h-[86%] md:h-1/2 h-2/5 grid lg:grid-cols-6 grid-cols-1 text-white font-roboto md:p-20 p-10 md:place-items-end'>
           <Image
             className='object-center object-cover pointer-events-none '
             src={newsBgImg}
@@ -21,7 +21,7 @@ export default async function NewsMain() {
             fill
             quality={100}
           />
-          <div className='flex flex-col gap-4 z-10'>
+          <div className='flex flex-col gap-4 z-10 col-span-3 ml-14'>
             <p className='md:text-3xl text-2xl font-bold leading-tight'>
               Arena Football League Relaunch Press release
             </p>

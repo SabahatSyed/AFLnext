@@ -38,7 +38,7 @@ body {
 }
 .custom-scrollbar::-webkit-scrollbar {
   width: 2px; /* Adjust the width of the scrollbar */
-  height: 8px;
+  height: 0px;
   border-radius: 8px; /* Add rounded corners */
 }
 

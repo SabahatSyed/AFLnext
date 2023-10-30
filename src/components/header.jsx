@@ -122,7 +122,7 @@ export function Header({ activepage }) {
       {/*{cartid && <CartComponent setData={setData} cartid={cartid} />}*/}
 
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
-      <div className=" bg-gradient-to-t from-darkorange to-lightorange relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-24 py-3 md:py-0">
+      <div className=" bg-[url('/Home/Navbar.svg')] bg-cover relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-20 py-3 md:py-0 ">
         {/* <Image
           className='object-center object-cover pointer-events-none'
           src={navImg}
@@ -176,9 +176,8 @@ export function Header({ activepage }) {
           <Link
             href="/shop"
             className={`${
-              pathname === '/shop' ? 'text-headingblue ' : ''
-            }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
-          >
+              pathname === "/shop" ? "text-headingblue" : ""
+            }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
             shop
           </Link>
           {/*<Link href="/stats">
@@ -190,18 +189,16 @@ export function Header({ activepage }) {
           <Link href="/partners">
             <div
               className={`${
-                pathname === '/partners' ? 'text-headingblue ' : ''
-              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
-            >
+                pathname === "/partners" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
               partners
             </div>
           </Link>
           <Link href="/tickets">
             <div
               className={`${
-                pathname === '/tickets' ? 'text-headingblue ' : ''
-              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
-            >
+                pathname === "/tickets" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
               tickets
             </div>
           </Link>

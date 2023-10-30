@@ -10,8 +10,8 @@ export default async function Footer({ activePage }) {
       {activePage !== 'signup' && activePage !== 'login' && (
         <div className='bg-black dark:bg-bg-dark2 grid grid-cols-8 p-10 md:p-14'>
           <div className='col-start-2 col-span-6 grid md:grid-cols-4 grid-cols-2 gap-7  text-white font-magistral font-bold text-xl'>
-            <div className='flex flex-col justify-center items-center gap-6'>
-              <p>Division 1</p>
+            <div className='flex flex-col items-center gap-6'>
+              <p>West</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 1)
                 .map((result, index) => (
@@ -35,8 +35,8 @@ export default async function Footer({ activePage }) {
                   </Link>
                 ))}
             </div>
-            <div className='flex flex-col justify-center items-center gap-6'>
-              <p>Division 2</p>
+            <div className='flex flex-col items-center gap-6'>
+              <p>Central</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 2)
                 .map((result, index) => (
@@ -60,8 +60,8 @@ export default async function Footer({ activePage }) {
                   </Link>
                 ))}
             </div>
-            <div className='flex flex-col justify-center items-center gap-6'>
-              <p>Division 3</p>
+            <div className='flex flex-col items-center gap-6'>
+              <p>South</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 3)
                 .map((result, index) => (
@@ -86,7 +86,7 @@ export default async function Footer({ activePage }) {
                 ))}
             </div>
             <div className='flex flex-col  items-center gap-6'>
-              <p>Division 4</p>
+              <p>East</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 4)
                 .map((result, index) => (
