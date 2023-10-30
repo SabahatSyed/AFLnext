@@ -1,24 +1,25 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-//import { Amplify } from "aws-amplify";
+'use client'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Amplify ,Auth} from 'aws-amplify'
 // import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-//import { withAuthenticator } from "@aws-amplify/ui-react";
-//import "@aws-amplify/ui-react/styles.css";
-import { gql } from "@apollo/client";
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-//import awsconfig from "../../aws-exports";
-//Amplify.configure(awsconfig);
-import { useMutation } from "@apollo/client";
-import { useRouter } from "next/navigation";
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+import { gql } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
+import awsconfig from '../../aws-exports'
+Amplify.configure(awsconfig)
+import { useMutation } from '@apollo/client'
+import { useRouter } from 'next/navigation'
 const product = {
   id: 1,
-  picture: "../../../shop/product1.svg",
-  name: "black afl logo hoodie",
-  size: "XL",
-  quantity: "1",
+  picture: '../../../shop/product1.svg',
+  name: 'black afl logo hoodie',
+  size: 'XL',
+  quantity: '1',
   price: 29.99,
-};
+}
 
 const query = gql`
   query GetCart($cartId: ID!) {
@@ -66,21 +67,8 @@ const query = gql`
       }
     }
   }
-`;
-const getlogin = gql`
-  mutation SignInWithEmailAndPassword($email: String!, $password: String!) {
-    customerAccessTokenCreate(input: { email: $email, password: $password }) {
-      customerAccessToken {
-        accessToken
-        expiresAt
-      }
-      customerUserErrors {
-        code
-        message
-      }
-    }
-  }
-`;
+`
+
 
 const checkoutwithcustomer = gql`
   mutation associateCustomerWithCheckout(
@@ -104,7 +92,7 @@ const checkoutwithcustomer = gql`
       }
     }
   }
-`;
+`
 const updateaddress = gql`
   mutation checkoutShippingAddressUpdateV2(
     $shippingAddress: MailingAddressInput!
@@ -132,76 +120,78 @@ const updateaddress = gql`
       }
     }
   }
-`;
+`
 
-export default function Checkout() {
-  const user = {};
-  const [token, setToken] = useState("");
-  const [checkoutid, setcheckoutid] = useState("");
-  const [cartid,setCartId]=useState("")
+export function Checkout() {
+  const router=useRouter()
+  const [token, setToken] = useState('')
+  const [checkoutid, setcheckoutid] = useState('')
+  const [cartid, setCartId] = useState('')
+  const [data,setData]=useState()
   const [formdata, setFormdata] = useState({
-    lastName: "",
-    firstName: "",
-    address1: "",
-    province: "",
-    country: "",
-    zip: "",
-    city: "",
-  });
-
+    lastName: '',
+    firstName: '',
+    address1: '',
+    province: '',
+    country: '',
+    zip: '',
+    city: '',
+  })
   const [paymentformdata, setPaymentFormdata] = useState({
-    cardnumber: "",
-    expiry: "",
-    cvc: "",
-    country: "",
-  });
-  useEffect(()=>{
-    setCartId(localStorage.getItem("cartid"));
-  },[])
-  const [login, { data1, loading1, error1 }] = useMutation(getlogin);
-  const { data, error } = useSuspenseQuery(query, {
-    variables: {
-      cartId:
-        cartid ||
-        "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUhERzdLUzYxWldBVlo4Nk1DUDJNUkJHWA",
-    },
-  });
-
+    cardnumber: '',
+    expiry: '',
+    cvc: '',
+    country: '',
+  })
+  useEffect(() => {
+    setCartId(localStorage.getItem('cartid'))
+  }, [])
+  
   const [checkout, { data2, loading2, error2 }] =
-    useMutation(checkoutwithcustomer);
+    useMutation(checkoutwithcustomer)
   const [updateAddress, { data3, loading3, error3 }] =
-    useMutation(updateaddress);
-  const [payment, setPayment] = useState(false);
+    useMutation(updateaddress)
+  const [payment, setPayment] = useState(false)
   useEffect(() => {
-    localStorage.setItem("customeraccesstoken", token);
-  }, [token]);
-  const loginuser = async () => {
-    const response = await login({
-      variables: {
-        email: user?.attributes?.email,
-        password: "1234567",
-      },
-    });
-    setToken(
-      response.data.customerAccessTokenCreate.customerAccessToken.accessToken
-    );
-  };
+    localStorage.setItem('customeraccesstoken', token)
+  }, [token])
+ 
   useEffect(() => {
-    setcheckoutid(localStorage.getItem("checkoutid"))
-    loginuser();
-  }, []);
-  const cartItems = data.cart.lines.edges;
-  const totalAmount = cartItems.reduce((total, item) => {
+    setcheckoutid(localStorage.getItem('checkoutid'))
+        setToken(localStorage.getItem("customeraccesstoken"))
+
+
+    //loginuser()
+  }, [])
+  useEffect(()=>{
+            Auth.currentAuthenticatedUser().then((res)=>{}).catch((err)=>{
+            router.push("/shop");
+
+           })
+  },[])
+  const cartItems = data?.cart.lines.edges
+  const totalAmount = cartItems?.reduce((total, item) => {
     const itemTotalAmount = parseFloat(
       item.node.estimatedCost.totalAmount.amount
-    );
-    return total + itemTotalAmount;
-  }, 0);
+    )
+    return total + itemTotalAmount
+  }, 0)
+     const CartComponent = ({setData,cartid}) => {
+       const { data, error2 } = useSuspenseQuery(query, {
+         variables: {
+           cartId: cartid,
+         },
+       });
+       setData(data);
+     };
+
   return (
     <div>
+      {cartid && <CartComponent setData={setData} cartid={cartid} />}
+
       <div className=" flex flex-col w-1/2 mx-auto py-10 px-4">
         <div className="my-10 flex flex-col gap-8 items-center bg-white py-8 px-8 lg:px-4 rounded-md ">
-          {data.cart.lines?.edges?.map((item) => (
+          {data?.cart.lines?.edges?.map((item) => (
             <div>
               <img
                 src={item.node.merchandise.product.featuredImage.src}
@@ -247,7 +237,7 @@ export default function Checkout() {
             <p className="font-bold text-black">
               $
               {Math.round(
-                ((data.cart.estimatedCost.totalAmount.amount - totalAmount) *
+                ((data?.cart.estimatedCost.totalAmount.amount - totalAmount) *
                   100) /
                   100
               )}
@@ -257,7 +247,7 @@ export default function Checkout() {
             <p className=" text-gray">Total</p>
 
             <p className="font-bold text-black">
-              $ {data.cart.estimatedCost.totalAmount.amount}
+              $ {data?.cart.estimatedCost.totalAmount.amount}
             </p>
           </div>
         </div>
@@ -267,7 +257,7 @@ export default function Checkout() {
             <div className="bg-headingblue  absolute py-2 px-10 mb-7">
               <p
                 onClick={() => router.push("/checkout")}
-                className="uppercase font-roboto  font-bold text-sm text-white flex items-center justify-center">
+                className="uppercase font-roboto cursor-pointer font-bold text-sm text-white flex items-center justify-center">
                 Add to Cart
               </p>
             </div>
@@ -277,11 +267,11 @@ export default function Checkout() {
             <div className="bg-headingblue  absolute py-2 px-10 mb-7 ">
               <p
                 onClick={() => router.push("/checkout")}
-                className="uppercase font-roboto  font-bold text-sm text-white flex items-center justify-center">
+                className="uppercase font-roboto cursor-pointer font-bold text-sm text-white flex items-center justify-center">
                 Add to Cart
               </p>
             </div>
-          </div>{" "}
+          </div>
         </div>
         <div className="bg-white p-12 mt-10 rounded-2xl">
           <p className=" uppercase font-magistraal text-lg text-headingblue ">
@@ -407,18 +397,18 @@ export default function Checkout() {
               </div>
               <div
                 onClick={async () => {
+               
                   const response = await updateAddress({
                     variables: {
                       shippingAddress: formdata,
-                      checkoutId:
-                        checkoutid||""
+                      checkoutId: checkoutid || "",
                     },
                   });
                   setPayment(true);
                   const response1 = await checkout({
                     variables: {
-                      checkoutId:checkoutid||"",
-                      customerAccessToken:token||"",
+                      checkoutId: checkoutid || "",
+                      customerAccessToken: token || "",
                     },
                   });
                 }}
@@ -519,4 +509,4 @@ export default function Checkout() {
   );
 }
 
-//export default withAuthenticator(Checkout);
+export default (Checkout)

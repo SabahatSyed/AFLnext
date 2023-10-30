@@ -1,11 +1,74 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Auth, Amplify } from "aws-amplify";
 import { useTheme } from "next-themes";
-export default function Header({ activepage }) {
+import awsconfig from "../aws-exports";
+import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
+import navImg from "public/Home/Navbar.svg";
+
+import { gql } from "@apollo/client";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+Amplify.configure(awsconfig);
+const query = gql`
+  query GetCart($cartId: ID!) {
+    cart(id: $cartId) {
+      checkoutUrl
+      estimatedCost {
+        totalAmount {
+          amount
+        }
+      }
+      lines(first: 100) {
+        edges {
+          node {
+            quantity
+            estimatedCost {
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
+            merchandise {
+              ... on ProductVariant {
+                id
+                title
+                product {
+                  id
+                  title
+                  description
+                  featuredImage {
+                    src
+                  }
+                }
+                priceV2 {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export function Header({ activepage }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-
+  const [user, setUser] = useState(null);
+  const [data, setData] = useState();
+  const [cartid, setCartId] = useState("");
+  useEffect(() => {
+    setCartId(localStorage.getItem("cartid"));
+  }, []);
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
@@ -13,35 +76,94 @@ export default function Header({ activepage }) {
     // Toggle the theme when the div is clicked
     setTheme(theme === "dark" ? "light" : "dark");
   };
+  console.log("pathname",pathname)
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      } catch (error) {
+        setUser(null);
+      }
+      console.log("user", user);
+    };
+
+    checkAuthStatus();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await Auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+  const CartComponent = ({ setData, cartid }) => {
+    const { data, error2 } = useSuspenseQuery(query, {
+      variables: {
+        cartId: cartid,
+      },
+    });
+    console.log("data", data);
+    setData(data);
+  };
 
   return (
-    <div>
+    <div
+      className={`${
+        pathname === "/login" ||
+        pathname === "/Signup" ||
+        pathname === "/forgotpassword" ||
+        pathname === "/resetpassword"
+          ? "hidden"
+          : ""
+      }`}>
+      {/*{cartid && <CartComponent setData={setData} cartid={cartid} />}*/}
+
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
-      <div className="bg-[url('/Home/Navbar.svg')]  relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-14 py-3 md:py-4">
+      <div className=" bg-[url('/Home/Navbar.svg')] bg-cover relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-20 py-3 md:py-0 ">
+        {/* <Image
+          className='object-center object-cover pointer-events-none'
+          src={navImg}
+          alt='navbar background image'
+          priority
+          fill
+        /> */}
         <div className="col-span-1">
           <Link href="/">
             <img
               src="/Home/logo.svg"
-              className="absolute -translate-y-2/4 md:-translate-y-[60%] w-20 lg:w-auto"
+              className="absolute -translate-y-2/4 md:top-4 w-20 lg:w-auto "
             />
           </Link>
         </div>
-        <div className="col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase items-center text-sm md:gap-3 lg:gap-8 hidden">
-          <Link href="/about">
+        <div className="col-start-4 col-span-6 md:flex font-magistral text-white font-bold justify-around uppercase text-sm md:gap-3 lg:gap-8 hidden h-full tracking-wider">
+          <Link
+            href="/about"
+            className="py-5 hover:text-headingblue transition-all duration-[.15s] ease-in-out hover:scale-110 ">
             <div
-              className={`${activepage == "about" ? "text-headingblue" : ""}`}>
+              className={`${pathname == "/about" ? "text-headingblue" : ""} `}>
               about
             </div>
           </Link>
-          <Link href="/news">
+          <Link
+            href="/news"
+            className="py-5 hover:text-headingblue transition-all duration-[.15s] ease-in-out hover:scale-110">
             <div
-              className={`${activepage == "news" ? "text-headingblue" : ""}`}>
+              className={`${
+                pathname == "/news" ? "text-headingblue" : ""
+              } hover:text-headingblue`}>
               news
             </div>
           </Link>
-          <Link href="/teams">
+          <Link
+            href="/teams"
+            className="py-5 hover:text-headingblue transition-all duration-[.15s] ease-in-out hover:scale-110">
             <div
-              className={`${activepage == "teams" ? "text-headingblue" : ""}`}>
+              className={`${
+                pathname == "/teams" ? "text-headingblue" : ""
+              } hover:text-headingblue`}>
               teams
             </div>
           </Link>
@@ -51,10 +173,13 @@ export default function Header({ activepage }) {
               watch
             </div>
   </Link>*/}
-          <Link
-            href="/shop"
-            className={`${activepage === "shop" ? "text-headingblue" : ""}`}>
-            shop
+          <Link href="/shop">
+            <div
+              className={`${
+                pathname === "/shop" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
+              shop
+            </div>
           </Link>
           {/*<Link href="/stats">
             <div
@@ -65,16 +190,16 @@ export default function Header({ activepage }) {
           <Link href="/partners">
             <div
               className={`${
-                activepage == "partners" ? "text-headingblue" : ""
-              }`}>
+                pathname === "/partners" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
               partners
             </div>
           </Link>
           <Link href="/tickets">
             <div
               className={`${
-                activepage == "tickets" ? "text-headingblue" : ""
-              }`}>
+                pathname === "/tickets" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
               tickets
             </div>
           </Link>
@@ -120,34 +245,62 @@ export default function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
-          <Link href={"/cart"}>
+        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-6 justify-items-center gap-2">
+          <Link
+            href={"/cart"}
+            className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/cart.svg" />
           </Link>
-          <div>
+          <Link
+            href={"https://www.humbl.com/social/"}
+            className="transition-all duration-[.15s] ease-in-out hover:scale-110 flex items-center">
             <img src="/Home/h.svg" />
-          </div>
-          <Link href={"https://www.facebook.com/AFL"}>
+          </Link>
+          <Link
+            href={"https://www.facebook.com/HUMBLinc"}
+            className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/facebook.svg" />
           </Link>
-          <Link href={"https://www.instagram.com/afl/"}>
+          <Link
+            href={"https://instagram.com/humblinc/"}
+            className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/instagram.svg" />{" "}
           </Link>
-          <Link href={"https://www.youtube.com/@AFL"}>
+          <Link
+            href={"https://www.youtube.com/c/HUMBL"}
+            className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/youtube.svg" />
           </Link>
+          {/* {user && (
+            <div
+              onClick={() => handleLogout()}
+              className="flex items-center lg:ml-5 my-auto w-4 h-4 lg:w-10 lg:h-10 ">
+              <img src="/logout.svg" className="cursor-pointer" />
+            </div>
+          )}
+          {user == null && (
+            <Link
+              href="/login"
+              className="flex items-center lg:ml-5 my-auto w-6 h-6 lg:w-10 lg:h-10 ">
+              <img src="/profile.svg" className="cursor-pointer" />
+            </Link>
+          )} */}
         </div>
-        <div className="md:hidden col-start-12 col-span-4">
+        <div className="md:hidden col-start-12 col-span-4 cursor-pointer">
           {/* Toggle Menu Button */}
           <div onClick={toggleMenu} className="w-10 h-10">
-            <img src="/Home/burger-menu.svg" alt="Bars Menu SVG" />
+            {menuOpen ? (
+              <img src="/Home/close-icon.svg" alt="Close Menu SVG" />
+            ) : (
+              <img src="/Home/burger-menu.svg" alt="Bars Menu SVG" />
+            )}
           </div>
         </div>
       </div>
       {/* Sliding Menu */}
       {menuOpen && (
         <div
-          className="w-fit p-5 mx-2 z-10 flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
+          className="w-fit p-5 mx-2 mt-10 !z-[100] flex flex-col gap-3 font-roboto uppercase font-bold absolute bg-gradient-to-t from-darkorange to-lightorange"
           style={{
             transform: menuOpen ? "translateX(0)" : "translateX(100%)",
             transition: "transform 0.3s ease-in-out",
@@ -157,8 +310,9 @@ export default function Header({ activepage }) {
           <Link href="/about">
             <div
               className={`${
-                activepage == "about" ? "text-headingblue" : "text-white"
-              } `}>
+                pathname == "about" ? "text-headingblue" : "text-white"
+              } `}
+              onClick={toggleMenu}>
               about
             </div>
           </Link>
@@ -166,7 +320,8 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 activepage == "news" ? "text-headingblue" : "text-white"
-              } `}>
+              } `}
+              onClick={toggleMenu}>
               news
             </div>
           </Link>
@@ -174,7 +329,8 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 activepage == "teams" ? "text-headingblue" : "text-white"
-              } `}>
+              } `}
+              onClick={toggleMenu}>
               teams
             </div>
           </Link>
@@ -190,7 +346,8 @@ export default function Header({ activepage }) {
             href="/shop"
             className={`${
               activepage === "shop" ? "text-headingblue" : ""
-            } text-white`}>
+            } text-white`}
+            onClick={toggleMenu}>
             shop
           </a>
           {/*} <Link href="/stats">
@@ -205,7 +362,8 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 activepage == "partners" ? "text-headingblue" : "text-white"
-              } `}>
+              } `}
+              onClick={toggleMenu}>
               partners
             </div>
           </Link>
@@ -213,7 +371,8 @@ export default function Header({ activepage }) {
             <div
               className={`${
                 activepage == "tickets" ? "text-headingblue" : "text-white"
-              } `}>
+              } `}
+              onClick={toggleMenu}>
               tickets
             </div>
           </Link>
@@ -227,25 +386,41 @@ export default function Header({ activepage }) {
             </div>
             </Link>*/}
 
-          <div className="grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
+          <div className="grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
             <Link href={"/cart"}>
               <img src="/Home/cart.svg" />
             </Link>
-            <div>
+            <Link href={"https://www.humbl.com/social/"}>
               <img src="/Home/h.svg" />
-            </div>
-            <div>
+            </Link>
+            <Link href={"https://www.facebook.com/HUMBLinc"}>
               <img src="/Home/facebook.svg" />
-            </div>
-            <div>
+            </Link>
+            <Link href={"https://www.facebook.com/HUMBLinc"}>
               <img src="/Home/instagram.svg" />{" "}
-            </div>
-            <div>
+            </Link>
+            <Link href={"https://www.youtube.com/c/HUMBL"}>
               <img src="/Home/youtube.svg" />
-            </div>
+            </Link>
+            {user && (
+              <img
+                onClick={() => handleLogout()}
+                src="/logout.svg"
+                className="h-7 cursor-pointer "
+              />
+            )}
+            {user == null && (
+              <img
+                onClick={() => router.push("/login")}
+                src="/profile.svg"
+                className="h-7 cursor-pointer"
+              />
+            )}
           </div>
         </div>
       )}
     </div>
   );
 }
+
+export default Header;

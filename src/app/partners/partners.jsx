@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 export default async function Partners({ data }) {
   return (
     <div>
@@ -34,7 +35,7 @@ export default async function Partners({ data }) {
                     Visit Their Website{" "}
                     <span className=" ml-3">
                       <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
-                    </span>{" "}
+                    </span>
                   </p>
                 </Link>
               </div>
@@ -42,7 +43,7 @@ export default async function Partners({ data }) {
           ))}
 
           {/* <div className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32">
-            <img src="/partners/humbl.svg" />
+            <img     src="/partners/humbl.svg" />
             <div className="flex flex-col gap-5 justify-center">
               <div>
                 <p className="uppercase text-2xl font-semibold">Humbl</p>
@@ -57,7 +58,7 @@ export default async function Partners({ data }) {
               <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
                 Visit Their Website{" "}
                 <span className=" ml-3">
-                  <img src="/Home/UnionBlack.svg" alt="Arrow svg " />
+                  <img     src="/Home/UnionBlack.svg" alt="Arrow svg " />
                 </span>{" "}
               </p>
             </div>

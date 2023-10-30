@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 const OurMission = () => {
   return (
     <div className="dark:bg-bgdark">

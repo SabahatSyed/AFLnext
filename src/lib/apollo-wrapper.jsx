@@ -17,7 +17,7 @@ const {
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from your authentication provider
-  const token = "bf2632921a9cae14345472d324e48e6c";
+  const token = "34c989d3cd6e3e330444a4b37e74161b";
 
   // Return the headers to the context so httpLink can read them
   return {
@@ -27,7 +27,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-const GRAPHQL_ENDPOINT = `https://291dfd.myshopify.com/api/2023-10/graphql.json`;
+const GRAPHQL_ENDPOINT = `https://b6eb23.myshopify.com/api/2023-10/graphql.json`;
 
 function makeClient() {
   const httpLink = new HttpLink({
