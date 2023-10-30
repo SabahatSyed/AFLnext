@@ -184,8 +184,7 @@ export function Cart() {
     setCheckoutUrl(response.data.checkoutCreate.checkout.webUrl)
     Auth.currentAuthenticatedUser()
       .then((res) => {
-        console.log('hello', response.data.checkoutCreate.checkout.webUrl)
-        router.push(response.data.checkoutCreate.checkout.webUrl)
+        router.push(response.data.checkoutCreate.checkout.webUrl);
       })
       .catch((err) => {
         router.push('/login?auth=auth')
