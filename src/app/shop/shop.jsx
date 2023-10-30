@@ -306,7 +306,7 @@ export function Shop({ formdata, customers }) {
                   src={result.image.src}
                   alt='News'
                 />
-                <div className='opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-40 absolute inset-0 flex items-center justify-center'>
+                <div className='opacity-0 group-hover:opacity-100 transition-opacity bg-black rounded-md bg-opacity-40 absolute inset-0 flex items-center justify-center'>
                   <button
                     className='bg-black text-white px-4 py-2 rounded'
                     onClick={() => addtoCart(result)}

@@ -58,7 +58,7 @@ export default function Signup({ data }) {
   const params = useSearchParams().get("auth");
   const history = useRouter();
   const [email, setEmail] = useState("");
-  const [hide,sethide]=useState(false)
+  const [hide,sethide]=useState(true)
   const [password, setPassword] = useState("");
   const [emailmsg, setemailmsg] = useState("");
   const [passwordmsg, setpasswordmsg] = useState("");

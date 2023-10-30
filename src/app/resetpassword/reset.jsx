@@ -28,8 +28,8 @@ const getlogin = gql`
 export default function Reset({ length = 6, customers }) {
   const query = useSearchParams().get("email");
   const history = useRouter();
-  const [hide, sethide] = useState(false);
-  const [hide1, sethide1] = useState(false);
+  const [hide, sethide] = useState(true);
+  const [hide1, sethide1] = useState(true);
 
   const [msg, setmsg] = useState("");
   const [passmsg, setPassmsg] = useState("");

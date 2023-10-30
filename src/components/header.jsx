@@ -65,7 +65,7 @@ export function Header({ activepage }) {
   const { theme, setTheme } = useTheme();
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
-  const [cartid,setCartId]=useState('')
+  const [cartid, setCartId] = useState("");
   useEffect(() => {
     setCartId(localStorage.getItem("cartid"));
   }, []);
@@ -76,7 +76,7 @@ export function Header({ activepage }) {
     // Toggle the theme when the div is clicked
     setTheme(theme === "dark" ? "light" : "dark");
   };
-
+  console.log("pathname",pathname)
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
@@ -105,10 +105,10 @@ export function Header({ activepage }) {
         cartId: cartid,
       },
     });
-    console.log("data",data)
+    console.log("data", data);
     setData(data);
   };
-  
+
   return (
     <div
       className={`${
@@ -173,12 +173,13 @@ export function Header({ activepage }) {
               watch
             </div>
   </Link>*/}
-          <Link
-            href="/shop"
-            className={`${
-              pathname === "/shop" ? "text-headingblue" : ""
-            }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
-            shop
+          <Link href="/shop">
+            <div
+              className={`${
+                pathname === "/shop" ? "text-headingblue " : ""
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
+              shop
+            </div>
           </Link>
           {/*<Link href="/stats">
             <div
@@ -422,4 +423,4 @@ export function Header({ activepage }) {
   );
 }
 
-export default Header
+export default Header;

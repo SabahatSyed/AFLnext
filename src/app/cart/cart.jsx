@@ -236,11 +236,11 @@ export function Cart() {
     <div>
       {cartid && <CartComponent setData={setData} cartid={cartid} />}
 
-      <div className=' flex flex-col w-2/4 mx-auto my-28'>
+      <div className=' flex flex-col w-2/4 mx-auto my-28 bg-white p-8 rounded-xl'>
         <div className=' uppercase font-magistraal text-2xl text-headingblue dark:text-white '>
           Shopping Cart
         </div>
-        {data?.cart.lines.edges.map((item, index) => (
+        {data?.cart?.lines?.edges.map((item, index) => (
           <>
             <div
               key={index}
