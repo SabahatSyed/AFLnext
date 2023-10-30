@@ -12,6 +12,7 @@ import awsconfig from '../../aws-exports'
 Amplify.configure(awsconfig)
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next-nprogress-bar'
+import toast from 'react-hot-toast'
 const product = {
   id: 1,
   picture: '../../../shop/product1.svg',
@@ -135,7 +136,7 @@ export function Cart() {
   const router = useRouter()
   const [cartid, setCartId] = useState('')
   const [checkoutid, setCheckoutid] = useState('')
-  const [checkoutUrl,setCheckoutUrl]=useState('')
+  const [checkoutUrl, setCheckoutUrl] = useState('')
   const [getcheckouturl, { data1, loading1, error1 }] = useMutation(getcheckout)
   const [addtocartflag, setaddtocart] = useState('')
   const [AddtoCart, { data2, loading, error }] = useMutation(addtocart)
@@ -149,9 +150,9 @@ export function Cart() {
   useEffect(() => {
     localStorage.setItem('checkoutid', checkoutid)
   }, [checkoutid])
-    useEffect(() => {
-      localStorage.setItem("checkouturl", checkoutUrl);
-    }, [checkoutUrl]);
+  useEffect(() => {
+    localStorage.setItem('checkouturl', checkoutUrl)
+  }, [checkoutUrl])
   const cartItems = data?.cart?.lines.edges
 
   // Calculating the total amount by summing up the totalAmount of each item
@@ -180,7 +181,7 @@ export function Cart() {
     })
 
     setCheckoutid(response.data.checkoutCreate.checkout.id)
-    setCheckoutUrl(response.data.checkoutCreate.checkout.webUrl);
+    setCheckoutUrl(response.data.checkoutCreate.checkout.webUrl)
     Auth.currentAuthenticatedUser()
       .then((res) => {
         router.push(response.data.checkoutCreate.checkout.webUrl);
@@ -198,6 +199,7 @@ export function Cart() {
     setData(data)
   }
   const addtoCart = (idd) => {
+    toast.success('Item removed from cart')
     try {
       console.log(idd)
       let line
@@ -238,51 +240,58 @@ export function Cart() {
         <div className=' uppercase font-magistraal text-2xl text-headingblue dark:text-white '>
           Shopping Cart
         </div>
-        {data?.cart.lines.edges.map((item) => (
-          <div className='m-10 lg:flex  justify-around items-center '>
-            {/* <img
+        {data?.cart.lines.edges.map((item, index) => (
+          <>
+            <div
+              key={index}
+              className='m-10 lg:flex  justify-around items-center '
+            >
+              {/* <img
               src={item.node.merchandise.product.featuredImage.src}
               className="h-48"
             /> */}
-            <div className='h-48 w-48 relative'>
-              <Image
-                className='object-center object-cover pointer-events-none rounded-xl'
-                src={item.node.merchandise.product.featuredImage.src}
-                alt='cartimage'
-                priority
-                fill
-                quality={100}
-              />
-            </div>
-            <div className='flex flex-col gap-4 mt-4 lg:mt-0'>
-              <p className=' font-roboto font-bold text-sm capitalize'>
-                {item.node.merchandise.product.title}
-              </p>
-              <div className='flex justify-between items-center w-full'>
-                <p className='font-roboto font-normal text-sm capitalize flex-row'>
-                  Size: <span className='font-bold'>{product.size}</span>
-                </p>
-
-                <p
-                  onClick={() => addtoCart(item.node.merchandise.id)}
-                  className='font-roboto cursor-pointer font-bold text-sm capitalize text-red-700'
-                >
-                  Remove
-                </p>
+              <div className='h-48 w-48 relative'>
+                <Image
+                  className='object-center object-cover pointer-events-none rounded-xl'
+                  src={item.node.merchandise.product.featuredImage.src}
+                  alt='cartimage'
+                  priority
+                  fill
+                  quality={100}
+                />
               </div>
-              <select
-                className='text-black dark:text-white w-2/4 font-normal border border-gray-400 rounded-md text-sm '
-                value={item.node.quantity}
-              >
-                <option value={item.node.quantity}>{item.node.quantity}</option>
-              </select>
+              <div className='flex flex-col gap-4 mt-4 lg:mt-0'>
+                <p className=' font-roboto font-bold text-sm capitalize'>
+                  {item.node.merchandise.product.title}
+                </p>
+                <div className='flex items-center gap-5'>
+                  <p className='font-roboto font-normal text-sm capitalize'>
+                    Size: <span className='font-bold'>{product.size}</span>
+                  </p>
+
+                  <p
+                    onClick={() => addtoCart(item.node.merchandise.id)}
+                    className='font-roboto cursor-pointer font-bold text-sm capitalize text-red-700'
+                  >
+                    Remove
+                  </p>
+                </div>
+                <select
+                  className='text-black dark:text-white w-2/4 font-normal border border-gray-400 rounded-md text-sm '
+                  value={item.node.quantity}
+                >
+                  <option value={item.node.quantity}>
+                    {item.node.quantity}
+                  </option>
+                </select>
+              </div>
+              <p className='font-roboto font-bold text-2xl text-gray mb-10'>
+                $ {item.node.merchandise.priceV2.amount}
+              </p>
             </div>
-            <p className='font-roboto font-bold text-2xl text-gray mb-10'>
-              $ {item.node.merchandise.priceV2.amount}
-            </p>
-          </div>
+            <div className='h-[0.5px] w-4/5 mx-auto bg-black' />
+          </>
         ))}
-        <div className='h-[0.5px] w-4/5 mx-auto bg-black' />
         <div className='bg-white p-8 mt-10 rounded-2xl'>
           <p className=' uppercase font-magistraal text-lg text-headingblue '>
             summary
@@ -290,7 +299,7 @@ export function Cart() {
           <div className='flex flex-col gap-5 mt-5'>
             <div className='flex items-center justify-between font-roboto font-normal text-sm text-black'>
               <p>Subtotal</p>
-              <p>{totalAmount}</p>
+              <p>${totalAmount}</p>
             </div>
             <div className='h-[0.5px] w-full mx-auto bg-black' />
             <div className='flex items-center justify-between font-roboto font-normal text-sm'>
@@ -314,7 +323,7 @@ export function Cart() {
             <div className='flex items-center justify-between font-roboto font-normal'>
               <p className='text-black'>Estimated total</p>
               <p className='text-black'>
-                {data?.cart?.estimatedCost.totalAmount.amount}
+                ${data?.cart?.estimatedCost.totalAmount.amount}
               </p>
             </div>
           </div>

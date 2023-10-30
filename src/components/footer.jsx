@@ -14,12 +14,13 @@ export default async function Footer({ activePage }) {
               <p>Division 1</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 1)
-                .map((result) => (
+                .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
+                    key={index}
                     href={'/'}
                     className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
                   >
@@ -38,12 +39,13 @@ export default async function Footer({ activePage }) {
               <p>Division 2</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 2)
-                .map((result) => (
+                .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
+                    key={index}
                     href={'/'}
                     className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
                   >
@@ -62,12 +64,13 @@ export default async function Footer({ activePage }) {
               <p>Division 3</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 3)
-                .map((result) => (
+                .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
+                    key={index}
                     href={'/'}
                     className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
                   >
@@ -86,12 +89,13 @@ export default async function Footer({ activePage }) {
               <p>Division 4</p>
               {data?.data
                 ?.filter((item) => item.attributes.division == 4)
-                .map((result) => (
+                .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
                   //   src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
+                    key={index}
                     href={'/'}
                     className='relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110'
                   >

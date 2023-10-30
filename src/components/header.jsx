@@ -176,8 +176,9 @@ export function Header({ activepage }) {
           <Link
             href="/shop"
             className={`${
-              pathname === "/shop" ? "text-headingblue" : ""
-            }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
+              pathname === '/shop' ? 'text-headingblue ' : ''
+            }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
+          >
             shop
           </Link>
           {/*<Link href="/stats">
@@ -189,16 +190,18 @@ export function Header({ activepage }) {
           <Link href="/partners">
             <div
               className={`${
-                pathname == "/partners" ? "text-headingblue" : ""
-              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
+                pathname === '/partners' ? 'text-headingblue ' : ''
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
+            >
               partners
             </div>
           </Link>
           <Link href="/tickets">
             <div
               className={`${
-                pathname == "/tickets" ? "text-headingblue" : ""
-              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}>
+                pathname === '/tickets' ? 'text-headingblue ' : ''
+              }hover:text-headingblue py-5 transition-all duration-[.15s] ease-in-out hover:scale-110`}
+            >
               tickets
             </div>
           </Link>
@@ -270,7 +273,7 @@ export function Header({ activepage }) {
             className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/youtube.svg" />
           </Link>
-          {user && (
+          {/* {user && (
             <div
               onClick={() => handleLogout()}
               className="flex items-center lg:ml-5 my-auto w-4 h-4 lg:w-10 lg:h-10 ">
@@ -283,7 +286,7 @@ export function Header({ activepage }) {
               className="flex items-center lg:ml-5 my-auto w-6 h-6 lg:w-10 lg:h-10 ">
               <img src="/profile.svg" className="cursor-pointer" />
             </Link>
-          )}
+          )} */}
         </div>
         <div className="md:hidden col-start-12 col-span-4 cursor-pointer">
           {/* Toggle Menu Button */}
