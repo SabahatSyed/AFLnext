@@ -13,24 +13,24 @@ export default async function Partners({ data }) {
           visit their websites to view their amazing products or services.
         </p>
         <div className=" flex flex-col gap-10 w-10/12 md:w-11/12 lg:w-7/12 mx-auto mt-10 mb-20">
-          {data.data.map((result, index) => (
+          {data?.data?.map((result, index) => (
             <div
               key={index}
               className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32">
               <img
-                src={`http://afl-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                src={`http://afl2024-cms.logixsy.com${result.attributes?.Image?.data[0]?.attributes?.url}`}
                 alt="athletic gaines"
               />
               {/* {ticket.attributes.Image.data[0].attributes.url} */}
               <div className="flex flex-col gap-5 justify-center font-roboto">
                 <div>
                   <p className="uppercase text-2xl font-semibold">
-                    {result.attributes.Title}
+                    {result?.attributes?.Title}
                   </p>
-                  <p className="text-sm ">{result.attributes.Label}</p>
+                  <p className="text-sm ">{result?.attributes?.Label}</p>
                 </div>
-                <p className="text-[16px]">{result.attributes.Description}</p>
-                <Link href={"https://" + result.attributes.website}>
+                <p className="text-[16px]">{result?.attributes?.Description}</p>
+                <Link href={"https://" + result?.attributes?.website}>
                   <p className="inline-flex text-headingblue dark:text-white items-center mt-1 text-base font-bold">
                     Visit Their Website{" "}
                     <span className=" ml-3">

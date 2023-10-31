@@ -236,80 +236,75 @@ export function Cart() {
     <div>
       {cartid && <CartComponent setData={setData} cartid={cartid} />}
 
-      <div className=' flex flex-col w-2/4 mx-auto my-28 bg-white p-8 rounded-xl'>
-        <div className=' uppercase font-magistraal text-2xl text-headingblue dark:text-white '>
+      <div className=" flex flex-col w-2/4 mx-auto my-28 bg-white p-8 rounded-xl">
+        <div className=" uppercase font-magistraal text-2xl text-headingblue dark:text-white ">
           Shopping Cart
         </div>
         {data?.cart?.lines?.edges.map((item, index) => (
           <>
             <div
               key={index}
-              className='m-10 lg:flex  justify-around items-center '
-            >
+              className="my-10 lg:flex  justify-around items-center ">
               {/* <img
               src={item.node.merchandise.product.featuredImage.src}
               className="h-48"
             /> */}
-              <div className='h-48 w-48 relative'>
+              <div className="h-48 w-48 relative">
                 <Image
-                  className='object-center object-cover pointer-events-none rounded-xl'
+                  className="object-center object-cover pointer-events-none rounded-xl"
                   src={item.node.merchandise.product.featuredImage.src}
-                  alt='cartimage'
+                  alt="cartimage"
                   priority
                   fill
                   quality={100}
                 />
               </div>
-              <div className='flex flex-col gap-4 mt-4 lg:mt-0'>
-                <p className=' font-roboto font-bold text-sm capitalize'>
+              <div className="flex flex-col gap-4 mt-4 lg:mt-0 w-2/6">
+                <p className=" font-roboto font-bold text-sm capitalize">
                   {item.node.merchandise.product.title}
                 </p>
-                <div className='flex items-center gap-5'>
-                  <p className='font-roboto font-normal text-sm capitalize'>
-                    Size: <span className='font-bold'>{product.size}</span>
+                <div className="flex items-center gap-5">
+                  <p className="font-roboto font-normal text-sm capitalize">
+                    {item.node.merchandise.title}
                   </p>
 
                   <p
                     onClick={() => addtoCart(item.node.merchandise.id)}
-                    className='font-roboto cursor-pointer font-bold text-sm capitalize text-red-700'
-                  >
+                    className="font-roboto cursor-pointer font-bold text-sm capitalize text-red-700">
                     Remove
                   </p>
                 </div>
-                <select
-                  className='text-black dark:text-white w-2/4 font-normal border border-gray-400 rounded-md text-sm '
-                  value={item.node.quantity}
-                >
-                  <option value={item.node.quantity}>
-                    {item.node.quantity}
-                  </option>
-                </select>
+                <p className="font-roboto font-bold  text-neutral-600">
+                  Quantity : {item.node.quantity}
+                </p>
               </div>
-              <p className='font-roboto font-bold text-2xl text-gray mb-10'>
-                $ {item.node.merchandise.priceV2.amount}
-              </p>
+              <div>
+                <p className="font-roboto font-bold text-2xl text-gray mb-10">
+                  $ {item.node.merchandise.priceV2.amount}
+                </p>
+              </div>
             </div>
-            <div className='h-[0.5px] w-4/5 mx-auto bg-black' />
+            <div className="h-[0.5px] w-4/5 mx-auto bg-black" />
           </>
         ))}
-        <div className='bg-white p-8 mt-10 rounded-2xl'>
-          <p className=' uppercase font-magistraal text-lg text-headingblue '>
+        <div className="bg-white p-8 mt-10 rounded-2xl">
+          <p className=" uppercase font-magistraal text-lg text-headingblue ">
             summary
           </p>
-          <div className='flex flex-col gap-5 mt-5'>
-            <div className='flex items-center justify-between font-roboto font-normal text-sm text-black'>
+          <div className="flex flex-col gap-5 mt-5">
+            <div className="flex items-center justify-between font-roboto font-normal text-sm text-black">
               <p>Subtotal</p>
               <p>${totalAmount}</p>
             </div>
-            <div className='h-[0.5px] w-full mx-auto bg-black' />
-            <div className='flex items-center justify-between font-roboto font-normal text-sm'>
-              <p className='text-black'>Shipping estimate</p>
-              <p className='text-black'>Calculated at checkout</p>
+            <div className="h-[0.5px] w-full mx-auto bg-black" />
+            <div className="flex items-center justify-between font-roboto font-normal text-sm">
+              <p className="text-black">Shipping estimate</p>
+              <p className="text-black">Calculated at checkout</p>
             </div>
-            <div className='h-[0.5px] w-full mx-auto bg-black' />
-            <div className='flex items-center justify-between font-roboto font-normal text-sm'>
-              <p className='text-black'>Tax estimate</p>
-              <p className='text-black'>
+            <div className="h-[0.5px] w-full mx-auto bg-black" />
+            <div className="flex items-center justify-between font-roboto font-normal text-sm">
+              <p className="text-black">Tax estimate</p>
+              <p className="text-black">
                 $
                 {Math.round(
                   ((data?.cart?.estimatedCost.totalAmount.amount -
@@ -319,10 +314,10 @@ export function Cart() {
                 )}
               </p>
             </div>
-            <div className='h-[0.5px] w-full mx-auto bg-black' />
-            <div className='flex items-center justify-between font-roboto font-normal'>
-              <p className='text-black'>Estimated total</p>
-              <p className='text-black'>
+            <div className="h-[0.5px] w-full mx-auto bg-black" />
+            <div className="flex items-center justify-between font-roboto font-normal">
+              <p className="text-black">Estimated total</p>
+              <p className="text-black">
                 ${data?.cart?.estimatedCost.totalAmount.amount}
               </p>
             </div>
@@ -330,35 +325,33 @@ export function Cart() {
         </div>
         <div
           onClick={() => {
-            getCheckout()
+            getCheckout();
           }}
-          className='bg-headingblue py-3 mt-10 rounded-md cursor-pointer '
-        >
-          <p className='capitalize font-roboto font-bold cursor-pointer text-lg text-white flex items-center justify-center'>
+          className="bg-headingblue py-3 mt-10 rounded-md cursor-pointer ">
+          <p className="capitalize font-roboto font-bold cursor-pointer text-lg text-white flex items-center justify-center">
             Checkout
-            <span className=' mx-3 '>
+            <span className=" mx-3 ">
               <img
-                src='/Home/UnionWhite.svg'
-                alt='Arrow svg '
-                className='h-3'
+                src="/Home/UnionWhite.svg"
+                alt="Arrow svg "
+                className="h-3"
               />
             </span>
           </p>
         </div>
-        <div className=' py-3  rounded-md '>
+        <div className=" py-3  rounded-md ">
           <p
-            onClick={() => router.push('/shop')}
-            className='capitalize font-roboto cursor-pointer text-black flex items-center justify-center'
-          >
-            <span className='text-black dark:text-white'>or</span>
-            <span className='mx-1 font-bold text-headingblue'>
+            onClick={() => router.push("/shop")}
+            className="capitalize font-roboto cursor-pointer text-black flex items-center justify-center">
+            <span className="text-black dark:text-white">or</span>
+            <span className="mx-1 font-bold text-headingblue">
               Continue Shopping
             </span>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Cart

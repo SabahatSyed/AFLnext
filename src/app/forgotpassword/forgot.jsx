@@ -10,20 +10,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useSearchParams } from "next/navigation";
 Amplify.configure(awsconfig);
-const getlogin = gql`
-  mutation SignInWithEmailAndPassword($email: String!, $password: String!) {
-    customerAccessTokenCreate(input: { email: $email, password: $password }) {
-      customerAccessToken {
-        accessToken
-        expiresAt
-      }
-      customerUserErrors {
-        code
-        message
-      }
-    }
-  }
-`;
+
 export default function Forgot({ data }) {
   const query = useSearchParams().get("auth");
   console.log(query);
@@ -32,7 +19,6 @@ export default function Forgot({ data }) {
   const [msg, setmsg] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [login, { data1, loading1, error1 }] = useMutation(getlogin);
   const [token, setToken] = useState("");
   useEffect(() => {
     localStorage.setItem("customeraccesstoken", token);

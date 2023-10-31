@@ -12,7 +12,7 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 'afl-cms.logixsy.com',
+        hostname: 'afl2024-cms.logixsy.com',
       },
       {
         protocol: 'https',

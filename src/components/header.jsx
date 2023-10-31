@@ -122,7 +122,7 @@ export function Header({ activepage }) {
       {/*{cartid && <CartComponent setData={setData} cartid={cartid} />}*/}
 
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
-      <div className=" bg-[url('/Home/Navbar.svg')] bg-cover relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-20 py-3 md:py-0 ">
+      <div className=" bg-gradient-bg bg-cover relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-20 py-3 md:py-0 ">
         {/* <Image
           className='object-center object-cover pointer-events-none'
           src={navImg}
@@ -402,7 +402,7 @@ export function Header({ activepage }) {
             <Link href={"https://www.youtube.com/c/HUMBL"}>
               <img src="/Home/youtube.svg" />
             </Link>
-            {user && (
+            {/* {user && (
               <img
                 onClick={() => handleLogout()}
                 src="/logout.svg"
@@ -415,7 +415,7 @@ export function Header({ activepage }) {
                 src="/profile.svg"
                 className="h-7 cursor-pointer"
               />
-            )}
+            )}*/}
           </div>
         </div>
       )}
