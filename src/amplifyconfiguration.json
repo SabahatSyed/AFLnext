@@ -1,29 +1,14 @@
 {
-  "aws_project_region": "eu-central-1",
-  "aws_cognito_identity_pool_id": "eu-central-1:7dd35acc-7858-4b1b-97fc-f56a54dfd30f",
-  "aws_cognito_region": "eu-central-1",
-  "aws_user_pools_id": "eu-central-1_Rnk6Xvuhu",
-  "aws_user_pools_web_client_id": "2cd0p9cef51ii7nrvlpo6r8ik2",
-  "oauth": {
-    "domain": "3r7azkkpr6xd-staging.auth.eu-central-1.amazoncognito.com",
-    "scope": [
-      "phone",
-      "email",
-      "openid",
-      "profile",
-      "aws.cognito.signin.user.admin"
-    ],
-    "redirectSignIn": "http://localhost:3000",
-    "redirectSignOut": "http://localhost:3000",
-    "responseType": "code"
-  },
-  "federationTarget": "COGNITO_USER_POOLS",
+  "aws_project_region": "us-east-1",
+  "aws_cognito_identity_pool_id": "us-east-1:a6d12624-197e-4a9d-a967-d893d1f44597",
+  "aws_cognito_region": "us-east-1",
+  "aws_user_pools_id": "us-east-1_Z8JIvMlk6",
+  "aws_user_pools_web_client_id": "7k21tkt2emk694s04j758cj6on",
+  "oauth": {},
   "aws_cognito_username_attributes": [
     "EMAIL"
   ],
-  "aws_cognito_social_providers": [
-    "GOOGLE"
-  ],
+  "aws_cognito_social_providers": [],
   "aws_cognito_signup_attributes": [
     "EMAIL",
     "NAME",
