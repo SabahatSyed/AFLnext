@@ -22,9 +22,7 @@
           "NAME",
           "PHONE_NUMBER"
         ],
-        "socialProviders": [
-          "GOOGLE"
-        ],
+        "socialProviders": [],
         "usernameAttributes": [
           "EMAIL"
         ],

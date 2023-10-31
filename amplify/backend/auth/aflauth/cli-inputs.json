@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "aflauta8709c2c",
+    "resourceNameTruncated": "aflautf66d433a",
     "userPoolName": "aflauth",
     "autoVerifiedAttributes": [
       "email"
@@ -34,9 +34,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "aflauta8709c2c_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "aflautf66d433a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a8709c2c",
+    "sharedId": "f66d433a",
     "resourceName": "aflauth",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
@@ -50,27 +50,6 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "3r7azkkpr6xd",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"phone_number\":\"phoneNumbers\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000\"],\"LogoutURLs\":[\"http://localhost:3000\"]}"
+    "useEnabledMfas": true
   }
 }
