@@ -11,20 +11,7 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useSearchParams } from "next/navigation";
 import { updateCustomer } from "@/api/shopifyapis";
 Amplify.configure(awsconfig);
-const getlogin = gql`
-  mutation SignInWithEmailAndPassword($email: String!, $password: String!) {
-    customerAccessTokenCreate(input: { email: $email, password: $password }) {
-      customerAccessToken {
-        accessToken
-        expiresAt
-      }
-      customerUserErrors {
-        code
-        message
-      }
-    }
-  }
-`;
+
 export default function Reset({ length = 6, customers }) {
   const query = useSearchParams().get("email");
   const history = useRouter();
@@ -39,7 +26,6 @@ export default function Reset({ length = 6, customers }) {
   const [confirmpassword, setConfirmPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [login, { data1, loading1, error1 }] = useMutation(getlogin);
   const [token, setToken] = useState("");
   useEffect(() => {
     localStorage.setItem("customeraccesstoken", token);
@@ -78,19 +64,9 @@ export default function Reset({ length = 6, customers }) {
       setmsg("");
       console.log("otp", otp.join(""));
       await Amplify.Auth.forgotPasswordSubmit(query, otp.join(""), password);
-      const customer = customers?.customers.find((item) => item.email == query);
-      const res = await updateCustomer(customer.id, {
-        customer: {
-          id: customer.id,
-          password: password,
-          password_confirmation: password,
-        },
-      });
-      console.log(res);
-      if (res.data) {
+     
         setmsg("Password Reset Successfully!");
         history.push("/login");
-      } else setmsg("Reset Password Failed");
       setLoading(false);
     } catch (error) {
       console.log(error);

@@ -4,10 +4,11 @@ import Footer from '@/components/footer'
 import Tickets from '@/app/tickets/tickets'
 import { getTicketsData } from '@/api/FetchData'
 import ticketsBgImg from 'public/teams/ticketsbg.png'
+import { getProducts } from '@/api/shopifyapis'
 
 export default async function TicketsMain() {
   const data = await getTicketsData()
-
+  const products=await getProducts()
   return (
     <div className='h-fit '>
       {/* <Header activepage={"tickets"} /> */}
@@ -22,7 +23,7 @@ export default async function TicketsMain() {
             quality={100}
           />
         </div>
-        <Tickets data={data} />
+        <Tickets data={data} products={products} />
         <Footer />
       </div>
     </div>

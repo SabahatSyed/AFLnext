@@ -13,11 +13,9 @@ const store = process.env.STORE_NAME;
 const version = process.env.API_VERSION;
 const storefrontsecret = process.env.STORE_FRONT;
 
-
 export async function getProducts() {
   try {
     // Send a POST request to your Strapi backend to subscribe the user
-    console.log(AdminSecret);
     const res = await fetch(
       `https://${store}.myshopify.com/admin/api/${version}/products.json`,
       {
@@ -28,15 +26,13 @@ export async function getProducts() {
         },
       }
     );
-    const data = await res.json();
+    const data =await res.json();
     console.log("data",data)
     return data;
   } catch (error) {
     console.error("Error:", error);
   }
 }
-
-
 
 export async function getCustomers() {
   try {
@@ -80,7 +76,7 @@ export async function deleteCustomer(id) {
   }
 }
 
-export async function updateCustomer(id,props) {
+export async function updateCustomer(id, props) {
   try {
     // Send a POST request to your Strapi backend to subscribe the user
 
@@ -92,14 +88,14 @@ export async function updateCustomer(id,props) {
           "Content-Type": "application/json",
           "X-Shopify-Access-Token": `${ADMIN}`,
         },
-        body:(props)
+        body: props,
       }
     );
     const data = await res.json();
-    console.log("data",data)
+    console.log("data", data);
     return data;
   } catch (error) {
     console.error("Error:", error);
-    return error
+    return error;
   }
 }
