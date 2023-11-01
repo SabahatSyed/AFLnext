@@ -11,7 +11,7 @@ const nextConfig = {
         hostname: 'afl2024.logixsy.com',
       },
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'afl2024-cms.logixsy.com',
       },
       {
