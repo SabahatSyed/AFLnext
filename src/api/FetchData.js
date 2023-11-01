@@ -1,6 +1,6 @@
 const authToken =
-  "ddb964bf42dff984f6c786583a7c51afd0bf7bf1074d6d387966398089e2701089f643fa3071dbc1392fcde6377390c068df595e812fd3613df234f5d9a8528ca9ff355f75b39b67eebbdd3219e4bda55ccb73209f85c3e441319f97b867935bd884ffa3a956ccab546e967050adb59c4c242073bb6f8d48cd7c60356a387a3e";
-const apiEndpoint = "https://afl-cms.logixsy.com/api/";
+  "045e72c0a2e7a7bee54a67b97a97c6cd2751eb9270552390577c514d577efd2b514553abb9210ca8007ae6489b4914067a39e2a88f309239d0d65cfce5203047d611f86aaf57872a1aa9f49214716b68b0867193f1d4652e5b581e0200a999b9a8782c2b22fc22fce91b3d1f5144c6de9b9a833293f19122407fb2427424f950";
+const apiEndpoint = "http://afl2024-cms.logixsy.com/api/";
 
 export async function getData() {
   try {
@@ -91,7 +91,7 @@ export function saveEmail(props) {
     .then(async (res) => {
       const data = await res.json();
       // console.log("res", data);
-      return ("Subscribed successfully!");
+      return "Subscribed successfully!";
     })
     .catch((err) => {
       console.log("Subscription failed. Please try again.");

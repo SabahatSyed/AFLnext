@@ -15,7 +15,7 @@ export function News({ data }) {
           {data?.data?.map((result, index) => (
             <div
               key={index}
-              className=" bg-white h-[412px] min-w-[336px] md:min-w-[310px] dark:bg-bgdark rounded-3xl shadow overflow-hidden">
+              className=" bg-white min-h-[430px] min-w-[336px] md:min-w-[310px] dark:bg-bgdark rounded-3xl shadow overflow-hidden">
               <div className="  ">
                 {/* <img
                     className=' w-full rounded-t-3xl'
