@@ -115,7 +115,7 @@ const addtocart = gql`
     }
   }
 `;
-export function TicketDetails({ products }) {
+export function ItemDetails({ products }) {
   const params = useSearchParams().get("id");
   const [product, setProduct] = useState();
   const [producttext, setText] = useState();
@@ -127,7 +127,7 @@ export function TicketDetails({ products }) {
   const [checkoutid, setCheckoutid] = useState("");
   const [addtocartflag, setaddtocart] = useState("");
   const [AddtoCart, { data2, loading, error }] = useMutation(addtocart);
-  const [count, setCount] = useState(0);
+  const [count,setCount]=useState(0)
   const [data, setData] = useState();
   useEffect(() => {
     setCheckoutid(data?.cart?.checkoutUrl);
@@ -148,11 +148,11 @@ export function TicketDetails({ products }) {
     return total + itemTotalAmount;
   }, 0);
   useEffect(() => {
-    console.log("after adding to crat", addtocartflag);
-    if (addtocartflag) localStorage.setItem("cartid", addtocartflag);
+    console.log("after adding to crat", cartid);
+    if (cartid) localStorage.setItem("cartid", cartid);
   }, [addtocartflag]);
   useEffect(() => {
-    localStorage.setItem("count", count);
+   localStorage.setItem("count", count);
   }, [count]);
   const CartComponent = ({ setData, cartid,setCount }) => {
     const { data, error2 } = useSuspenseQuery(dataquery, {
@@ -161,7 +161,6 @@ export function TicketDetails({ products }) {
       },
     });
     setCount(data.cart.lines.edges.length);
-
     setData(data);
   };
 
@@ -224,9 +223,9 @@ export function TicketDetails({ products }) {
   useEffect(() => {
     setPackage(product?.variants[0]);
 
-    setText(product?.body_html?.split("!")[0]);
+    setText(product?.body_html);
     const bodyHtml = product?.body_html;
-    if (bodyHtml) {
+    /*if (bodyHtml) {
       const splitData = bodyHtml.split("!")[1].split(".");
       const variantTextObject = {};
 
@@ -247,7 +246,7 @@ export function TicketDetails({ products }) {
 
       setVariantText(variantTextObject);
       console.log("fs", variantTextObject);
-    }
+    }*/
   }, [product]);
 
   return (
@@ -262,6 +261,22 @@ export function TicketDetails({ products }) {
           {product?.title}
         </p>
         <p className="font-roboto text-xl text-gray flex-wrap">{producttext}</p>
+        <div>
+          <select
+            className=" dark:text-white p-2 h-8 w-1/2 text-bgblue outline-neutral-200 font-normal border border-gray-400 rounded-md text-sm "
+            value={selectedPackage?.id}
+            onChange={(e) =>
+              setPackage(
+                product?.variants?.find((item) => item.id == e.target.value)
+              )
+            }>
+            {product?.variants?.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="flex gap-10">
           <p className="font-roboto text-4xxl text-gray font-bold flex-wrap">
             $ {selectedPackage?.price}
@@ -290,59 +305,9 @@ export function TicketDetails({ products }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          {product?.variants?.map((item) => (
-            <div key={item.id} className=" bg-variantsbg rounded-2xl  ">
-              <div
-                onClick={() => setPackage(item)}
-                className="flex justify-between bg-lightNews p-3 items-center border border-neutral-300 rounded-2xl">
-                <div className="flex gap-4 items-center ">
-                  <img
-                    src={
-                      product?.images?.find(
-                        (it) => it?.variant_ids[0] == item?.id
-                      )?.src
-                    }
-                    alt="Tickets"
-                  />
-                  <p className="font-magistral font-bold text-xl text-bgblue uppercase">
-                    {item?.title}
-                  </p>
-                </div>
-                <div className="flex gap-4 items-center ">
-                  <p className="font-roboto font-bold text-2xl text-gray uppercase">
-                    ${item?.price}
-                  </p>
-                  <div
-                    className={`h-4 w-4 flex justify-center items-center rounded-full border border-neutral-300 ${
-                      selectedPackage?.id == item.id ? " bg-selectblue" : ""
-                    }`}>
-                    {selectedPackage?.id == item?.id && (
-                      <div className="w-1 h-1 bg-white rounded-full" />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="p-5">
-                {variantText &&
-                  variantText[item?.title?.toLowerCase()?.split(" ")[0]]?.map(
-                    (tex) => (
-                      <div className="flex gap-4 items-center px-10">
-                        <div className="w-1 h-1 bg-gray rounded-full" />
-
-                        <p className="text-gray font-roboto font-medium text-xl">
-                          {tex}
-                        </p>
-                      </div>
-                    )
-                  )}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
 }
 
-export default TicketDetails;
+export default ItemDetails;

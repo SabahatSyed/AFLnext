@@ -145,12 +145,14 @@ export function Shop({ formdata, customers }) {
     checkAuthStatus()
   }, [])
 
-  const CartComponent = ({ setData, cartid }) => {
+  const CartComponent = ({ setData, cartid ,setCount}) => {
     const { data, error2 } = useSuspenseQuery(dataquery, {
       variables: {
         cartId: cartid,
       },
     })
+        setCount(data.cart.lines.edges.length);
+
     setData(data)
   }
 
@@ -231,107 +233,101 @@ export function Shop({ formdata, customers }) {
     //const data= getProducts()
   }, [activeStep])
   return (
-    <div className='bg-white h-full'>
-      {cartid && <CartComponent setData={setData} cartid={cartid} />}
+    <div className="bg-white h-full">
+      {cartid && <CartComponent setData={setData} cartid={cartid}  setCount={setCount}/>}
 
-      <div className=' gap-40  relative z-10 bg-cover w-10/12 my-14 mx-auto   lg:h-[86%] md:h-1/2 h-2/5 flex flex-col justify-between items-center text-white font-roboto md:p-10 p-10  rounded-xl'>
+      <div className=" gap-40  relative z-10 bg-cover w-10/12 my-14 mx-auto   lg:h-[86%] md:h-1/2 h-2/5 flex flex-col justify-between items-center text-white font-roboto md:p-10 p-10  rounded-xl">
         <Image
-          className='object-center object-cover pointer-events-none rounded-xl -z-30'
+          className="object-center object-cover pointer-events-none rounded-xl -z-30"
           src={shopImg}
-          alt='shop background image'
+          alt="shop background image"
           priority
           fill
           quality={100}
         />
         <div></div>
-        <div className='flex flex-col gap-4 '>
-          <p className='md:text-4xl text-2xl font-bold leading-tight text-center'>
+        <div className="flex flex-col gap-4 ">
+          <p className="md:text-4xl text-2xl font-bold leading-tight text-center">
             {steps[activeStep - 1]}
           </p>
 
-          <p className='flex items-center justify-center text-2xl font-bold cursor-pointer '>
+          <p className="flex items-center justify-center text-2xl font-bold cursor-pointer ">
             Buy Now
-            <span className=' mx-3 '>
+            <span className=" mx-3 ">
               <img
-                src='/Home/UnionWhite.svg'
-                alt='Arrow svg '
-                className='h-5'
+                src="/Home/UnionWhite.svg"
+                alt="Arrow svg "
+                className="h-5"
               />
-            </span>{' '}
+            </span>{" "}
           </p>
         </div>
-        <div className='w-1/12 flex gap-2 h-3 mx-auto'>
+        <div className="w-1/12 flex gap-2 h-3 mx-auto">
           <p
             onClick={() => setActiveStep(1)}
             className={`cursor-pointer ${
               activeStep == 1
-                ? ' bg-gray-500 text-transparent px-4'
-                : 'bg-lightgray text-transparent px-1 opacity-50'
-            }  rounded-full `}
-          >
+                ? " bg-gray-500 text-transparent px-4"
+                : "bg-lightgray text-transparent px-1 opacity-50"
+            }  rounded-full `}>
             .
           </p>
           <p
             onClick={() => setActiveStep(2)}
             className={`cursor-pointer ${
               activeStep == 2
-                ? ' bg-gray-500 text-transparent px-4'
-                : 'bg-lightgray text-transparent px-1 opacity-50'
-            }  rounded-full `}
-          >
+                ? " bg-gray-500 text-transparent px-4"
+                : "bg-lightgray text-transparent px-1 opacity-50"
+            }  rounded-full `}>
             .
           </p>
           <p
             onClick={() => setActiveStep(3)}
             className={`cursor-pointer ${
               activeStep == 3
-                ? ' bg-gray-500 text-transparent px-4'
-                : 'bg-lightgray text-transparent px-1 opacity-50'
-            }  rounded-full `}
-          >
+                ? " bg-gray-500 text-transparent px-4"
+                : "bg-lightgray text-transparent px-1 opacity-50"
+            }  rounded-full `}>
             .
           </p>
         </div>
       </div>
-      <div className='bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 px-2 lg:px-14 lg:-mt-60 relative z-0 lg:pt-60'>
-        <div className='uppercase font-magistraal font-bold text-xl text-headingblue dark:text-white m-8'>
+      <div className="bg-bgNews dark:bg-bg-dark2 flex flex-col py-6 px-2 lg:px-14 lg:-mt-60 relative z-0 lg:pt-60">
+        <div className="uppercase font-magistraal font-bold text-xl text-headingblue dark:text-white m-8">
           New Releases
         </div>
         {/* {data.data.map((result,index) => ( */}
 
         {/* // ))} */}
-        <div className='  gap-3 grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4'>
-          {formdata?.products?.map((result, index) => (
-            <div key={result.id} className=' col-span-1  md:m-5 m-0  '>
-              <div className='max-w-sm mx-auto bg-white p-6 rounded-md shadow-md group relative'>
-                <img
-                  className=' w-full rounded-t-3xl'
-                  src={result.image.src}
-                  alt='News'
-                />
-                <div className='opacity-0 group-hover:opacity-100 transition-opacity bg-black rounded-md bg-opacity-40 absolute inset-0 flex items-center justify-center'>
-                  <button
-                    className='bg-black text-white px-4 py-2 rounded'
-                    onClick={() => addtoCart(result)}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-              <div className='p-5 flex flex-col '>
-                <div className='font-roboto uppercase text-xl font-medium  '>
-                  {result.title}
-                </div>
+        <div className="  gap-3 grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4">
+          {formdata?.products
+            ?.filter((item) => item.product_type.includes("Merchandise"))
+            .map((result, index) => (
+              <div key={result.id} className=" col-span-1  md:m-5 m-0  ">
+                <Link href={`/itemdetail?id=${result.admin_graphql_api_id}`}>
+                  <div className="max-w-sm mx-auto bg-white p-6 rounded-md group-hover:opacity-100 transition-opacity shadow-md group relative">
+                    <img
+                      className=" w-full rounded-t-3xl"
+                      src={result.image.src}
+                      alt="News"
+                    />
+                    
+                  </div>
+                </Link>
+                <div className="p-5 flex flex-col ">
+                  <div className="font-roboto uppercase text-xl font-medium  ">
+                    {result.title}
+                  </div>
 
-                <p className='font-roboto font-bold text-xl text-bgblue  '>
-                  $ {result.variants[0].price}
-                </p>
+                  <p className="font-roboto font-bold text-xl text-bgblue  ">
+                    $ {result.variants[0].price}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 export default Shop
