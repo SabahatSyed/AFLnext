@@ -118,96 +118,100 @@ const addtocart = gql`
 export function TicketDetails({ products }) {
   const params = useSearchParams().get("id");
   const [product, setProduct] = useState();
-  const [producttext,setText]=useState()
-  const [variantText,setVariantText]=useState()
-  const [selectedPackage,setPackage]=useState()
-  const [quantity,setQuantity]=useState(1)
-  const router = useRouter()
-  const [cartid, setCartId] = useState('')
-  const [checkoutid, setCheckoutid] = useState('')
-  const [addtocartflag, setaddtocart] = useState('')
-  const [AddtoCart, { data2, loading, error }] = useMutation(addtocart)
-
-  const [data, setData] = useState()
+  const [producttext, setText] = useState();
+  const [variantText, setVariantText] = useState();
+  const [selectedPackage, setPackage] = useState();
+  const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
+  const [cartid, setCartId] = useState("");
+  const [checkoutid, setCheckoutid] = useState("");
+  const [addtocartflag, setaddtocart] = useState("");
+  const [AddtoCart, { data2, loading, error }] = useMutation(addtocart);
+  const [count,setCount]=useState(0)
+  const [data, setData] = useState();
   useEffect(() => {
-    setCheckoutid(data?.cart?.checkoutUrl)
+    setCheckoutid(data?.cart?.checkoutUrl);
 
-    setCartId(localStorage.getItem('cartid'))
-  }, [])
+    setCartId(localStorage.getItem("cartid"));
+  }, []);
   useEffect(() => {
-    localStorage.setItem('checkoutid', checkoutid)
-  }, [checkoutid])
+    localStorage.setItem("checkoutid", checkoutid);
+  }, [checkoutid]);
 
-  const cartItems = data?.cart?.lines.edges
+  const cartItems = data?.cart?.lines.edges;
 
   // Calculating the total amount by summing up the totalAmount of each item
   const totalAmount = cartItems?.reduce((total, item) => {
     const itemTotalAmount = parseFloat(
       item.node.estimatedCost.totalAmount.amount
-    )
-    return total + itemTotalAmount
-  }, 0)
+    );
+    return total + itemTotalAmount;
+  }, 0);
   useEffect(() => {
-    console.log('after adding to crat', addtocartflag)
-    if (addtocartflag) localStorage.setItem('cartid', addtocartflag)
-  }, [addtocartflag])
-const CartComponent = ({ setData, cartid }) => {
-  const { data, error2 } = useSuspenseQuery(dataquery, {
-    variables: {
-      cartId: cartid,
-    },
-  });
-  setData(data);
-};
-
-const addtoCart = (dataa) => {
-  const toastId = toast.loading("adding item to cart");
-  try {
-    let line;
-    console.log(data);
-    if (data) {
-      line = data.cart.lines.edges.map((edge) => {
-        const { quantity } = edge.node;
-        const { id } = edge.node.merchandise;
-        return { merchandiseId: id, quantity };
-      });
-    }
-    console.log(line);
-    const response = AddtoCart({
+    console.log("after adding to crat", addtocartflag);
+    if (addtocartflag) localStorage.setItem("cartid", addtocartflag);
+  }, [addtocartflag]);
+  useEffect(() => {
+   localStorage.setItem("count", count);
+  }, [count]);
+  const CartComponent = ({ setData, cartid }) => {
+    const { data, error2 } = useSuspenseQuery(dataquery, {
       variables: {
-        cartInput: {
-          lines: line
-            ? [
-                ...line,
-                {
-                  quantity: quantity,
-                  merchandiseId: selectedPackage?.admin_graphql_api_id,
-                },
-              ]
-            : [
-                {
-                  quantity: quantity,
-                  merchandiseId: selectedPackage?.admin_graphql_api_id,
-                },
-              ],
-        },
+        cartId: cartid,
       },
-    }).then((res) => {
-      setaddtocart(res.data.cartCreate.cart.id);
-      setCartId(res.data.cartCreate.cart.id);
-      toast.dismiss(toastId);
-       router.push('/checkout')
     });
-    //get cart id and save it in the localstorage
+    setData(data);
+  };
 
-    // Handle the response, e.g., show success message or redirect
-  } catch (error) {
-    // Handle registration error
-    console.error("Registration error:", error.message);
-    toast.error("Error adding to cart");
-    toast.dismiss(toastId);
-  }
-};
+  const addtoCart = (dataa) => {
+    const toastId = toast.loading("adding item to cart");
+    try {
+      let line;
+      console.log(data);
+      if (data) {
+        line = data.cart.lines.edges.map((edge) => {
+          const { quantity } = edge.node;
+          const { id } = edge.node.merchandise;
+          return { merchandiseId: id, quantity };
+        });
+      }
+      console.log(line);
+      const response = AddtoCart({
+        variables: {
+          cartInput: {
+            lines: line
+              ? [
+                  ...line,
+                  {
+                    quantity: quantity,
+                    merchandiseId: selectedPackage?.admin_graphql_api_id,
+                  },
+                ]
+              : [
+                  {
+                    quantity: quantity,
+                    merchandiseId: selectedPackage?.admin_graphql_api_id,
+                  },
+                ],
+          },
+        },
+      }).then((res) => {
+        setCount(res.data.cartCreate.cart.lines.edges.length);
+        setaddtocart(res.data.cartCreate.cart.id);
+        setCartId(res.data.cartCreate.cart.id);
+        toast.dismiss(toastId);
+        router.push("/checkout");
+      });
+      //get cart id and save it in the localstorage
+
+      // Handle the response, e.g., show success message or redirect
+    } catch (error) {
+      // Handle registration error
+      console.error("Registration error:", error.message);
+      toast.error("Error adding to cart");
+      toast.dismiss(toastId);
+    }
+  };
   useEffect(() => {
     setProduct(
       products?.products?.find((item) =>
@@ -215,8 +219,8 @@ const addtoCart = (dataa) => {
       )
     );
   }, []);
-  useEffect(()=>{
-        setPackage(product?.variants[0]);
+  useEffect(() => {
+    setPackage(product?.variants[0]);
 
     setText(product?.body_html?.split("!")[0]);
     const bodyHtml = product?.body_html;
@@ -227,7 +231,10 @@ const addtoCart = (dataa) => {
       splitData.forEach((item) => {
         const colonIndex = item.indexOf(":");
         if (colonIndex !== -1) {
-          const attributeName = item.substring(0, colonIndex).trim().toLowerCase();
+          const attributeName = item
+            .substring(0, colonIndex)
+            .trim()
+            .toLowerCase();
           const attributeValues = item
             .substring(colonIndex + 1)
             .split(",")
@@ -239,13 +246,11 @@ const addtoCart = (dataa) => {
       setVariantText(variantTextObject);
       console.log("fs", variantTextObject);
     }
-
-   
-  },[product])
+  }, [product]);
 
   return (
     <div className=" m-20 grid grid-cols-5 gap-10">
-       {cartid && <CartComponent setData={setData} cartid={cartid} />}
+      {cartid && <CartComponent setData={setData} cartid={cartid} />}
 
       <div className="col-span-2">
         <img src={product?.image?.src} alt="Tickets" />
@@ -263,7 +268,7 @@ const addtoCart = (dataa) => {
             <select
               className=" dark:text-white p-2 h-8 w-16 text-bgblue outline-neutral-200 font-normal border border-gray-400 rounded-md text-sm "
               value={quantity}
-              onChange={(e)=>setQuantity(parseInt(e.target.value))}>
+              onChange={(e) => setQuantity(parseInt(e.target.value))}>
               {[...Array(selectedPackage?.inventory_quantity).keys()].map(
                 (num) => (
                   <option key={num + 1} value={num + 1}>
@@ -274,7 +279,7 @@ const addtoCart = (dataa) => {
             </select>
             <div
               onClick={() => {
-                addtoCart()
+                addtoCart();
               }}
               className="bg-headingblue py-2 px-8 rounded-md cursor-pointer ">
               <p className="uppercase font-roboto font-bold cursor-pointer text-sm text-white flex items-center justify-center">
