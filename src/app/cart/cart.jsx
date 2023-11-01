@@ -280,7 +280,7 @@ export function Cart() {
               </div>
               <div>
                 <p className="font-roboto font-bold text-2xl text-gray mb-10">
-                  $ {item.node.merchandise.priceV2.amount}
+                  $ {item.node.estimatedCost.totalAmount.amount}
                 </p>
               </div>
             </div>

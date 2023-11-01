@@ -16,7 +16,6 @@ module.exports = {
         "gradient-text": "linear-gradient(to bottom, #f08024, #f01a0e)",
         "gradient-bg": "linear-gradient(to right, #f08024, #f01a0e)",
       },
-
       fontFamily: {
         magistral: ["var(--font-magistral)"],
         roboto: ["var(--font-roboto)"],

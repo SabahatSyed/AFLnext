@@ -187,7 +187,6 @@ export function Shop({ formdata, customers }) {
         setaddtocart(res.data.cartCreate.cart.id)
         setCartId(res.data.cartCreate.cart.id)
         toast.dismiss(toastId)
-        toast.success('item added to cart successfully')
         // router.push('/cart')
       })
       //get cart id and save it in the localstorage

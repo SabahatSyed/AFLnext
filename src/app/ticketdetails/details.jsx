@@ -196,7 +196,6 @@ const addtoCart = (dataa) => {
       setaddtocart(res.data.cartCreate.cart.id);
       setCartId(res.data.cartCreate.cart.id);
       toast.dismiss(toastId);
-      toast.success("item added to cart successfully");
        router.push('/checkout')
     });
     //get cart id and save it in the localstorage
