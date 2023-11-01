@@ -193,12 +193,14 @@ useEffect(() => {
         router.push('/login?auth=auth')
       })
   }
-  const CartComponent = ({ setData, cartid }) => {
+  const CartComponent = ({ setData, cartid,setCount }) => {
     const { data, error2 } = useSuspenseQuery(query, {
       variables: {
         cartId: cartid,
       },
     })
+    setCount(data.cart.lines.edges.length);
+
     setData(data)
   }
   const addtoCart = (idd) => {
@@ -238,7 +240,7 @@ useEffect(() => {
   }
   return (
     <div>
-      {cartid && <CartComponent setData={setData} cartid={cartid} />}
+      {cartid && <CartComponent setData={setData} cartid={cartid} setCount={setCount} />}
 
       <div className=" flex flex-col w-2/4 mx-auto my-28 bg-white p-8 rounded-xl">
         <div className=" uppercase font-magistraal text-2xl text-headingblue dark:text-white ">

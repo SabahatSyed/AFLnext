@@ -18,7 +18,7 @@ export default async function Partners({ data }) {
               key={index}
               className="flex flex-col md:flex-row justify-between gap-10 lg:gap-32">
               <img
-                src={`http://afl2024-cms.logixsy.com${result.attributes?.Image?.data[0]?.attributes?.url}`}
+                src={`https://afl2024-cms.logixsy.com${result.attributes?.Image?.data[0]?.attributes?.url}`}
                 alt="athletic gaines"
               />
               {/* {ticket.attributes.Image.data[0].attributes.url} */}

@@ -205,7 +205,9 @@ export function Header({ activepage }) {
             href={"/cart"}
             className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/cart.svg" />
-            <p className="text-xxs mb-4 text-white bg-bgblue px-1 rounded-full relative right-2">{count}</p>
+            <p className="text-xxs mb-4 text-white bg-bgblue px-1 rounded-full relative right-2">
+              {count}
+            </p>
           </Link>
           <Link
             href={"https://www.humbl.com/social/"}
@@ -343,8 +345,11 @@ export function Header({ activepage }) {
             </Link>*/}
 
           <div className="grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
-            <Link href={"/cart"}>
+            <Link href={"/cart"} className="flex items-center">
               <img src="/Home/cart.svg" />
+              <p className="text-xxs mb-4 text-white bg-bgblue px-1 rounded-full relative right-2">
+                {count}
+              </p>
             </Link>
             <Link href={"https://www.humbl.com/social/"}>
               <img src="/Home/h.svg" />

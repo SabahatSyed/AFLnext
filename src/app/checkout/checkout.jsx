@@ -145,7 +145,7 @@ export function Checkout() {
   const [cartid, setCartId] = useState("");
   const [data, setData] = useState();
     const [checkoutUrl, setCheckoutUrl] = useState("");
-
+  const [count,setCount]=useState(0)
   useEffect(() => {
     localStorage.setItem("checkoutid", checkoutid);
   }, [checkoutid]); 
@@ -153,6 +153,9 @@ export function Checkout() {
      localStorage.setItem("checkouturl", checkoutUrl);
    }, [checkoutUrl]);
   
+   useEffect(()=>{
+     localStorage.setItem("count", count);
+   },[count])
   useEffect(() => {
     setCartId(localStorage.getItem("cartid"));
   }, []);
@@ -177,12 +180,14 @@ export function Checkout() {
     );
     return total + itemTotalAmount;
   }, 0);
-  const CartComponent = ({ setData, cartid }) => {
+  const CartComponent = ({ setData, cartid,setCount }) => {
     const { data, error2 } = useSuspenseQuery(query, {
       variables: {
         cartId: cartid,
       },
     });
+   setCount(data.cart.lines.edges.length);
+
     setData(data);
   };
 
@@ -213,7 +218,7 @@ export function Checkout() {
   };
   return (
     <div>
-      {cartid && <CartComponent setData={setData} cartid={cartid} />}
+      {cartid && <CartComponent setData={setData} cartid={cartid} setCount={setCount} />}
 
       <div className=" flex flex-col w-1/2 mx-auto py-10 px-4">
         <div className="my-10 flex flex-col  items-center bg-white py-8 px-8 lg:px-6 rounded-md ">

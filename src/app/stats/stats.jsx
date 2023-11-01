@@ -20,7 +20,7 @@ export default async function Stats({ data }) {
           }}>
           <img
             source={{
-              uri: `http://afl2024-cms.logixsy.com${item.attributes.icon.data.attributes.url}`,
+              uri: `https://afl2024-cms.logixsy.com${item.attributes.icon.data.attributes.url}`,
             }}
             style={{ width: 20, height: 20, marginRight: 10 }}
           />
@@ -109,7 +109,7 @@ export default async function Stats({ data }) {
                 <tbody key={index} className="text-center text-xs">
                   <tr className="h-12 border border-headingblue ">
                     {/* <img
-                src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                 alt="athletic gaines"
               /> */}
                     <td
@@ -122,7 +122,7 @@ export default async function Stats({ data }) {
                       }}
                       className={`font-semibold flex items-center  w-48 lg:min-w-fit `}>
                       <img
-                        src={`http://afl2024-cms.logixsy.com${result.attributes.icon.data.attributes.url}`}
+                        src={`https://afl2024-cms.logixsy.com${result.attributes.icon.data.attributes.url}`}
                         alt="outLaws"
                         className="w-10 h-10 m-2"
                       />
