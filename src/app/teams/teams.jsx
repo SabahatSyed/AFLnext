@@ -47,6 +47,10 @@ export default function Teams({ data }) {
                         }}
                         className={`
                      flex flex-col gap-3  p-5 rounded-xl justify-center items-center h-[186px] w-[290px] `}>
+                        {console.log(
+                          "imags",
+                          result.attributes.Image.data[0].attributes.url
+                        )}
                         <img
                           src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                           alt="Teams"

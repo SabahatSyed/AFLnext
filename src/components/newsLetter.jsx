@@ -19,7 +19,7 @@ const NewsLetter = () => {
   }
   return (
     <div>
-      <div className=' py-[5rem] bg-bggray dark:bg-bgdark'>
+      <div className=' py-[5rem] bg-[url("/Home/newsletter.png")] dark:bg-bgdark'>
         <div className='flex justify-center md:flex-row flex-col gap-16'>
           <div className='flex justify-center '>
             <img src='/Home/logo.svg' alt='Logo' />
