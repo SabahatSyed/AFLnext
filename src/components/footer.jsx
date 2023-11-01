@@ -17,7 +17,7 @@ export default async function Footer({ activePage }) {
                 .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
-                  //   src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  //   src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
                     key={index}
@@ -25,7 +25,7 @@ export default async function Footer({ activePage }) {
                     className="relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110">
                     <Image
                       className="object-center object-contain pointer-events-none"
-                      src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="teams images"
                       priority
                       fill
@@ -41,7 +41,7 @@ export default async function Footer({ activePage }) {
                 .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
-                  //   src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  //   src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
                     key={index}
@@ -49,7 +49,7 @@ export default async function Footer({ activePage }) {
                     className="relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110">
                     <Image
                       className="object-center object-contain pointer-events-none"
-                      src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="teams images"
                       priority
                       fill
@@ -65,7 +65,7 @@ export default async function Footer({ activePage }) {
                 .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
-                  //   src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  //   src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
                     key={index}
@@ -73,7 +73,7 @@ export default async function Footer({ activePage }) {
                     className="relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110">
                     <Image
                       className="object-center object-contain pointer-events-none"
-                      src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="teams images"
                       priority
                       fill
@@ -89,7 +89,7 @@ export default async function Footer({ activePage }) {
                 .map((result, index) => (
                   // <img
                   //   className='scale-125 object-cover'
-                  //   src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                  //   src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                   // />
                   <Link
                     key={index}
@@ -97,7 +97,7 @@ export default async function Footer({ activePage }) {
                     className="relative w-16 h-16 transition-all duration-[.15s] ease-in hover:scale-110">
                     <Image
                       className="object-center object-contain pointer-events-none"
-                      src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                      src={`https://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
                       alt="teams images"
                       priority
                       fill
