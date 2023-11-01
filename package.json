@@ -20,7 +20,7 @@
     "encoding": "^0.1.13",
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
-    "next": "latest",
+    "next": "13.4.12",
     "next-nprogress-bar": "^2.1.2",
     "next-themes": "^0.2.1",
     "nextjs-toploader": "^1.5.3",
