@@ -50,7 +50,7 @@ export default function Teams({ data }) {
                         <img
                           src={`http://afl2024-cms.logixsy.com${
                             result.attributes.Image.data[0].attributes.url?.split(
-                              "https://"
+                              "https://afl2024-cms.logixsy.com"
                             )[1]
                           }`}
                           alt="Teams"
@@ -117,7 +117,7 @@ export default function Teams({ data }) {
                       <img
                         src={`http://afl2024-cms.logixsy.com${
                           result.attributes.Image.data[0].attributes.url.split(
-                            "https://"
+                            "https://afl2024-cms.logixsy.com"
                           )[1]
                         }`}
                         alt="Teams"
@@ -181,7 +181,7 @@ export default function Teams({ data }) {
                       <img
                         src={`http://afl2024-cms.logixsy.com${
                           result.attributes.Image.data[0].attributes.url.split(
-                            "https://"
+                            "https://afl2024-cms.logixsy.com"
                           )[1]
                         }`}
                         alt="Teams"
@@ -245,7 +245,7 @@ export default function Teams({ data }) {
                       <img
                         src={`http://afl2024-cms.logixsy.com${
                           result.attributes.Image.data[0].attributes.url.split(
-                            "https://"
+                            "https://afl2024-cms.logixsy.com"
                           )[1]
                         }`}
                         alt="Teams"
