@@ -7,12 +7,16 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'liqueous-news-cms.logixsy.com',
+        protocol: 'http',
+        hostname: 'afl2024.logixsy.com',
       },
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'afl2024-cms.logixsy.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'afl-website.logixsy.com',
       },
       {
         protocol: 'https',
