@@ -169,13 +169,7 @@ export function Checkout() {
 
     //loginuser()
   }, []);
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then((res) => {})
-      .catch((err) => {
-        router.push("/shop");
-      });
-  }, []);
+ 
   const cartItems = data?.cart.lines.edges;
   const totalAmount = cartItems?.reduce((total, item) => {
     const itemTotalAmount = parseFloat(
@@ -224,7 +218,7 @@ export function Checkout() {
       <div className=" flex flex-col w-1/2 mx-auto py-10 px-4">
         <div className="my-10 flex flex-col  items-center bg-white py-8 px-8 lg:px-6 rounded-md ">
           {data?.cart.lines?.edges?.map((item) => (
-            <div>
+            <div key={item.node.merchandise.id} className="w-full">
               <div className="flex flex-col justify-center md:flex-row  md:justify-between gap-10 ">
                 <img
                   src={item.node.merchandise.product.featuredImage.src}
@@ -242,7 +236,7 @@ export function Checkout() {
                       Quantity : {item.node.quantity}
                     </p>
                     <p className="font-roboto font-bold text-xl text-bgblue">
-                      $ {item.node.merchandise.priceV2.amount}
+                      $ {item.node.estimatedCost.totalAmount.amount}
                     </p>
                   </div>
                 </div>

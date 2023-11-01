@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next-nprogress-bar";
@@ -70,21 +70,21 @@ export default function Signup({ data, length = 6 }) {
   };
   const handleVerifyEmail = async () => {
     try {
-          setLoading(true);
+      setLoading(true);
 
-      const Username=email
-      
-      const res=await Auth.confirmSignUp(Username, otp.join(""));
-      console.log(res)
+      const Username = email;
+
+      const res = await Auth.confirmSignUp(Username, otp.join(""));
+      console.log(res);
       setVerificationError(null);
       setVerificationSuccess(true);
       setmsg("Email verified Successfully!");
-      setLoading(false)
+      setLoading(false);
       // Optionally, you can redirect the user to another page or perform other actions.
     } catch (error) {
       setVerificationError(error.message);
       setVerificationSuccess(false);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -139,6 +139,8 @@ export default function Signup({ data, length = 6 }) {
           .then((res) => {
             setmsg("Successfully Registered!!");
             setLoading(false);
+            if (params == "auth") history.push("/login?auth=auth");
+            else history.push("/login");
             setRegistered(true);
           })
           .catch((err) => {
@@ -219,14 +221,7 @@ export default function Signup({ data, length = 6 }) {
             </div>
           </>
         )}
-        {!registered && (
-          <p
-            className={`text-sm font-bold ${
-              msg.includes("Successfully") ? "text-green-700" : "text-red-500"
-            }`}>
-            {msg}
-          </p>
-        )}
+
         {!registered && (
           <div className=" w-full font-medium text-xs flex flex-col items-center justify-center">
             <p>By signing up, you agree to our</p>
@@ -264,14 +259,7 @@ export default function Signup({ data, length = 6 }) {
             </div>
           </>
         )}
-        {registered && (
-          <p
-            className={`text-sm font-bold ${
-              msg.includes("Successfully") ? "text-green-700" : "text-red-500"
-            }`}>
-            {msg}
-          </p>
-        )}
+
         <button
           onClick={() => {
             if (!registered) handleSignup();
@@ -300,7 +288,10 @@ export default function Signup({ data, length = 6 }) {
         <p className="text-base flex justify-center">
           Already have an account?
           <span
-            onClick={() => history.push("/login")}
+            onClick={() => {
+              if (params == "auth") history.push("/login?auth=auth");
+              else history.push("/login");
+            }}
             className=" text-bgblue font-semibold cursor-pointer mx-1">
             {" "}
             Login Now
