@@ -140,7 +140,7 @@ export function Cart() {
   const [getcheckouturl, { data1, loading1, error1 }] = useMutation(getcheckout)
   const [addtocartflag, setaddtocart] = useState('')
   const [AddtoCart, { data2, loading, error }] = useMutation(addtocart)
-
+  const [count,setCount]=useState(0)
   const [data, setData] = useState()
   useEffect(() => {
     setCheckoutid(data?.cart?.checkoutUrl)
@@ -166,6 +166,9 @@ export function Cart() {
     console.log('after adding to crat', addtocartflag)
     if (addtocartflag) localStorage.setItem('cartid', addtocartflag)
   }, [addtocartflag])
+useEffect(() => {
+  if (count) localStorage.setItem("count",count);
+}, [count]);
   const getCheckout = async () => {
     const lineItems = cartItems.map((edge) => {
       const node = edge.node
@@ -221,6 +224,7 @@ export function Cart() {
           },
         },
       }).then((res) => {
+        setCount(res.data.cartCreate.cart.lines.edges.length);
         setaddtocart(res.data.cartCreate.cart.id)
         setCartId(res.data.cartCreate.cart.id)
       })
@@ -280,7 +284,7 @@ export function Cart() {
               </div>
               <div>
                 <p className="font-roboto font-bold text-2xl text-gray mb-10">
-                  $ {item.node.merchandise.priceV2.amount}
+                  $ {item.node.estimatedCost.totalAmount.amount}
                 </p>
               </div>
             </div>

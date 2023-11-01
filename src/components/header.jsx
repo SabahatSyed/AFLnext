@@ -11,53 +11,7 @@ import navImg from "public/Home/Navbar.svg";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 Amplify.configure(awsconfig);
-const query = gql`
-  query GetCart($cartId: ID!) {
-    cart(id: $cartId) {
-      checkoutUrl
-      estimatedCost {
-        totalAmount {
-          amount
-        }
-      }
-      lines(first: 100) {
-        edges {
-          node {
-            quantity
-            estimatedCost {
-              subtotalAmount {
-                amount
-                currencyCode
-              }
-              totalAmount {
-                amount
-                currencyCode
-              }
-            }
-            merchandise {
-              ... on ProductVariant {
-                id
-                title
-                product {
-                  id
-                  title
-                  description
-                  featuredImage {
-                    src
-                  }
-                }
-                priceV2 {
-                  amount
-                  currencyCode
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+
 export function Header({ activepage }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -65,10 +19,13 @@ export function Header({ activepage }) {
   const { theme, setTheme } = useTheme();
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
+  const [count, setCount] = useState();
   const [cartid, setCartId] = useState("");
   useEffect(() => {
     setCartId(localStorage.getItem("cartid"));
+    setCount(localStorage.getItem("count"));
   }, []);
+
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
@@ -76,7 +33,6 @@ export function Header({ activepage }) {
     // Toggle the theme when the div is clicked
     setTheme(theme === "dark" ? "light" : "dark");
   };
-  console.log("pathname",pathname)
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
@@ -100,12 +56,11 @@ export function Header({ activepage }) {
     }
   };
   const CartComponent = ({ setData, cartid }) => {
-    const { data, error2 } = useSuspenseQuery(query, {
+    const { data, error } = useSuspenseQuery(query, {
       variables: {
         cartId: cartid,
       },
     });
-    console.log("data", data);
     setData(data);
   };
 
@@ -119,7 +74,7 @@ export function Header({ activepage }) {
           ? "hidden"
           : ""
       }`}>
-      {/*{cartid && <CartComponent setData={setData} cartid={cartid} />}*/}
+      {/*} {cartid && <CartComponent setData={setData} cartid={cartid} />}*/}
 
       <div className="bg-white dark:bg-bgdark h-10 md:h-24 "></div>
       <div className=" bg-gradient-bg bg-cover relative z-10 grid grid-cols-12 place-content-center px-4 lg:px-20 py-3 md:py-0 ">
@@ -245,11 +200,12 @@ export function Header({ activepage }) {
             </svg>
           )}
           </div>*/}
-        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-6 justify-items-center gap-2">
+        <div className="col-start-11 col-span-2 hidden md:grid grid-cols-5 justify-items-center gap-2">
           <Link
             href={"/cart"}
             className="transition-all duration-[.15s] ease-in-out hover:scale-125 flex items-center">
             <img src="/Home/cart.svg" />
+            <p className="text-xxs mb-4 text-white bg-bgblue px-1 rounded-full relative right-2">{count}</p>
           </Link>
           <Link
             href={"https://www.humbl.com/social/"}
@@ -386,7 +342,7 @@ export function Header({ activepage }) {
             </div>
             </Link>*/}
 
-          <div className="grid grid-cols-6 justify-items-center place-content-center place-items-center gap-2">
+          <div className="grid grid-cols-5 justify-items-center place-content-center place-items-center gap-2">
             <Link href={"/cart"}>
               <img src="/Home/cart.svg" />
             </Link>

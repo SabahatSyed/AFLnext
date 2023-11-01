@@ -6,15 +6,11 @@ import Image from "next/image";
 import { Auth, Amplify } from "aws-amplify";
 import awsconfig from "../../aws-exports";
 import Loader from "@/components/Loader";
-import { gql, useMutation } from "@apollo/client";
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useSearchParams } from "next/navigation";
-import { AiOutlineClose } from "react-icons/ai";
 Amplify.configure(awsconfig);
 
 export default function Login({ data }) {
   const query = useSearchParams().get("auth");
-  console.log(query);
   const history = useRouter();
   const [hide, sethide] = useState(true);
   const [email, setEmail] = useState("");
@@ -27,7 +23,7 @@ export default function Login({ data }) {
     Auth.currentAuthenticatedUser().then((res) => {
       history.push("/");
     });
-  });
+  },[]);
   useEffect(() => {
     setCheckoutUrl(localStorage.getItem("checkouturl"));
   }, []);

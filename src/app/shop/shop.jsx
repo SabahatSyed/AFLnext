@@ -112,6 +112,7 @@ export function Shop({ formdata, customers }) {
   useEffect(() => {
     setCartId(localStorage.getItem('cartid'))
   }, [])
+  const [count,setCount]=useState(0)
   const router = useRouter()
   const [cartid, setCartId] = useState('')
   const [addtocartflag, setaddtocart] = useState('')
@@ -123,7 +124,9 @@ export function Shop({ formdata, customers }) {
   useEffect(() => {
     if (addtocartflag) localStorage.setItem('cartid', addtocartflag)
   }, [addtocartflag])
-
+  useEffect(() => {
+    if (count) localStorage.setItem("count", count);
+  }, [count]);
   const steps = [
     'New 2024 Collection Available!',
     'New Billing Outlaws Collection 2024 Collection Available!',
@@ -185,9 +188,9 @@ export function Shop({ formdata, customers }) {
         },
       }).then((res) => {
         setaddtocart(res.data.cartCreate.cart.id)
+        setCount(res.data.cartCreate.cart.lines.edges.length);
         setCartId(res.data.cartCreate.cart.id)
         toast.dismiss(toastId)
-        toast.success('item added to cart successfully')
         // router.push('/cart')
       })
       //get cart id and save it in the localstorage
