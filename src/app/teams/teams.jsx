@@ -3,9 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import pyramidImg from "public/teams/AFLpyramid.png";
 export default function Teams({ data }) {
-   
-     console.log("imags", data?.data[0]?.attributes?.Image?.data[0]?.attributes?.url);
-   
   return (
     <div>
       <div className="w-full h-fit px-4 pb-4 flex flex-col justify-center items-center">
@@ -50,9 +47,12 @@ export default function Teams({ data }) {
                         }}
                         className={`
                      flex flex-col gap-3  p-5 rounded-xl justify-center items-center h-[186px] w-[290px] `}>
-                        
                         <img
-                          src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                          src={`http://afl2024-cms.logixsy.com${
+                            result.attributes.Image.data[0].attributes.url?.split(
+                              "https://"
+                            )[1]
+                          }`}
                           alt="Teams"
                           className="h-24"
                         />
@@ -115,7 +115,11 @@ export default function Teams({ data }) {
                       className={`
                      flex flex-col gap-3  p-5 rounded-xl justify-center items-center h-[186px] w-[290px]`}>
                       <img
-                        src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                        src={`http://afl2024-cms.logixsy.com${
+                          result.attributes.Image.data[0].attributes.url.split(
+                            "https://"
+                          )[1]
+                        }`}
                         alt="Teams"
                         className="h-24"
                       />
@@ -175,7 +179,11 @@ export default function Teams({ data }) {
                       className={`
                      flex flex-col gap-3  p-5 rounded-xl justify-center items-center h-[186px] w-[290px]`}>
                       <img
-                        src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                        src={`http://afl2024-cms.logixsy.com${
+                          result.attributes.Image.data[0].attributes.url.split(
+                            "https://"
+                          )[1]
+                        }`}
                         alt="Teams"
                         className="h-24"
                       />
@@ -235,7 +243,11 @@ export default function Teams({ data }) {
                       className={`
                      flex flex-col gap-3  p-5 rounded-xl justify-center items-center h-[186px] w-[290px]`}>
                       <img
-                        src={`http://afl2024-cms.logixsy.com${result.attributes.Image.data[0].attributes.url}`}
+                        src={`http://afl2024-cms.logixsy.com${
+                          result.attributes.Image.data[0].attributes.url.split(
+                            "https://"
+                          )[1]
+                        }`}
                         alt="Teams"
                         className="h-24"
                       />
