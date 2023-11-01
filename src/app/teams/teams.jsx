@@ -4,7 +4,7 @@ import Image from "next/image";
 import pyramidImg from "public/teams/AFLpyramid.png";
 export default function Teams({ data }) {
    
-     console.log("imags", data?.data[0]?.result.attributes.Image.data[0].attributes.url);
+     console.log("imags", data?.data[0]?.attributes?.Image?.data[0]?.attributes?.url);
    
   return (
     <div>
